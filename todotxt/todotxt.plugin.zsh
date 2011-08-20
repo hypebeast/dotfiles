@@ -7,4 +7,5 @@ function t() {
   fi
 }
 
-alias n="t ls +NextAction"
+alias n="t ls @NextAction"
+alias ta="t lsp A"
