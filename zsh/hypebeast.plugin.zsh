@@ -1,5 +1,5 @@
-# todo.txt
-alias t='/Users/sruml/bin/todo.sh'
+# ls
+alias lr='ls -altr'
 
 # Various custom aliases
 alias -g EG='|& egrep'

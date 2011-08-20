@@ -21,7 +21,7 @@ export ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx rails github node rails rvm)
+plugins=(hypebeast git ruby osx rails github node rails rvm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 # Custom Definitions
 ####
 
-# Path Definitions
+# Path definition
 PATH=/usr/local/Trolltech/Qt-4.8/bin:/Users/sruml/bin:$PATH
 export PATH
 
