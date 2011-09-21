@@ -4,6 +4,14 @@
 
 # ls
 alias lr='ls -altr'
+alias lsd='ls -l | grep '^d''
+
+
+# Aliases for the wonderful tree command
+alias t1='tree -d -L 1'
+alias t2='tree -d -L 2'
+alias t3='tree -d -L 3'
+alias t3='tree -d -L 3'
 
 # Various custom aliases
 alias -g EG='|& egrep'
