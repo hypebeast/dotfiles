@@ -1,0 +1,5 @@
+####
+# Env
+####
+
+export EDITOR='vi'

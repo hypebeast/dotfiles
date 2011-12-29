@@ -4,8 +4,13 @@ desc "Hook our dotfiles into system standard positions."
 
 task :install do
     linkables = Dir.glob('*/**{.symlink}')
+    zshplugins = Dir.glob('*/**{.plugin.zsh}')
     zshfiles = Dir.glob('*/**{.zsh}')
 
+    # Remove all ZSH plugins
+    zshfiles = zshfiles - zshplugins
+
+    # Process all linkable files
     skip_all = false
     overwrite_all = false
     backup_all = false
@@ -36,14 +41,16 @@ task :install do
             `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
         end
 
+        # Create symlink
         `ln -s "$PWD/#{linkable}" "#{target}"` unless skip || skip_all
     end
 
+    # Process all ZSH plugins
     skip_all = false
     overwrite_all = false
     backup_all = false
 
-    zshfiles.each do |zshfile|
+    zshplugins.each do |zshfile|
         skip = false
         overwrite = false
         backup = false
@@ -70,13 +77,57 @@ task :install do
             FileUtils.rm_rf(target_file) if overwrite || overwrite_all
             `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
         else
+            # Create directory if it doesn't exists
             unless File.directory?(target_dir)
                 Dir.mkdir(target_dir)
             end
         end
 
+        # Create symlink
         `ln -s "$PWD/#{zshfile}" "#{target_file}"` unless skip || skip_all
     end
+
+    # Process all ZSH config file
+    skip_all = false
+    overwrite_all = false
+    backup_all = false
+
+    zshfiles.each do |zshfile|
+        skip = false
+        overwrite = false
+        backup = false
+
+        file = zshfile.split('/').last
+        target_dir = "#{ENV["HOME"]}/.oh-my-zsh/custom"
+        target_file = "#{target_dir}/#{file}"
+
+        if File.exists?(target_file) || File.symlink?(target_file)
+            unless skip_all || overwrite_all || backup_all
+                puts "File already exits: #{target_file}, what do you want to do? [s]skip, [S]kip all,[o]verwrite, [O]verwrite all, [b]backup, [B]ackup all?"
+
+                case STDIN.gets.chomp
+                when 's' then skip = true
+                when 'o' then overwrite = true
+                when 'b' then backup = true
+                when 'O' then overwrite_all = true
+                when 'B' then backup_all = true
+                when 'S' then skip_all = true
+                end
+            end
+            
+            FileUtils.rm_rf(target_file) if overwrite || overwrite_all
+            `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
+        else
+            # Create directory if it doesn't exists
+            unless File.directory?(target_dir)
+                Dir.mkdir(target_dir)
+            end
+        end
+
+        # Create symlink
+        `ln -s "$PWD/#{zshfile}" "#{target_file}"` unless skip || skip_all
+    end
+
 end
 
 task :default => 'install'
