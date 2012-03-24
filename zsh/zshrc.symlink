@@ -25,5 +25,13 @@ plugins=(hypebeast todotxt git ruby osx rails github node rails rvm)
 
 source $ZSH/oh-my-zsh.sh
 
+# Don't change. The following determines where YADR is installed.
+dotfiles=`find -L ~ -type file -maxdepth 2 -name .yadr | head | sed 's:\.dotfiles\/::'`
+
+# Things I don't want to publish to github
+[[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+# Add path to our custom bins
+export PATH=/usr/local/bin:$PATH:$yadr/bin

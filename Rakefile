@@ -6,6 +6,7 @@ task :install do
     linkables = Dir.glob('*/**{.symlink}')
     zshplugins = Dir.glob('*/**{.plugin.zsh}')
     zshfiles = Dir.glob('*/**{.zsh}')
+    executables = Dir.glob('*/**{.sh}')
 
     # Remove all ZSH plugins
     zshfiles = zshfiles - zshplugins
