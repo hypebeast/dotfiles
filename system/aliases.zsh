@@ -45,3 +45,13 @@ alias -g X0G='| xargs -0 egrep'
 alias -g X0='| xargs -0'
 alias -g XG='| xargs egrep'
 alias -g X='| xargs'
+
+
+# fasd - https://github.com/clvv/fasd
+# # jump to recently used items
+alias a='fasd -a' # any
+alias s='fasd -s' # show / search / select
+alias d='fasd -d' # directory
+alias f='fasd -f' # file
+alias z='fasd_cd -d' # cd, same functionality as j in autojump
+alias v='f -e vim' # quick opening files with vim
