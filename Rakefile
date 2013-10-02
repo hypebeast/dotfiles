@@ -16,6 +16,7 @@ task :install do
     overwrite_all = false
     backup_all = false
 
+    # Process all linkable files. These files will get symlinked into your $HOME.
     linkables.each do |linkable|
         skip = false
         overwrite = false
@@ -130,5 +131,11 @@ task :install do
     end
 
 end
+
+desc 'Setup git config files'
+task :setup_gitconfig do
+
+end
+
 
 task :default => 'install'

@@ -5,7 +5,14 @@
 
 # ls
 alias lr='ls -altr'
-alias lsd='ls -l | grep '^d''
+
+if $(gls &>/dev/null)
+then
+  alias ls="gls -F --color"
+  alias l="gls -lAh --color"
+  alias ll="gls -l --color"
+  alias la='gls -A --color'
+fi
 
 # Aliases for the wonderful tree command
 alias t1='tree -d -L 1'
