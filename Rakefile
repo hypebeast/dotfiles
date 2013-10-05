@@ -9,8 +9,17 @@ task :install do
     puts
 
     install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
+    install_ohmyzsh
+    install_spf13vim
 
-    # Find all interesting files
+    puts
+    puts
+    puts "======================================================"
+    puts "Hooking up all dotfiles into system standard positions..."
+    puts "======================================================"
+    puts
+
+    # Find all config files
     linkables = Dir.glob('*/**{.symlink}')
     zshplugins = Dir.glob('*/**{.plugin.zsh}')
     zshfiles = Dir.glob('*/**{.zsh}')
@@ -196,7 +205,31 @@ def install_homebrew
 end
 
 def install_ohmyzsh
+    puts "======================================================"
+    puts "Installing oh-my-zsh, the open source, community-driven"
+    puts "framework for managing your ZSH configuration..."
+    puts "If it's already installed, this will do nothing."
+    puts "======================================================"
+    
     # TODO
+    if File.directory?(File.expand_path("~/.oh-my-zsh"))
+        puts "It looks like that oh-my-zsh is already installed."
+    else
+        run %{curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh}
+    end
+end
+
+def install_spf13vim
+    puts "======================================================"
+    puts "Installing spf13-vim, the ultimate vim distribution..."
+    puts "If it's already installed, this will do nothing."
+    puts "======================================================"
+
+    if File.directory?(File.expand_path("~/.spf13-vim-3"))
+        puts "It looks like that spf13-vim is already installed."
+    else
+        run %{curl http://j.mp/spf13-vim3 -L -o - | sh}
+    end
 end
 
 def install_term_theme
