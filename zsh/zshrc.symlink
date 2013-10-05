@@ -11,7 +11,8 @@ export PROJECTS=~/Development
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="robbyrussell"
+#export ZSH_THEME="robbyrussell"
+export ZSH_THEME="steeef"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -31,9 +32,6 @@ plugins=(hypebeast todotxt git ruby osx rails github node rails rvm)
 
 source $ZSH/oh-my-zsh.sh
 
-# Don't change. The following determines where YADR is installed.
-#dotfiles=`find -L ~ -type file -maxdepth 2 -name .yadr | head | sed 's:\.dotfiles\/::'`
-
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
@@ -42,5 +40,5 @@ source $ZSH/oh-my-zsh.sh
 # Add path to our custom bins
 export PATH=/usr/local/bin:$GOPATH/bin:$PATH
 
-# Initialize fasd (https://github.com/clvv/fasd)
-eval "$(fasd --init posix-alias zsh-hook)"
+# Load dircolors for the solarized theme (iTerm2)
+eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-universal`

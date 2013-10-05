@@ -2,10 +2,16 @@
 #
 # Get the dircolors-solarized from https://github.com/seebi/dircolors-solarized
 # to support colors for GNU ls when the Solarized color scheme is used with iTerm2.
+#
 
 if [ ! -d "$DOTFILES/libs" ]; then
-  # Control will enter here if $DIRECTORY doesn't exist.
   mkdir "$DOTFILES/libs"
 fi
 
-git clone https://github.com/seebi/dircolors-solarized "$DOTFILES/libs/dircolors-solarized"
+cd "$DOTFILES/libs"
+if [ ! -d "./dircolors-solarized" ]; then
+	git clone "https://github.com/seebi/dircolors-solarized" "./dircolors-solarized"
+else
+	cd "dircolors-solarized"
+	git pull origin master
+fi

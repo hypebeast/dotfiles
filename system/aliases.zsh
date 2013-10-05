@@ -20,6 +20,10 @@ alias t2='tree -d -L 2'
 alias t3='tree -d -L 3'
 alias t3='tree -d -L 3'
 
+# PS
+alias psa="ps aux"
+alias psg="ps aux | grep "
+
 # Various custom aliases
 alias -g EG='|& egrep'
 alias -g EH='|& head'
@@ -52,13 +56,3 @@ alias -g X0G='| xargs -0 egrep'
 alias -g X0='| xargs -0'
 alias -g XG='| xargs egrep'
 alias -g X='| xargs'
-
-
-# fasd - https://github.com/clvv/fasd
-# # jump to recently used items
-alias a='fasd -a' # any
-alias s='fasd -s' # show / search / select
-alias d='fasd -d' # directory
-alias f='fasd -f' # file
-alias z='fasd_cd -d' # cd, same functionality as j in autojump
-alias v='f -e vim' # quick opening files with vim

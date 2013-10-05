@@ -14,6 +14,6 @@ then
 fi
 
 # Install homebrew packages
-brew install grc coreutils spark
+brew install grc coreutils spark fasd curl ctags tmux unrar the_silver_searcher
 
 exit 0
