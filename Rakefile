@@ -9,7 +9,7 @@ task :install do
     puts
 
     install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
-    
+
     # Find all interesting files
     linkables = Dir.glob('*/**{.symlink}')
     zshplugins = Dir.glob('*/**{.plugin.zsh}')
@@ -190,7 +190,7 @@ def install_homebrew
   puts "======================================================"
   puts "Installing Homebrew packages...There may be some warnings."
   puts "======================================================"
-  run %{brew install zsh grc coreutils spark fasd curl ctags tmux unrar the_silver_searcher}
+  run %{brew install zsh grc ack coreutils spark fasd curl ctags tmux unrar the_silver_searcher}
   puts
   puts
 end
