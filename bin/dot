@@ -9,5 +9,5 @@
 $DOTFILES/osx/set-defaults.sh
 
 # Upgrade homebrew
-cd ~/.dotfiles 
+cd ~/.dotfiles
 rake update_brew

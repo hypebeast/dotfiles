@@ -1,0 +1,5 @@
+#!/bin/bash
+mkdir -p bin pkg src
+export GOPATH="`pwd`"
+export PATH="$GOPATH/bin:$PATH"
+unset GOBIN

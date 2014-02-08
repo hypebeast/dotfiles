@@ -8,9 +8,11 @@ task :install do
     puts "======================================================"
     puts
 
-    install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
-    install_ohmyzsh
-    install_spf13vim
+    # TODO: Do this in the boostrip script!!
+    
+    #install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
+    #install_ohmyzsh
+    #install_spf13vim
 
     puts
     puts

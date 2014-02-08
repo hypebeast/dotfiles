@@ -1,2 +1,5 @@
-color desert
-set syntax on
+colorscheme  molokai
+
+set nospell
+
+highlight clear SpellBad

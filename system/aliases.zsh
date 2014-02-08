@@ -19,6 +19,7 @@ alias t1='tree -d -L 1'
 alias t2='tree -d -L 2'
 alias t3='tree -d -L 3'
 alias t3='tree -d -L 3'
+alias t4='tree -d -L 4'
 
 # PS
 alias psa="ps aux"
@@ -56,3 +57,6 @@ alias -g X0G='| xargs -0 egrep'
 alias -g X0='| xargs -0'
 alias -g XG='| xargs egrep'
 alias -g X='| xargs'
+
+# Go
+alias go-pi='GOARCH=arm GOARM=5 GOOS=linux go'
