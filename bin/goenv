@@ -1,4 +1,10 @@
 #!/bin/bash
+
+####
+## This script creates a fresh go environment in the current directory and 
+## sets GOPATH to this directory.
+####
+
 mkdir -p bin pkg src
 export GOPATH="`pwd`"
 export PATH="$GOPATH/bin:$PATH"

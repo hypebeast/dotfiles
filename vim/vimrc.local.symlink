@@ -1,5 +1,2 @@
+syntax on
 colorscheme  molokai
-
-set nospell
-
-highlight clear SpellBad

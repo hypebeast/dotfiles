@@ -6,8 +6,4 @@
 # to make sure you're on the latest and greatest.
 
 # Set OS X defaults
-$DOTFILES/osx/set-defaults.sh
-
-# Upgrade homebrew
-cd ~/.dotfiles
-rake update_brew
+~/.dotfiles/osx/set-defaults.sh
