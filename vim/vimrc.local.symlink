@@ -1,2 +1,5 @@
-syntax on
-colorscheme  molokai
+set background=light
+colorscheme molokai
+set nospell
+set nolist
+set number
