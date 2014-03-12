@@ -9,7 +9,7 @@ task :install do
     puts
 
     #install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
-    #run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
+    run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
     install_ohmyzsh
     install_spf13vim
 
@@ -37,7 +37,7 @@ task :install do
     process_zsh_plugins(zshplugins)
     process_zsh_files(zshfiles)
 
-    install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
+    #install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
     install_dircolors if RUBY_PLATFORM.downcase.include?("darwin")
 end
 
@@ -92,7 +92,7 @@ def install_homebrew
   puts "Updating Homebrew."
   puts "======================================================"
   run %{brew update}
-  
+
   puts
   puts
   puts "======================================================"
