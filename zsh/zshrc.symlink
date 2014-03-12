@@ -13,6 +13,7 @@ export PROJECTS=~/Development
 # time that oh-my-zsh is loaded.
 #export ZSH_THEME="robbyrussell"
 export ZSH_THEME="steeef"
+#export ZSH_THEME="agnoster"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
