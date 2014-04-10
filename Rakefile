@@ -68,6 +68,33 @@ task :update_brew do
     install_homebrew
 end
 
+desc 'Link all dotfiles'
+task :link do
+    puts
+    puts
+    puts "======================================================"
+    puts "Hooking up all dotfiles into system standard positions..."
+    puts "======================================================"
+    puts
+
+    # Find all config files
+    linkables = Dir.glob('*/**{.symlink}')
+    zshplugins = Dir.glob('*/**{.plugin.zsh}')
+    zshfiles = Dir.glob('*/**{.zsh}')
+    executables = Dir.glob('*/**{.sh}')
+
+    # Remove all ZSH plugins
+    zshfiles = zshfiles - zshplugins
+
+    puts linkables
+    puts zshplugins
+    puts zshfiles
+
+    process_symlinks(linkables)
+    process_zsh_plugins(zshplugins)
+    process_zsh_files(zshfiles)
+end
+
 task :default => 'install'
 
 private
