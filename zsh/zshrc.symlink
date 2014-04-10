@@ -39,7 +39,7 @@ source $ZSH/oh-my-zsh.sh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 # Add path to our custom bins
-export PATH=/usr/local/bin:$GOPATH/bin:$PATH
+export PATH=/usr/local/bin:$PATH
 
 # Load dircolors for the solarized theme (iTerm2)
 eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-universal`
