@@ -9,6 +9,8 @@ fi
 source "$fasd_cache"
 unset fasd_cache
 
+eval "$(fasd --init auto)"
+
 # jump to recently used items
 alias a='fasd -a' # any
 alias s='fasd -si' # show / search / select
