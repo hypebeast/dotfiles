@@ -29,7 +29,7 @@ export ZSH_THEME="steeef"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails go git textmate ruby lighthouse)
-plugins=(todotxt git ruby osx rails github node node npm sublime history-substring-search zsh-syntax-highlighting themes)
+plugins=(todotxt git ruby osx rails github node node npm sublime history-substring-search zsh-syntax-highlighting themes fasd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -44,5 +44,5 @@ export PATH=/usr/local/bin:$PATH
 # Load dircolors for the solarized theme (iTerm2)
 eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-universal`
 
-# Laod fasd
-eval "$(fasd --init auto)"
+# Load fasd
+#eval "$(fasd --init auto)"
