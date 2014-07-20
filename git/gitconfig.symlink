@@ -32,6 +32,7 @@
     # checkout
     co = checkout                     # checkout
     nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+    cr = checkout --track             # Checkout remote branch
 
     # cherry-pick
     cp = cherry-pick -x               # grab a change from a branch
@@ -107,7 +108,7 @@
 [core]
     autocrlf = false
     editor = vim
-    excludesfile = ~/.yadr/gitignore_global
+	excludesfile = /Users/sruml/.gitignore_global
 
 [advice]
     statusHints = false
@@ -124,3 +125,9 @@
 [user]
 	name = Sebastian Ruml
 	email = sebastian.ruml@gmail.com
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

@@ -2,8 +2,10 @@
 # Path definitions
 ###
 
+# Scala Home
+SCALA_HOME=/Users/sruml/bin/scala-2.11.1
+
 # Path
-SCALA_HOME=/Users/sruml/Applications/scala-2.9.1
 PATH=/usr/local/Trolltech/Qt-4.8/bin:/Users/sruml/bin:$SCALA_HOME/bin:/Users/sruml/.dotfiles/bin:/usr/local/CrossPack-AVR/bin:/Users/sruml/Apps/yagarto-4.7.2/bin:$HOME/yagarto/yagarto-4.7.2/tools:$PATH
 
 # Pythonpath
@@ -22,5 +24,8 @@ PATH=~/anaconda/bin:$PATH
 
 # QT
 PATH=~/Apps/Qt/5.1.1/clang_64/bin/:$PATH
+
+# Activator
+PATH=~/bin/activator/:$PATH
 
 export PATH
