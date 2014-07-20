@@ -1,11 +1,35 @@
 #!/bin/bash
 
 ####
-## This script creates a fresh go environment in the current directory and 
-## sets GOPATH to this directory.
+## This script creates a fresh go environment in the current directory,
+## sets GOPATH to this directory and adds $GOPATH/bin to PATH.
 ####
 
-mkdir -p bin pkg src
-export GOPATH="`pwd`"
-export PATH="$GOPATH/bin:$PATH"
-unset GOBIN
+# source goenv
+GOLIB=$(pwd)
+GOVENDOR=$(pwd)/vendor
+
+echo "Adding $GOLIB to GOPATH..."
+export GOPATH=$GOLIB
+
+echo "Checking go project directory structure..."
+for subd in src bin pkg doc bin ; do
+    [[ ! -e $subd ]] && (mkdir -p $subd ; echo -e "\tcreate $subd")
+done
+
+
+if [[ -n $GOVENDOR ]] ; then
+    export GOPATH=$GOVENDOR:$GOPATH
+    for subd in src bin pkg doc bin ; do
+        [[ ! -e $GOVENDOR/$subd ]] && ( mkdir -p $GOVENDOR/$subd ; echo -e "\tcreate $GOVENDOR/$subd")
+    done
+fi
+
+# export GOPATH=$GOLIB
+echo "Adding $GOLIB/bin to PATH..."
+export PATH=$GOLIB/bin:$PATH
+if [[ -e golang ]] ; then
+    export PATH=$(pwd)/golang/go/bin:$PATH
+fi
+
+echo "Done"
