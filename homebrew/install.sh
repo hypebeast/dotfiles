@@ -14,7 +14,7 @@ then
 fi
 
 # Install homebrew packages
-brew install grc coreutils spark fasd curl ctags tmux unrar the_silver_searcher ack pyqt tree htop
+brew install grc coreutils spark fasd curl ctags tmux unrar the_silver_searcher ack pyqt tree htop ack
 brew install macvim --custom-icons --override-system-vim --with-lua --with-luajit
 
 exit 0
