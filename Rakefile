@@ -1,24 +1,32 @@
 require 'rake'
 
-desc "Hook our dotfiles into system standard positions."
-task :install do
+desc "Installs all programs, tools and frameworks"
+task :bootstrap do
     puts
     puts "======================================================"
     puts "Welcome."
+    puts "Installing all required programs, tools and frameworks."
     puts "======================================================"
     puts
 
     install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
-    run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
     install_ohmyzsh
     install_spf13vim
+    
+    install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
+    install_dircolors if RUBY_PLATFORM.downcase.include?("darwin")
+end
 
-    puts
+desc "Hook our dotfiles into system standard positions."
+task :install do
     puts
     puts "======================================================"
     puts "Hooking up all dotfiles into system standard positions..."
     puts "======================================================"
     puts
+
+    # Set Mac OS X defaults
+    run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
 
     # Find all config files
     linkables = Dir.glob('*/**{.symlink}')
@@ -36,16 +44,6 @@ task :install do
     process_symlinks(linkables)
     process_zsh_plugins(zshplugins)
     process_zsh_files(zshfiles)
-
-    install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
-    install_dircolors if RUBY_PLATFORM.downcase.include?("darwin")
-end
-
-desc 'Updates some spf13vim '
-task :update do
-    install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
-    run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
-    #update_spf13vim
 end
 
 desc 'Setup gitconfig'
@@ -53,9 +51,9 @@ task :setup_gitconfig do
     # TODO
 end
 
-desc 'Run all dotfiles installers (install.sh)'
+desc 'Run all installer scripts (install.sh)'
 task :run_installers do
-    scripts = linkables = Dir.glob('*/**{install.sh}')
+    scripts = Dir.glob('*/**{install.sh}')
     scripts.each do |script|
         puts "## Executing \"" + script + "\""
         `sh -c "#{script}"`
@@ -65,34 +63,7 @@ end
 
 desc 'Update brew packages'
 task :update_brew do
-    install_homebrew
-end
-
-desc 'Link all dotfiles'
-task :link do
-    puts
-    puts
-    puts "======================================================"
-    puts "Hooking up all dotfiles into system standard positions..."
-    puts "======================================================"
-    puts
-
-    # Find all config files
-    linkables = Dir.glob('*/**{.symlink}')
-    zshplugins = Dir.glob('*/**{.plugin.zsh}')
-    zshfiles = Dir.glob('*/**{.zsh}')
-    executables = Dir.glob('*/**{.sh}')
-
-    # Remove all ZSH plugins
-    zshfiles = zshfiles - zshplugins
-
-    puts linkables
-    puts zshplugins
-    puts zshfiles
-
-    process_symlinks(linkables)
-    process_zsh_plugins(zshplugins)
-    process_zsh_files(zshfiles)
+    install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
 end
 
 task :default => 'install'
