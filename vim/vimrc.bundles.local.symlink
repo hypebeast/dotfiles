@@ -1,2 +1,8 @@
 " Emmet-Vim (https://github.com/mattn/emmet-vim)
 Plugin 'mattn/emmet-vim'
+
+" Unite (https://github.com/Shougo/unite.vim)
+Plugin 'Shougo/unite.vim'
+
+" MRU plugin includes unite.vim MRU sources
+Plugin 'Shougo/neomru.vim'

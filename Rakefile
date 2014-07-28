@@ -1,6 +1,6 @@
 require 'rake'
 
-desc "Installs all programs, tools and frameworks"
+desc "First time installation of basic programs, tools and frameworks"
 task :bootstrap do
     puts
     puts "======================================================"
@@ -25,9 +25,6 @@ task :install do
     puts "======================================================"
     puts
 
-    # Set Mac OS X defaults
-    run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
-
     # Find all config files
     linkables = Dir.glob('*/**{.symlink}')
     zshplugins = Dir.glob('*/**{.plugin.zsh}')
@@ -37,18 +34,14 @@ task :install do
     # Remove all ZSH plugins
     zshfiles = zshfiles - zshplugins
 
-    puts linkables
-    puts zshplugins
-    puts zshfiles
-
     process_symlinks(linkables)
     process_zsh_plugins(zshplugins)
     process_zsh_files(zshfiles)
 end
 
-desc 'Setup gitconfig'
-task :setup_gitconfig do
-    # TODO
+desc 'Set Mac OS X default options'
+task :dot do
+    run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
 end
 
 desc 'Run all installer scripts (install.sh)'
@@ -223,8 +216,6 @@ def process_symlinks(files)
 
         file = linkable.split('/').last.split('.symlink')
         target = "#{ENV["HOME"]}/.%s" % file
-
-        puts target
 
         if File.exists?(target) || File.symlink?(target)
             unless skip_all || overwrite_all || backup_all
