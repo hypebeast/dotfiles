@@ -46,3 +46,6 @@ eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-universal`
 
 # Load fasd
 #eval "$(fasd --init auto)"
+
+# added by travis gem
+[ -f /Users/sruml/.travis/travis.sh ] && source /Users/sruml/.travis/travis.sh
