@@ -60,3 +60,17 @@ alias -g X='| xargs'
 
 # Go
 alias go-pi='GOARCH=arm GOARM=5 GOOS=linux go'
+
+# Resource Usage
+alias df='df -kh'
+alias du='du -kh'
+
+if (( $+commands[htop] )); then
+    alias top=htop
+else
+    alias topc='top -o cpu'
+    alias topm='top -o vsize'
+fi
+
+# Serves a directory via HTTP.
+alias http-serve='python -m SimpleHTTPServer'
