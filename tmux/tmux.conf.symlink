@@ -76,3 +76,6 @@ set -g history-limit 10000
 
 # Local config
 if-shell "[ -f ~/.tmux.conf.user ]" 'source ~/.tmux.conf.user'
+
+# Enable mouse scrolling
+setw -g mode-mouse on

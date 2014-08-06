@@ -19,17 +19,24 @@ done
 
 
 if [[ -n $GOVENDOR ]] ; then
+    echo "Adding $GOVENDOR to GOPATH..."
     export GOPATH=$GOVENDOR:$GOPATH
     for subd in src bin pkg doc bin ; do
         [[ ! -e $GOVENDOR/$subd ]] && ( mkdir -p $GOVENDOR/$subd ; echo -e "\tcreate $GOVENDOR/$subd")
     done
 fi
 
-# export GOPATH=$GOLIB
+# add GOPATH to PATH
 echo "Adding $GOLIB/bin to PATH..."
 export PATH=$GOLIB/bin:$PATH
 if [[ -e golang ]] ; then
     export PATH=$(pwd)/golang/go/bin:$PATH
+fi
+
+# add GOVENDOR to PATH
+if [[ -e $GOVENDOR ]]; then
+    echo "Adding $GOVENDOR/bin to PATH..."
+    export PATH=$GOVENDOR/bin:$PATH
 fi
 
 echo "Done"

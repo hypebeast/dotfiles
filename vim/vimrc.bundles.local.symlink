@@ -8,4 +8,4 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neomru.vim'
 
 " vim-gocode
-"Plugin 'Blackrush/vim-gocode'
+Plugin 'Blackrush/vim-gocode'
