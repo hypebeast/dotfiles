@@ -104,4 +104,4 @@ bind u:${hyper} focus ${editor}
 bind e:${hyper} focus 'Evernote'
 bind i:${hyper} focus 'iTerm'
 bind k:${hyper} focus 'KeePassX'
-bind s:${hyper} focus 'Skype'
+bind s:${hyper} focus 'Slack'
