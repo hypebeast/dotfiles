@@ -29,7 +29,7 @@ export ZSH_THEME="steeef"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails go git textmate ruby lighthouse)
-plugins=(todotxt git ruby osx rails github node npm sublime history-substring-search zsh-syntax-highlighting themes fasd jira)
+plugins=(todotxt git ruby osx rails github node npm sublime history-substring-search zsh-syntax-highlighting themes fasd jira git-prompt web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -49,5 +49,5 @@ eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-universal`
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-export LC_ALL=en_US.UTF-8  
+export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
