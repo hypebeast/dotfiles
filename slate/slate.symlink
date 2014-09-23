@@ -37,17 +37,17 @@ alias browser 'Google Chrome'
 alias editor 'Sublime Text'
 
 # # Location Bindings
-bind return:shift;cmd ${full}
-bind k:shift;cmd ${tophalf}
-bind j:shift;cmd ${bottomhalf}
-bind h:shift;cmd ${lefthalf}
-bind h:shift;alt;cmd ${leftthird}
-bind i:shift;alt;cmd ${middlethird}
-bind b:shift;cmd ${bottomleft}
-bind y:shift;cmd ${topleft}
-bind l:shift;cmd ${righthalf}
-bind l:shift;alt;cmd ${rightthird}
-bind .:shift;cmd ${bottomright}
+#bind return:shift;cmd ${full}
+#bind k:shift;cmd ${tophalf}
+#bind j:shift;cmd ${bottomhalf}
+#bind h:shift;cmd ${lefthalf}
+#bind h:shift;alt;cmd ${leftthird}
+#bind i:shift;alt;cmd ${middlethird}
+#bind b:shift;cmd ${bottomleft}
+#bind y:shift;cmd ${topleft}
+#bind l:shift;cmd ${righthalf}
+#bind l:shift;alt;cmd ${rightthird}
+#bind .:shift;cmd ${bottomright}
 #bind p:shift;cmd ${topright}
 
 # # Resize Bindings
@@ -67,8 +67,8 @@ bind up:ctrl;cmd     push up    bar-resize:screenSizeY/2
 bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
 
 # Nudge Bindings
-bind right:shift;alt nudge +10% +0
-bind left:shift;alt  nudge -10% +0
+#bind right:shift;alt nudge +10% +0
+#bind left:shift;alt  nudge -10% +0
 #bind up:shift;alt    nudge +0   -10%
 #bind down:shift;alt  nudge +0   +10%
 

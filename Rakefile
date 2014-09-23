@@ -35,8 +35,8 @@ task :install do
     zshfiles = zshfiles - zshplugins
 
     process_symlinks(linkables)
-    #process_zsh_plugins(zshplugins)
-    #process_zsh_files(zshfiles)
+    process_zsh_plugins(zshplugins)
+    process_zsh_files(zshfiles)
 end
 
 desc 'Set Mac OS X default options'
@@ -214,9 +214,7 @@ def process_symlinks(files)
     skip_all = false
     overwrite_all = false
     backup_all = false
-
     baseDir = Dir.pwd
-    puts baseDir
 
     files.each do |linkable|
         skip = false
