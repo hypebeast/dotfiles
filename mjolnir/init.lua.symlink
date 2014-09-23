@@ -1,0 +1,13 @@
+local application = require "mjolnir.application"
+local hotkey = require "mjolnir.hotkey"
+local window = require "mjolnir.window"
+local fnutils = require "mjolnir.fnutils"
+
+hotkey.bind({"cmd", "alt", "ctrl"}, "D", function()
+    local win = window.focusedwindow()
+    win:maximize()
+end)
+
+hotkey.bind({"cmd", "alt", "ctrl"}, "S", function()
+    application.launchorfocus("Skype")
+end)
