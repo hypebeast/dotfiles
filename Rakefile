@@ -35,8 +35,8 @@ task :install do
     zshfiles = zshfiles - zshplugins
 
     process_symlinks(linkables)
-    process_zsh_plugins(zshplugins)
-    process_zsh_files(zshfiles)
+    #process_zsh_plugins(zshplugins)
+    #process_zsh_files(zshfiles)
 end
 
 desc 'Set Mac OS X default options'
@@ -46,6 +46,12 @@ end
 
 desc 'Run all installer scripts (install.sh)'
 task :run_installers do
+    puts
+    puts "======================================================"
+    puts "Running all installer scripts..."
+    puts "======================================================"
+    puts
+
     scripts = Dir.glob('*/**{install.sh}')
     scripts.each do |script|
         puts "## Executing \"" + script + "\""
@@ -209,13 +215,26 @@ def process_symlinks(files)
     overwrite_all = false
     backup_all = false
 
+    baseDir = Dir.pwd
+    puts baseDir
+
     files.each do |linkable|
         skip = false
         overwrite = false
         backup = false
 
         file = linkable.split('/').last.split('.symlink')
-        target = "#{ENV["HOME"]}/.%s" % file
+        configDir = File.join(baseDir, File.dirname(linkable))
+
+        # Check if a targetdir file exists and change the target accordingly
+        targetDirFile = File.join(configDir, "targetdir.txt")
+        if File.exists?(targetDirFile)
+            targetDir = File.expand_path(File.read(targetDirFile).strip)
+            target = File.join(targetDir, file)
+        else
+            target = "#{ENV["HOME"]}/.%s" % file
+            targetDir = File.dirname(target)
+        end
 
         if File.exists?(target) || File.symlink?(target)
             unless skip_all || overwrite_all || backup_all
@@ -232,7 +251,12 @@ def process_symlinks(files)
             end
 
             FileUtils.rm_rf(target) if overwrite || overwrite_all
-            `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
+            `mv "#{target}" "#{target}.backup"` if backup || backup_all
+        else
+            # Create directory if it doesn't exists
+            unless File.directory?(targetDir)
+                Dir.mkdir(targetDir)
+            end
         end
 
         # Create symlink
