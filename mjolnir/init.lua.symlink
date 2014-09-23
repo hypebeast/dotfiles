@@ -172,8 +172,12 @@ hotkey.bind(hyperKey, "b", function()
     application.launchorfocus(browser)
 end)
 
-hotkey.bind(hyperKey, "E", function()
+hotkey.bind(hyperKey, "u", function()
     application.launchorfocus(editor)
+end)
+
+hotkey.bind(hyperKey, "e", function()
+    application.launchorfocus("Evernote")
 end)
 
 hotkey.bind(hyperKey, "I", function()
