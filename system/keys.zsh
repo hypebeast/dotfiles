@@ -8,3 +8,8 @@
 
 # Pipe my public key to my clipboard. Fuck you, pay me.
 alias pubkey="more ~/.ssh/id_rsa.pub | pbcopy | echo '=> Public key copied to pasteboard.'"
+
+# Copy my public key to a remote host
+function ssh-copy () {
+    cat ~/.ssh/id_rsa.pub | ssh $@ 'mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys'
+}
