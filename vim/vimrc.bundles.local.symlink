@@ -7,4 +7,5 @@ Plugin 'Shougo/unite.vim'
 " MRU plugin includes unite.vim MRU sources
 Plugin 'Shougo/neomru.vim'
 
+" Tern (https://github.com/marijnh/tern_for_vim)
 Bundle 'marijnh/tern_for_vim'
