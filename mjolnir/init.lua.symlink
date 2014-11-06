@@ -185,6 +185,6 @@ hotkey.bind(hyperKey, "I", function()
 end)
 
 hotkey.bind(hyperKey, "K", function()
-    application.launchorfocus("KeePassX 2")
+    application.launchorfocus("KeePassX")
 end)
 
