@@ -11,6 +11,7 @@ task :bootstrap do
 
     install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
     install_ohmyzsh
+    install_zshplugins
     install_spf13vim
     
     install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
@@ -111,6 +112,20 @@ def install_ohmyzsh
         puts "It looks like that oh-my-zsh is already installed."
     else
         run %{curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh}
+    end
+end
+
+def install_zshplugins
+    puts "======================================================"
+    puts "Installing some more zsh plugins."
+    puts "The following plugins are going to be installed:"
+    puts " - zsh-syntax-highlighting"
+    puts "======================================================"
+
+    if File.directory?(File.expand_path("~/.oh-my-zsh"))
+        puts "It looks like that oh-my-zsh is not installed."
+    else
+        run %{cd ~/.oh-my-zsh/plugins; git clone git://github.com/zsh-users/zsh-syntax-highlighting.git}
     end
 end
 
@@ -293,7 +308,7 @@ def process_zsh_plugins(files)
             end
 
             FileUtils.rm_rf(target_file) if overwrite || overwrite_all
-            `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
+            `mv #{target_file} "#{target_file}.backup"` if backup || backup_all
         else
             # Create directory if it doesn't exists
             unless File.directory?(target_dir)
@@ -336,7 +351,7 @@ def process_zsh_files(files)
             end
 
             FileUtils.rm_rf(target_file) if overwrite || overwrite_all
-            `mv "$HOME/.#{file}" "$HOME/.#{file}.backup"` if backup || backup_all
+            `mv #{target_file} "#{target_file}.backup"` if backup || backup_all
         else
             # Create directory if it doesn't exists
             unless File.directory?(target_dir)
