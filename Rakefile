@@ -125,7 +125,7 @@ def install_zshplugins
     if File.directory?(File.expand_path("~/.oh-my-zsh"))
         puts "It looks like that oh-my-zsh is not installed."
     else
-        run %{cd ~/.oh-my-zsh/plugins; git clone git://github.com/zsh-users/zsh-syntax-highlighting.git}
+        run %{cd ~/.oh-my-zsh/custom/plugins; git clone git://github.com/zsh-users/zsh-syntax-highlighting.git}
     end
 end
 
