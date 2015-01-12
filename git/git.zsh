@@ -52,7 +52,7 @@ alias gsm='git submodule'
 alias gsmi='git submodule init'
 alias gsmu='git submodule update'
 alias gt='git t'
-alias gdelm='git branch --merged | grep -E "(feature|bugfix|hotfix)" | xargs -n 1 git branch -d'
+alias gdm='git branch --merged | grep -E "(feature|bugfix|hotfix)" | xargs -n 1 git branch -d'
 
 function git_included_tickets_in_release () {
     if [[ -n $1 && -n $2 && -n $3 ]] ; then
