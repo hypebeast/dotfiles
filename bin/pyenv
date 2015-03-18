@@ -1,0 +1,17 @@
+#!/bin/bash
+
+####
+## This script creates a fresh virtualenv environment in the current directory.
+####
+
+ENV_DIR=$(pwd)/env
+
+if [[ ! -e $ENV_DIR ]] ; then
+    echo "Creating new virtualenv..."
+    virtualenv $ENV_DIR
+fi
+
+echo "Activating virtualenv.."
+source $ENV_DIR/bin/activate
+
+echo "Done"
