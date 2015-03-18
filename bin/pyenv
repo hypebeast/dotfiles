@@ -14,4 +14,7 @@ fi
 echo "Activating virtualenv.."
 source $ENV_DIR/bin/activate
 
+echo "Adding $ENV_DIR/bin to PATH..."
+export PATH=$ENV_DIR/bin:$PATH
+
 echo "Done"
