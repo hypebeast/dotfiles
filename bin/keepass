@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# TODO: Read Keepass file from env variable
+
+DB_FILE=keepass.kdb
+
+# Check if KeePass has already been started
+if [ -f ${DB_FILE}.lock ]; then
+    echo "===================================="
+    echo "KeePass seems to be already started "
+    echo "===================================="
+    exit
+fi
+
+# get latest version from Git server
+git pull origin master
+
+# Check if pull was unsuccessfull
+if [ $? -gt 0 ]; then
+    echo "===================================="
+    echo "Can't connect to Git server"
+    echo "Keepass db will be READONLY"
+    echo "===================================="
+    touch ${DB_FILE}.lock
+    keepassx ${DB_FILE}
+    rm ${DB_FILE}.lock
+    exit
+fi
+# Check if keepass is already running somewhere else
+if [ -f ${DB_FILE}.scriptlock ]; then
+    echo "=========================================="
+    echo "Keepass is already running somewhere else"
+    echo "=========================================="
+    exit
+fi
+
+# Create lock file
+touch ${DB_FILE}.scriptlock
+git add ${DB_FILE}.scriptlock
+git commit -am "created lock file"
+git push
+
+# open Keepass
+keepassx ${DB_FILE}
+
+# delete lock file
+rm ${DB_FILE}.scriptlock
+git rm ${DB_FILE}.scriptlock
+git commit -am "deleted lock file"
+git push
