@@ -74,3 +74,6 @@ fi
 
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
+
+# Pretty print JSON
+alias pretty-json='python -m json.tool'
