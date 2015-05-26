@@ -4,15 +4,7 @@
 ###
 
 # ls
-alias lr='ls -altr'
-
-if $(gls &>/dev/null)
-then
-  alias ls="gls -F --color"
-  alias l="gls -lAh --color"
-  alias ll="gls -l --color"
-  alias la='gls -A --color'
-fi
+alias lr='ls -alhtr'
 
 # Aliases for the wonderful tree command
 alias t1='tree -d -L 1'
@@ -33,12 +25,9 @@ alias -g ELS='|& less -S'
 alias -g ETL='|& tail -20'
 alias -g ET='|& tail'
 alias -g F=' | fmt -'
-alias -g G='| egrep'
-alias -g H='| head'
 alias -g HL='|& head -20'
 alias -g Sk="*~(*.bz2|*.gz|*.tgz|*.zip|*.z)"
 alias -g LL="2>&1 | less"
-alias -g L="| less"
 alias -g LS='| less -S'
 alias -g MM='| most'
 alias -g M='| more'
@@ -50,7 +39,6 @@ alias -g R=' > /c/aaa/tee.txt '
 alias -g RNS='| sort -nr'
 alias -g S='| sort'
 alias -g TL='| tail -20'
-alias -g T='| tail'
 alias -g US='| sort -u'
 alias -g VM=/var/log/messages
 alias -g X0G='| xargs -0 egrep'
