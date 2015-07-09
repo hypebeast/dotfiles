@@ -12,7 +12,7 @@ PATH=/usr/local/Trolltech/Qt-4.8/bin:/Users/sruml/bin:$SCALA_HOME/bin:/Users/sru
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 
 # Java Home
-export JAVA_HOME=/Library/Java/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/
 
 # Flip Path
 export FLIP_HOME=/Users/sruml/Apps/flip.3.2.1/bin
@@ -27,5 +27,8 @@ PATH=~/Apps/Qt/5.1.1/clang_64/bin/:$PATH
 
 # Activator
 PATH=~/bin/activator/:$PATH
+
+# Gradle
+PATH=~/bin/gradle-2.4/bin:$PATH
 
 export PATH

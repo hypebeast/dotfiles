@@ -1,9 +1,16 @@
 local application = require "hs.application"
 local hotkey = require "hs.hotkey"
 local window = require "hs.window"
--- local hints = require "mjolnir.th.hints"
--- local spotify = require "mjolnir.lb.spotify"
+local spotify = require "hs.spotify"
+local notify = require "hs.notify"
 -- local tiling = require "mjolnir.tiling"
+
+require "fntools"
+require "extensions"
+
+---------------------------------------------------------
+-- Key definitions
+---------------------------------------------------------
 
 local locationModifierKey = {"cmd", "shift"}
 local resizeModifierKey = {"cmd", "alt", "ctrl"}
@@ -11,13 +18,44 @@ local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 
-local browser = "Google Chrome"
-local editor = "VIM"
 
+---------------------------------------------------------
+-- Application definitions
+---------------------------------------------------------
+
+local browser = "Google Chrome"
+local editor = "Sublime Text"
+local terminal = "iTerm"
+
+
+---------------------------------------------------------
+-- Global settings
+---------------------------------------------------------
+
+-- disable animations
+hs.window.animationDuration = 0
+
+-- hide window shadows
+hs.window.setShadows(false)
+
+
+---------------------------------------------------------
+-- SCREENS
+---------------------------------------------------------
+
+local cycleScreens = hs.fnutils.cycle(hs.screen.allScreens())
+
+hotkey.bind(hyperKey, "S", function()
+  window.focusedWindow():moveToScreen(cycleScreens())
+end)
 
 ---
 --- Location bindings
 ---
+
+hs.hotkey.bind(hyperKey, "F", fullScreenCurrent)
+hs.hotkey.bind(hyperKey, "D", screenToRight)
+hs.hotkey.bind(hyperKey, "A", screenToLeft)
 
 --- Fullsize
 hotkey.bind(locationModifierKey, "return", function ()
@@ -89,7 +127,6 @@ hotkey.bind(locationModifierKey, "K", function ()
     win:setFrame(winFrame)
 end)
 
-
 ---
 --- Resize bindings
 ---
@@ -128,7 +165,7 @@ end)
 
 
 ---
---- Nudge Bindings 
+--- Nudge Bindings
 ---
 
 --- Move right
@@ -179,10 +216,13 @@ end)
 --- Spotify
 ---
 
--- hotkey.bind(hyperKey, 'c', spotify.displayCurrentTrack)
--- hotkey.bind(hyperKey, 'space', spotify.play)
--- hotkey.bind(hyperKey, 'n', spotify.next)
--- hotkey.bind(hyperKey, 'p', spotify.previous)
+hotkey.bind(hyperKey, 'I', spotify.displayCurrentTrack)
+hotkey.bind(hyperKey, 'space', function()
+  spotify.play()
+  -- notify.new({title="Hammerspoon", informativeText="Hello World"}):send():release()
+end)
+hotkey.bind(hyperKey, 'n', spotify.next)
+hotkey.bind(hyperKey, 'p', spotify.previous)
 
 ---
 --- Tiling
@@ -193,31 +233,41 @@ end)
 -- hotkey.bind(hintModifierKey, "k", function() tiling.cycle(-1) end)
 -- hotkey.bind(hintModifierKey, "space", function() tiling.promote() end)
 
----
---- App bindings
----
+---------------------------------------------------------
+-- APP HOTKEYS
+---------------------------------------------------------
 
-hotkey.bind(hyperKey, "S", function()
-    application.launchorfocus("Slack")
+
+hotkey.bind(hyperKey, "1", launchOrCycleFocus(browser))
+hotkey.bind(hyperKey, "2", launchOrCycleFocus(terminal))
+hotkey.bind(hyperKey, "3", launchOrCycleFocus(editor))
+hotkey.bind(hyperKey, "4", launchOrCycleFocus("KeePassX"))
+hotkey.bind(hyperKey, "5", launchOrCycleFocus("Slack"))
+hotkey.bind(hyperKey, "6", launchOrCycleFocus("Evernote"))
+
+hs.hotkey.bind(hyperKey, "Z", launchOrCycleFocus("Finder"))
+
+
+---------------------------------------------------------
+-- ON-THE-FLY KEYBIND
+---------------------------------------------------------
+
+-- Temporarily bind an application to be toggled by the V key
+-- useful for once-in-a-while applications like Preview
+local boundApplication = nil
+
+hs.hotkey.bind(hyperKey, "C", function()
+  local appName = hs.window.focusedWindow():application():title()
+
+  if boundApplication then
+    boundApplication:disable()
+  end
+
+  boundApplication = hs.hotkey.bind(hyperKey, "V", launchOrCycleFocus(appName))
+
+  -- https://github.com/Hammerspoon/hammerspoon/issues/184#issuecomment-102835860
+  boundApplication:disable()
+  boundApplication:enable()
+
+  hs.alert(string.format("Binding: \"%s\" => ⌘ + V", appName))
 end)
-
-hotkey.bind(hyperKey, "b", function()
-    application.launchorfocus(browser)
-end)
-
-hotkey.bind(hyperKey, "u", function()
-    application.launchorfocus(editor)
-end)
-
-hotkey.bind(hyperKey, "e", function()
-    application.launchorfocus("Evernote")
-end)
-
-hotkey.bind(hyperKey, "I", function()
-    application.launchorfocus("iTerm")
-end)
-
-hotkey.bind(hyperKey, "K", function()
-    application.launchorfocus("KeePassX")
-end)
-
