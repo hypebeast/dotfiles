@@ -32,7 +32,7 @@ export ZSH_THEME="steeef"
 plugins=(todotxt git ruby osx rails github node npm sublime
             history-substring-search zsh-syntax-highlighting
             themes fasd web-search zsh-syntax-highlighting wd
-            cp dirhistory urltoolsi vagrant grunt)
+            cp dirhistory urltoolsi vagrant grunt common-aliases)
 
 source $ZSH/oh-my-zsh.sh
 
