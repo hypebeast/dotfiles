@@ -16,6 +16,7 @@ local locationModifierKey = {"cmd", "shift"}
 local resizeModifierKey = {"cmd", "alt", "ctrl"}
 local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
+local sendKeyStrokesModifierKey = {"ctrl", "shift"}
 local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 
 
@@ -218,11 +219,21 @@ end)
 
 hotkey.bind(hyperKey, 'I', spotify.displayCurrentTrack)
 hotkey.bind(hyperKey, 'space', function()
+  local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
+
   spotify.play()
-  -- notify.new({title="Hammerspoon", informativeText="Hello World"}):send():release()
+  notify.new({title="Spotify Play/Pause", informativeText=info}):send():release()
 end)
-hotkey.bind(hyperKey, 'n', spotify.next)
-hotkey.bind(hyperKey, 'p', spotify.previous)
+hotkey.bind(hyperKey, 'n', function()
+  spotify.next()
+  local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
+  notify.new({title="Spotify - Next Track", informativeText=info}):send():release()
+end)
+hotkey.bind(hyperKey, 'p', function()
+  spotify.previous()
+  local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
+  notify.new({title="Spotify - Previous Track", informativeText=info}):send():release()
+end)
 
 ---
 --- Tiling
@@ -271,3 +282,10 @@ hs.hotkey.bind(hyperKey, "C", function()
 
   hs.alert(string.format("Binding: \"%s\" => ⌘ + V", appName))
 end)
+
+hotkey.bind(hyperKey, "R", launchOrCycleFocus(terminal))
+
+hotkey.bind(hyperKey, "R", function()
+  launchOrCycleFocus(terminal)
+end)
+
