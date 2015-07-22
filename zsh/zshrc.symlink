@@ -29,7 +29,10 @@ export ZSH_THEME="steeef"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails go git textmate ruby lighthouse)
-plugins=(todotxt git ruby osx rails github node npm sublime history-substring-search zsh-syntax-highlighting themes fasd web-search zsh-syntax-highlighting wd cp dirhistory urltoolsi vagrant)
+plugins=(todotxt git ruby osx rails github node npm sublime
+            history-substring-search zsh-syntax-highlighting
+            themes fasd web-search zsh-syntax-highlighting wd
+            cp dirhistory urltoolsi vagrant grunt)
 
 source $ZSH/oh-my-zsh.sh
 
