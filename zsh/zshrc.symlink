@@ -53,9 +53,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Initialize rbenv
-if ! type "rbenv" > /dev/null; then
+if (( $+commands[rbenv] )); then
     eval "$(rbenv init -)"
-end
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sruml/.gvm/bin/gvm-init.sh" ]] && source "/Users/sruml/.gvm/bin/gvm-init.sh"
