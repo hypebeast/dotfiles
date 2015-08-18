@@ -3,6 +3,7 @@ local hotkey = require "hs.hotkey"
 local window = require "hs.window"
 local spotify = require "hs.spotify"
 local notify = require "hs.notify"
+local pasteboard = require "hs.pasteboard"
 -- local tiling = require "mjolnir.tiling"
 
 require "fntools"
@@ -39,6 +40,24 @@ hs.window.animationDuration = 0
 -- hide window shadows
 hs.window.setShadows(false)
 
+
+---------------------------------------------------------
+-- Config reload
+---------------------------------------------------------
+
+function reloadConfig(files)
+    doReload = false
+    for _,file in pairs(files) do
+        if file:sub(-4) == ".lua" then
+            doReload = true
+        end
+    end
+    if doReload then
+        hs.reload()
+    end
+end
+hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+hs.alert.show("Config loaded")
 
 ---------------------------------------------------------
 -- SCREENS
@@ -289,3 +308,13 @@ hotkey.bind(hyperKey, "R", function()
   launchOrCycleFocus(terminal)
 end)
 
+---------------------------------------------------------
+-- Do a Google search with the clipboard content
+---------------------------------------------------------
+
+hotkey.bind(hyperKey, "G", function()
+  local content = pasteboard.getContents()
+  local searchUrl = "https://google.com/search?q=" .. content
+
+  hs.execute("open " .. searchUrl)
+end)

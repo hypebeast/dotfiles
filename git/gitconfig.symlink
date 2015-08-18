@@ -133,3 +133,5 @@
 	trustExitCode = true
 [url "https://"]
 	insteadOf = git://
+[github]
+	user = hypebeast
