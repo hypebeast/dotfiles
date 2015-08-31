@@ -1,0 +1,11 @@
+####
+# View markdown documents in your terminal.
+# Requires lynx and pandoc.
+#
+# Sebastian Ruml, 2015/08/30
+####
+
+vmk() {
+  local file=$1
+  pandoc $file | lynx -stdin
+}
