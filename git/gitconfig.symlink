@@ -135,3 +135,5 @@
 	insteadOf = git://
 [github]
 	user = hypebeast
+[http]
+	sslVerify = false
