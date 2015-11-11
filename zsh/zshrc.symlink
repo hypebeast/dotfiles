@@ -59,8 +59,12 @@ if (( $+commands[rbenv] )); then
     eval "$(rbenv init -)"
 fi
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/sruml/.gvm/bin/gvm-init.sh" ]] && source "/Users/sruml/.gvm/bin/gvm-init.sh"
+############ SZCMS settings BEGIN
+source /projects/szcms_tools/ENV.sh
+############ SZCMS settings END
 
 export NVM_DIR="/Users/sruml/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/sruml/.gvm/bin/gvm-init.sh" ]] && source "/Users/sruml/.gvm/bin/gvm-init.sh"
