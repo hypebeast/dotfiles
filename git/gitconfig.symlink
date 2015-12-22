@@ -109,6 +109,7 @@
     autocrlf = false
     editor = vim
 	excludesfile = /Users/sruml/.gitignore_global
+	quotepath = false
 
 [advice]
     statusHints = false
@@ -135,3 +136,5 @@
 	insteadOf = git://
 [github]
 	user = hypebeast
+[http]
+	sslVerify = false
