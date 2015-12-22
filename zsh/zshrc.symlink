@@ -43,6 +43,8 @@ source $ZSH/oh-my-zsh.sh
 # Add path to our custom bins
 export PATH=/usr/local/bin:$PATH
 
+#export PROMPT="$PROMPT\$(git-radar --zsh --fetch) "
+
 # Load dircolors for the solarized theme (iTerm2)
 eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-universal`
 
@@ -65,5 +67,9 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # gopath
 export GOPATH=~/Development/go
 
-# THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+############ SZCMS settings BEGIN
+source /projects/szcms_tools/ENV.sh
+############ SZCMS settings END
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sruml/.gvm/bin/gvm-init.sh" ]] && source "/Users/sruml/.gvm/bin/gvm-init.sh"

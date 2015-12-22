@@ -64,7 +64,7 @@ fi
 alias http-serve='python -m SimpleHTTPServer'
 
 # Pretty print JSON
-alias pretty-json='python -m json.tool'
+alias pretty-json='python -m json.tool | pygmentize -l json'
 
 # ag
 alias -g agi='ag -i'
