@@ -3,7 +3,7 @@
 ###
 
 # Scala Home
-SCALA_HOME=/Users/sruml/bin/scala-2.11.1
+SCALA_HOME=/Users/sruml/bin/scala-2.11.7
 
 # Path
 PATH=/usr/local/Trolltech/Qt-4.8/bin:/Users/sruml/bin:$SCALA_HOME/bin:/Users/sruml/.dotfiles/bin:/usr/local/CrossPack-AVR/bin:/Users/sruml/Apps/yagarto-4.7.2/bin:$HOME/yagarto/yagarto-4.7.2/tools:$PATH
