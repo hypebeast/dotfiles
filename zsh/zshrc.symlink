@@ -29,11 +29,11 @@ export ZSH_THEME="steeef"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails go git textmate ruby lighthouse)
-plugins=(todotxt git ruby osx rails github node npm sublime
+plugins=(git ruby osx rails github node npm sublime
             history-substring-search zsh-syntax-highlighting
             themes fasd web-search zsh-syntax-highlighting wd
-            cp dirhistory urltoolsi vagrant grunt common-aliases
-            copydir copyfile github)
+            cp dirhistory urltools vagrant grunt common-aliases
+            copydir copyfile github taskwarrior)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -55,16 +55,21 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Initialize rbenv
-if (( $+commands[rbenv] )); then
-    eval "$(rbenv init -)"
-fi
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+export NVM_DIR="/Users/sruml/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# pyenv
+export PYENV_ROOT=/usr/local/var/pyenv
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+# gopath
+export GOPATH=~/Development/go
 
 ############ SZCMS settings BEGIN
 [ -s /projects/szcms_tools/ENV.sh ] && source /projects/szcms_tools/ENV.sh
 ############ SZCMS settings END
-
-export NVM_DIR="/Users/sruml/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sruml/.gvm/bin/gvm-init.sh" ]] && source "/Users/sruml/.gvm/bin/gvm-init.sh"
