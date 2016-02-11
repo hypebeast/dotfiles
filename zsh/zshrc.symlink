@@ -60,7 +60,7 @@ if (( $+commands[rbenv] )); then
 fi
 
 ############ SZCMS settings BEGIN
-source /projects/szcms_tools/ENV.sh
+[ -s /projects/szcms_tools/ENV.sh ] && source /projects/szcms_tools/ENV.sh
 ############ SZCMS settings END
 
 export NVM_DIR="/Users/sruml/.nvm"
