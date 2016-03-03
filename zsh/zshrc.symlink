@@ -68,7 +68,7 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export GOPATH=~/Development/go
 
 ############ SZCMS settings BEGIN
-[ -s /projects/szcms_tools/ENV.sh ] && source /projects/szcms_tools/ENV.sh
+[ -s "/projects/szcms_tools/ENV.sh" ] && source /projects/szcms_tools/ENV.sh
 ############ SZCMS settings END
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
@@ -77,3 +77,6 @@ export GOPATH=~/Development/go
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/sruml/.sdkman"
 [[ -s "/Users/sruml/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/sruml/.sdkman/bin/sdkman-init.sh"
+
+# Docker-Machine env variables
+eval "$(docker-machine env dev)"

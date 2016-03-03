@@ -31,4 +31,7 @@ PATH=~/bin/activator/:$PATH
 # Gradle
 PATH=~/bin/gradle-2.4/bin:$PATH
 
+# Pipsi
+PATH=~/.local/venvs/pipsi/bin:$PATH
+
 export PATH
