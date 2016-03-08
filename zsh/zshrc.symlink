@@ -40,6 +40,12 @@ source $ZSH/oh-my-zsh.sh
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
+if [ -d $HOME/.secrets ]; then
+  for file in $HOME/.secrets/**/*.zsh; do
+      source $file
+  done
+fi
+
 # Add path to our custom bins
 export PATH=/usr/local/bin:$PATH
 
