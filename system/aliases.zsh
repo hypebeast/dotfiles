@@ -5,6 +5,8 @@
 
 # ls
 alias lr='ls -alhtr'
+alias l='ls -alh'
+alias ll='ls -lFh'
 
 # Aliases for the wonderful tree command
 alias t1='tree -d -L 1'
