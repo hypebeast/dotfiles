@@ -1,6 +1,3 @@
-" Emmet-Vim (https://github.com/mattn/emmet-vim)
-Plugin 'mattn/emmet-vim'
-
 " Unite (https://github.com/Shougo/unite.vim)
 Plugin 'Shougo/unite.vim'
 
@@ -9,3 +6,4 @@ Plugin 'Shougo/neomru.vim'
 
 " Tern (https://github.com/marijnh/tern_for_vim)
 Bundle 'marijnh/tern_for_vim'
+
