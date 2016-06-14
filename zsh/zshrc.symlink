@@ -33,7 +33,7 @@ plugins=(git ruby osx rails github node npm sublime
             history-substring-search zsh-syntax-highlighting
             themes fasd web-search zsh-syntax-highlighting wd
             cp dirhistory urltools vagrant grunt common-aliases
-            copydir copyfile github taskwarrior)
+            copydir copyfile github taskwarrior ubuntu)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -63,7 +63,13 @@ export LANG=en_US.UTF-8
 # Initialize rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-export NVM_DIR="/Users/sruml/.nvm"
+# NVM
+if [[ $('uname') == 'Linux' ]]; then
+  export NVM_DIR="/home/sruml/.nvm"
+elif  [[ "$OSTYPE" = darwin* ]]; then
+  export NVM_DIR="/Users/sruml/.nvm"
+fi
+
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # pyenv
