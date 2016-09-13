@@ -2,7 +2,7 @@
 # todo.sh: https://github.com/ginatrapani/todo.txt-cli
 ###
 
-function t() { 
+function txt() { 
   if [ $# -eq 0 ]; then
     todo.sh ls
   else
@@ -10,7 +10,7 @@ function t() {
   fi
 }
 
-alias n="t ls @next"
-alias ta="t lsp A"
-alias tb="t lsp B"
-alias tc="t lsp C"
+alias n="txt ls @next"
+alias ta="txt lsp A"
+alias tb="txt lsp B"
+alias tc="txt lsp C"

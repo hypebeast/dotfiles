@@ -11,9 +11,6 @@ PATH=/usr/local/Trolltech/Qt-4.8/bin:/Users/sruml/bin:$SCALA_HOME/bin:/Users/sru
 # Pythonpath
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 
-# Java Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/
-
 # Flip Path
 export FLIP_HOME=/Users/sruml/Apps/flip.3.2.1/bin
 FLIP_PATH=/Users/sruml/Apps/flip.3.2.1/bin

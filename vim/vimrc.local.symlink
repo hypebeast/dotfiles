@@ -1,5 +1,5 @@
 " Some common settings
-colorscheme molokai
+colorscheme dracula
 set nospell
 set nolist
 set number
@@ -16,4 +16,3 @@ nnoremap <Leader>f :Unite grep:.<cr>
 
 " replacing unite with ctrl-p
 nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
-
