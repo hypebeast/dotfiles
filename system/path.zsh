@@ -31,7 +31,10 @@ PATH=$HOME/bin/gradle-2.4/bin:$PATH
 # Pipsi
 PATH=$HOME/.local/venvs/pipsi/bin:$PATH
 
-# Python/Pip
+# Python3 executables
 PATH=$HOME/.local/bin:$PATH
+
+# pyenv
+PATH=$HOME/.pyenv/bin:$PATH
 
 export PATH
