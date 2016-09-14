@@ -11,9 +11,7 @@ export PROJECTS=~/Development
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#export ZSH_THEME="robbyrussell"
 export ZSH_THEME="steeef"
-#export ZSH_THEME="agnoster"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -33,7 +31,7 @@ plugins=(git ruby osx rails github node npm sublime
             history-substring-search zsh-syntax-highlighting
             themes fasd web-search zsh-syntax-highlighting wd
             cp dirhistory urltools vagrant grunt common-aliases
-            copydir copyfile github taskwarrior ubuntu)
+            copydir copyfile github taskwarrior)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,20 +71,19 @@ fi
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # pyenv
-export PYENV_ROOT=/usr/local/var/pyenv
+export PYENV_ROOT="$HOME/.pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # gopath
 export GOPATH=~/Development/go
 
-############ SZCMS settings BEGIN
+# SZCMS settings
 [ -s "/projects/szcms_tools/ENV.sh" ] && source /projects/szcms_tools/ENV.sh
-############ SZCMS settings END
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+# GVM: THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/sruml/.gvm/bin/gvm-init.sh" ]] && source "/Users/sruml/.gvm/bin/gvm-init.sh"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# SDKMAN: THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/sruml/.sdkman"
 [[ -s "/Users/sruml/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/sruml/.sdkman/bin/sdkman-init.sh"
 

@@ -1,6 +1,6 @@
 require 'rake'
 
-desc "First time installation of basic programs, tools and frameworks"
+desc "First time installation of basic applications, tools and frameworks"
 task :bootstrap do
     puts
     puts "======================================================"
