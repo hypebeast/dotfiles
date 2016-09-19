@@ -163,16 +163,16 @@ def link_files(linkables)
             `mv "#{target}" "#{target}.backup"` if backup || backup_all
         end
 
-        # Create target directory if it doesn't exist
-        if !target_dir.nil? && !File.directory?(target_dir)
-            puts "Creating directory #{target_dir}" if ENV["DEBUG"]
-            Dir.mkdir(target_dir)
-        end
-
         # Create symlink
         unless skip || skip_all
-            puts "Linking #{Dir.pwd}/#{src} to #{target}"
-            `ln -s "$PWD/#{src}" "#{target}"`
+          # Create target directory if it doesn't exist
+          if !target_dir.nil? && !File.directory?(target_dir)
+              puts "Creating directory #{target_dir}" if ENV["DEBUG"]
+              Dir.mkdir(target_dir)
+          end
+
+          puts "Linking #{Dir.pwd}/#{src} to #{target}"
+          `ln -s "$PWD/#{src}" "#{target}"`
         end
     end
 end
