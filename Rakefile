@@ -143,7 +143,7 @@ def link_files(linkables)
 
         src = linkable["src"]
         target = linkable["target"]
-        target_dir = linkable.key?('target_dir') and linkable["target_dir"]
+        target_dir = linkable['target_dir']
 
         if File.exist?(target) || File.symlink?(target)
             unless skip_all || overwrite_all || backup_all
@@ -161,12 +161,12 @@ def link_files(linkables)
 
             FileUtils.rm_rf(target) if overwrite || overwrite_all
             `mv "#{target}" "#{target}.backup"` if backup || backup_all
-        else
-            # Create target directory if it doesn't exist
-            if target_dir and !File.directory?(target_dir)
-                puts "Creating directory #{target_dir}" if ENV["DEBUG"]
-                Dir.mkdir(target_dir)
-            end
+        end
+
+        # Create target directory if it doesn't exist
+        if !target_dir.nil? && !File.directory?(target_dir)
+            puts "Creating directory #{target_dir}" if ENV["DEBUG"]
+            Dir.mkdir(target_dir)
         end
 
         # Create symlink

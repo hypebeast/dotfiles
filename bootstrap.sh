@@ -2,7 +2,7 @@
 
 ####
 # Bootstrap script for dotfiles. This script performs the first time
-# installation of dotfiles on a new machine.
+# installation on a new machine.
 #
 # To manage your dotfile repo use rake and make changes to the Rakefile if
 # necessary.
