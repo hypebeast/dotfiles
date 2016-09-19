@@ -4,43 +4,39 @@ require 'rake'
 desc "First time installation of basic applications, tools and frameworks"
 task :bootstrap do
     puts
-    puts "======================================================"
-    puts "Welcome."
+    puts "======================================================".green
+    puts "Welcome.".green
     puts
-    puts "Installing all required programs, tools and frameworks."
-    puts "======================================================"
+    puts "Installing all required programs, tools and frameworks.".green
+    puts "======================================================".green
     puts
 
-    install_homebrew if RUBY_PLATFORM.downcase.include?("darwin")
+    install_homebrew if is_darwin
     install_ohmyzsh
     install_zshplugins
     install_spf13vim
-    
+
     run_installers
     dot if is_darwin
-    install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
-    install_dircolors if RUBY_PLATFORM.downcase.include?("darwin")
+    install_term_theme if is_darwin
+    install_dircolors if is_darwin
 end
 
 desc "Hook our dotfiles into system standard positions."
 task :install do
     puts
-    puts "======================================================"
-    puts "Hooking up all dotfiles into system standard positions..."
-    puts "======================================================"
+    puts "=========================================================".green
+    puts "Hooking up all dotfiles into system standard positions...".green
+    puts "=========================================================".green
     puts
 
-    # Find all config files
-    linkables = Dir.glob('*/**{.symlink}')
-    zshplugins = Dir.glob('*/**{.plugin.zsh}')
-    zshfiles = Dir.glob('*/**{.zsh}')
+    symlinks = find_symlinks
+    plugins = find_zshplugins
+    zsh = find_zshfiles
+    linkable_dirs = find_linkabledirs
 
-    # Remove all ZSH plugins
-    zshfiles = zshfiles - zshplugins
-
-    process_symlinks(linkables)
-    process_zsh_plugins(zshplugins)
-    process_zsh_files(zshfiles)
+    all = symlinks + plugins + zsh + linkable_dirs
+    link_files(all)
 end
 
 desc 'Set Mac OS X default options'
@@ -101,7 +97,7 @@ def find_zshfiles()
         target = "#{ENV["HOME"]}/.oh-my-zsh/custom/%s" % file.split("/").last
         { "src" => file, "target" => target }
     end
-    
+
     result
 end
 
@@ -121,8 +117,15 @@ def find_zshplugins()
 end
 
 # Find all directories that should be linked to ~
-def find_linkabledirs(dir)
-    # TODO
+def find_linkabledirs()
+    dirs = Dir.glob('*/**').reject { |e| !File.directory?(e) }
+
+    result = dirs.map do |dir|
+      target = "#{ENV["HOME"]}/.%s" % dir.split("/").last
+      { "src" => dir, "target" => target }
+    end
+
+    result
 end
 
 # Link the given files to their final place.
@@ -391,25 +394,4 @@ class String
     def underline;      "\e[4m#{self}\e[24m" end
     def blink;          "\e[5m#{self}\e[25m" end
     def reverse_color;  "\e[7m#{self}\e[27m" end
-end
-
-
-############
-# !!!Only for testing!!!
-############
-
-#  Dir.entries('/your_dir').select {|entry| File.directory? File.join('/your_dir',entry) and !(entry =='.' || entry == '..') }
-
-task :testtask do
-    symlinks = find_symlinks
-    plugins = find_zshplugins
-    zsh = find_zshfiles
-
-    all = symlinks + plugins + zsh
-    link_files(all)
-end
-
-def test_glob()
-    #Dir.glob('*/**').reject {|e| !File.directory?(e)}
-    Dir.glob('*')
 end
