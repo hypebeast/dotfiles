@@ -1,10 +1,12 @@
 require 'rake'
 
+
 desc "First time installation of basic applications, tools and frameworks"
 task :bootstrap do
     puts
     puts "======================================================"
     puts "Welcome."
+    puts
     puts "Installing all required programs, tools and frameworks."
     puts "======================================================"
     puts
@@ -14,6 +16,8 @@ task :bootstrap do
     install_zshplugins
     install_spf13vim
     
+    run_installers
+    dot if is_darwin
     install_term_theme if RUBY_PLATFORM.downcase.include?("darwin")
     install_dircolors if RUBY_PLATFORM.downcase.include?("darwin")
 end
@@ -30,7 +34,6 @@ task :install do
     linkables = Dir.glob('*/**{.symlink}')
     zshplugins = Dir.glob('*/**{.plugin.zsh}')
     zshfiles = Dir.glob('*/**{.zsh}')
-    #executables = Dir.glob('*/**{.sh}')
 
     # Remove all ZSH plugins
     zshfiles = zshfiles - zshplugins
@@ -68,11 +71,113 @@ end
 
 task :default => 'install'
 
+
 private
-def run(cmd)
-  puts "[Running] #{cmd}"
-  `#{cmd}` unless ENV['DEBUG']
+
+###########################################################
+## Config file tasks
+###########################################################
+
+# Find all files that ends with ".symlink" and link them to the home dir
+def find_symlinks()
+    files = Dir.glob('*/**{.symlink}')
+
+    result = files.map do |file|
+        target = "#{ENV["HOME"]}/.%s" % file.split('/').last.split('.symlink')
+        { "src" => file, "target" => target }
+    end
+
+    result
 end
+
+# Find all zsh config files (file must end in .zsh)
+def find_zshfiles()
+    files = Dir.glob('*/**{.zsh}')
+
+    # Filter out zsh plugins
+    files = files.reject { |file| file.end_with?('.plugin.zsh') }
+
+    result = files.map do |file|
+        target = "#{ENV["HOME"]}/.oh-my-zsh/custom/%s" % file.split("/").last
+        { "src" => file, "target" => target }
+    end
+    
+    result
+end
+
+# Find all zsh plugins (file must end in .zshplugin)
+def find_zshplugins()
+    files = Dir.glob('*/**{.plugin.zsh}')
+
+    result = files.map do |file|
+        file_name = file.split('/').last
+        dir = file.split("/").last.split(".plugin.zsh")
+        target_dir = "#{ENV["HOME"]}/.oh-my-zsh/custom/plugins/%s" % dir
+        target = "%s/%s" % [target_dir, file_name]
+        { "src" => file, "target" => target, "target_dir" => target_dir }
+    end
+
+    result
+end
+
+# Find all directories that should be linked to ~
+def find_linkabledirs(dir)
+    # TODO
+end
+
+# Link the given files to their final place.
+# Expects an array that contians hashes with the following format:
+# {src => "", target => "", target_dir => ""}
+def link_files(linkables)
+    skip_all = false
+    overwrite_all = false
+    backup_all = false
+
+    linkables.each do |linkable|
+        skip = false
+        overwrite = false
+        backup = false
+
+        src = linkable["src"]
+        target = linkable["target"]
+        target_dir = linkable.key?('target_dir') and linkable["target_dir"]
+
+        if File.exist?(target) || File.symlink?(target)
+            unless skip_all || overwrite_all || backup_all
+                puts "File already exits: #{target}, what do you want to do? [s]skip, [S]kip all,[o]verwrite, [O]verwrite all, [b]backup, [B]ackup all?"
+
+                case STDIN.gets.chomp
+                when 's' then skip = true
+                when 'o' then overwrite = true
+                when 'b' then backup = true
+                when 'O' then overwrite_all = true
+                when 'B' then backup_all = true
+                when 'S' then skip_all = true
+                end
+            end
+
+            #FileUtils.rm_rf(target) if overwrite || overwrite_all
+            #`mv "#{target}" "#{target}.backup"` if backup || backup_all
+        else
+            # Create target directory if it doesn't exist
+            if target_dir and !File.directory?(target_dir)
+                puts "Creating directory #{target_dir}" if ENV["DEBUG"]
+                #Dir.mkdir(target_dir)
+            end
+        end
+
+        # Create symlink
+        unless skip || skip_all
+            puts "Linking #{Dir.pwd}/#{src} to #{target}"
+            #`ln -s "$PWD/#{src}" "#{target}"`
+        end
+    end
+end
+
+
+###########################################################
+## Install tasks
+###########################################################
 
 def install_homebrew
   run %{which brew}
@@ -101,6 +206,12 @@ def install_homebrew
   puts
 end
 
+# Install required packages via apt
+def install_apt_packages
+    # TODO
+end
+
+# Install oh-my-zsh
 def install_ohmyzsh
     puts "======================================================"
     puts "Installing oh-my-zsh, the open source, community-driven"
@@ -112,6 +223,19 @@ def install_ohmyzsh
         puts "It looks like that oh-my-zsh is already installed."
     else
         run %{curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh}
+    end
+end
+
+def install_spf13vim
+    puts "======================================================"
+    puts "Installing spf13-vim, the ultimate vim distribution..."
+    puts "If it's already installed, this will do nothing."
+    puts "======================================================"
+
+    if File.directory?(File.expand_path("~/.spf13-vim-3"))
+        puts "It looks like that spf13-vim is already installed."
+    else
+        run %{curl http://j.mp/spf13-vim3 -L -o - | sh}
     end
 end
 
@@ -129,19 +253,6 @@ def install_zshplugins
     end
 end
 
-def install_spf13vim
-    puts "======================================================"
-    puts "Installing spf13-vim, the ultimate vim distribution..."
-    puts "If it's already installed, this will do nothing."
-    puts "======================================================"
-
-    if File.directory?(File.expand_path("~/.spf13-vim-3"))
-        puts "It looks like that spf13-vim is already installed."
-    else
-        run %{curl http://j.mp/spf13-vim3 -L -o - | sh}
-    end
-end
-
 def install_dircolors
     puts "======================================================"
     puts "Installing dircolors..."
@@ -149,6 +260,11 @@ def install_dircolors
 
     run %{sh -c dircolors/install.sh}
 end
+
+
+###########################################################
+## iTerm specific functions
+###########################################################
 
 def install_term_theme
   puts "======================================================"
@@ -209,6 +325,18 @@ def apply_theme_to_iterm_profile_idx(index, color_scheme_path)
   run %{ /usr/libexec/PlistBuddy -c "Merge '#{color_scheme_path}' :'New Bookmarks':#{index}" ~/Library/Preferences/com.googlecode.iterm2.plist }
 end
 
+
+###########################################################
+## Helper functions
+###########################################################
+
+# Runs a command
+def run(cmd)
+  puts "[Running] #{cmd}"
+  `#{cmd}` unless ENV['DEBUG']
+end
+
+# Ask a question and provides a selection
 def ask(message, values)
   puts message
   while true
@@ -224,143 +352,64 @@ def ask(message, values)
   values[selection]
 end
 
-# Process all linkable files. These files will get symlinked into your $HOME.
-def process_symlinks(files)
-    skip_all = false
-    overwrite_all = false
-    backup_all = false
-    baseDir = Dir.pwd
-
-    files.each do |linkable|
-        skip = false
-        overwrite = false
-        backup = false
-
-        file = linkable.split('/').last.split('.symlink')
-        configDir = File.join(baseDir, File.dirname(linkable))
-
-        # Check if a targetdir file exists and change the target accordingly
-        targetDirFile = File.join(configDir, "targetdir.txt")
-        if File.exists?(targetDirFile)
-            targetDir = File.expand_path(File.read(targetDirFile).strip)
-            target = File.join(targetDir, file)
-        else
-            target = "#{ENV["HOME"]}/.%s" % file
-            targetDir = File.dirname(target)
-        end
-
-        if File.exists?(target) || File.symlink?(target)
-            unless skip_all || overwrite_all || backup_all
-                puts "File already exits: #{target}, what do you want to do? [s]skip, [S]kip all,[o]verwrite, [O]verwrite all, [b]backup, [B]ackup all?"
-
-                case STDIN.gets.chomp
-                when 's' then skip = true
-                when 'o' then overwrite = true
-                when 'b' then backup = true
-                when 'O' then overwrite_all = true
-                when 'B' then backup_all = true
-                when 'S' then skip_all = true
-                end
-            end
-
-            FileUtils.rm_rf(target) if overwrite || overwrite_all
-            `mv "#{target}" "#{target}.backup"` if backup || backup_all
-        else
-            # Create directory if it doesn't exists
-            unless File.directory?(targetDir)
-                Dir.mkdir(targetDir)
-            end
-        end
-
-        # Create symlink
-        `ln -s "$PWD/#{linkable}" "#{target}"` unless skip || skip_all
-    end
+# Return true, if the system is Darwin
+def is_darwin()
+    RUBY_PLATFORM.downcase.include?("darwin")
 end
 
-# Process all ZSH plugins
-def process_zsh_plugins(files)
-    skip_all = false
-    overwrite_all = false
-    backup_all = false
-
-    files.each do |zshfile|
-        skip = false
-        overwrite = false
-        backup = false
-
-        file = zshfile.split('/').last
-        dir = zshfile.split('/').last.split('.plugin.zsh')
-        target_dir = "#{ENV["HOME"]}/.oh-my-zsh/custom/plugins/%s" % dir
-        target_file = "%s/%s" % [target_dir, file]
-
-        if File.exists?(target_file) || File.symlink?(target_file)
-            unless skip_all || overwrite_all || backup_all
-                puts "File already exits: #{target_file}, what do you want to do? [s]skip, [S]kip all,[o]verwrite, [O]verwrite all, [b]backup, [B]ackup all?"
-
-                case STDIN.gets.chomp
-                when 's' then skip = true
-                when 'o' then overwrite = true
-                when 'b' then backup = true
-                when 'O' then overwrite_all = true
-                when 'B' then backup_all = true
-                when 'S' then skip_all = true
-                end
-            end
-
-            FileUtils.rm_rf(target_file) if overwrite || overwrite_all
-            `mv #{target_file} "#{target_file}.backup"` if backup || backup_all
-        else
-            # Create directory if it doesn't exists
-            unless File.directory?(target_dir)
-                Dir.mkdir(target_dir)
-            end
-        end
-
-        # Create symlink
-        `ln -s "$PWD/#{zshfile}" "#{target_file}"` unless skip || skip_all
-    end
+# Return true, if the system is Linux
+def is_linux()
+    RUBY_PLATFORM.downcase.include?("linux")
 end
 
-# Process all ZSH files
-def process_zsh_files(files)
-    skip_all = false
-    overwrite_all = false
-    backup_all = false
 
-    files.each do |zshfile|
-        skip = false
-        overwrite = false
-        backup = false
+###########################################################
+## Colorfull strings
+###########################################################
 
-        file = zshfile.split('/').last
-        target_dir = "#{ENV["HOME"]}/.oh-my-zsh/custom"
-        target_file = "#{target_dir}/%s" % file
+class String
+    def black;          "\e[30m#{self}\e[0m" end
+    def red;            "\e[31m#{self}\e[0m" end
+    def green;          "\e[32m#{self}\e[0m" end
+    def brown;          "\e[33m#{self}\e[0m" end
+    def blue;           "\e[34m#{self}\e[0m" end
+    def magenta;        "\e[35m#{self}\e[0m" end
+    def cyan;           "\e[36m#{self}\e[0m" end
+    def gray;           "\e[37m#{self}\e[0m" end
 
-        if File.exists?(target_file) || File.symlink?(target_file)
-            unless skip_all || overwrite_all || backup_all
-                puts "File already exits: #{target_file}, what do you want to do? [s]skip, [S]kip all,[o]verwrite, [O]verwrite all, [b]backup, [B]ackup all?"
+    def bg_black;       "\e[40m#{self}\e[0m" end
+    def bg_red;         "\e[41m#{self}\e[0m" end
+    def bg_green;       "\e[42m#{self}\e[0m" end
+    def bg_brown;       "\e[43m#{self}\e[0m" end
+    def bg_blue;        "\e[44m#{self}\e[0m" end
+    def bg_magenta;     "\e[45m#{self}\e[0m" end
+    def bg_cyan;        "\e[46m#{self}\e[0m" end
+    def bg_gray;        "\e[47m#{self}\e[0m" end
 
-                case STDIN.gets.chomp
-                when 's' then skip = true
-                when 'o' then overwrite = true
-                when 'b' then backup = true
-                when 'O' then overwrite_all = true
-                when 'B' then backup_all = true
-                when 'S' then skip_all = true
-                end
-            end
-
-            FileUtils.rm_rf(target_file) if overwrite || overwrite_all
-            `mv #{target_file} "#{target_file}.backup"` if backup || backup_all
-        else
-            # Create directory if it doesn't exists
-            unless File.directory?(target_dir)
-                Dir.mkdir(target_dir)
-            end
-        end
-
-        # Create symlink
-        `ln -s "$PWD/#{zshfile}" "#{target_file}"` unless skip || skip_all
-    end
+    def bold;           "\e[1m#{self}\e[22m" end
+    def italic;         "\e[3m#{self}\e[23m" end
+    def underline;      "\e[4m#{self}\e[24m" end
+    def blink;          "\e[5m#{self}\e[25m" end
+    def reverse_color;  "\e[7m#{self}\e[27m" end
 end
 
+
+############
+# !!!Only for testing!!!
+############
+
+#  Dir.entries('/your_dir').select {|entry| File.directory? File.join('/your_dir',entry) and !(entry =='.' || entry == '..') }
+
+task :testtask do
+    symlinks = find_symlinks
+    plugins = find_zshplugins
+    zsh = find_zshfiles
+
+    all = symlinks + plugins + zsh
+    link_files(all)
+end
+
+def test_glob()
+    #Dir.glob('*/**').reject {|e| !File.directory?(e)}
+    Dir.glob('*')
+end
