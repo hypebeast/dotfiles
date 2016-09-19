@@ -9,6 +9,7 @@ if [ ! -d "~/.dotfiles/libs" ]; then
 fi
 
 cd "~/.dotfiles/libs"
+
 if [ ! -d "./dircolors-solarized" ]; then
 	git clone "https://github.com/seebi/dircolors-solarized" "./dircolors-solarized"
 else
