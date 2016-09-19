@@ -159,20 +159,20 @@ def link_files(linkables)
                 end
             end
 
-            #FileUtils.rm_rf(target) if overwrite || overwrite_all
-            #`mv "#{target}" "#{target}.backup"` if backup || backup_all
+            FileUtils.rm_rf(target) if overwrite || overwrite_all
+            `mv "#{target}" "#{target}.backup"` if backup || backup_all
         else
             # Create target directory if it doesn't exist
             if target_dir and !File.directory?(target_dir)
                 puts "Creating directory #{target_dir}" if ENV["DEBUG"]
-                #Dir.mkdir(target_dir)
+                Dir.mkdir(target_dir)
             end
         end
 
         # Create symlink
         unless skip || skip_all
             puts "Linking #{Dir.pwd}/#{src} to #{target}"
-            #`ln -s "$PWD/#{src}" "#{target}"`
+            `ln -s "$PWD/#{src}" "#{target}"`
         end
     end
 end
@@ -333,7 +333,7 @@ end
 ## Helper functions
 ###########################################################
 
-# Runs a command
+# Run a command
 def run(cmd)
   puts "[Running] #{cmd}"
   `#{cmd}` unless ENV['DEBUG']
