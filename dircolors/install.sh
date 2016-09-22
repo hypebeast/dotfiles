@@ -5,7 +5,7 @@
 #
 
 if [ ! -d "~/.dotfiles/libs" ]; then
-  mkdir "~/.dotfiles/libs"
+  mkdir -p "~/.dotfiles/libs"
 fi
 
 cd "~/.dotfiles/libs"

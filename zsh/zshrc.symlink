@@ -38,6 +38,7 @@ source $ZSH/oh-my-zsh.sh
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
+# Source my secrets
 if [ -d $HOME/.secrets ]; then
   for file in $HOME/.secrets/**/*.zsh; do
       source $file
