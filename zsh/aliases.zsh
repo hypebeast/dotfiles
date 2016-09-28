@@ -17,7 +17,7 @@ alias t4='tree -d -L 4'
 
 # PS
 alias psa="ps aux"
-alias psg="ps aux | grep "
+alias psg="ps aux | grep -i"
 
 # Various custom aliases
 alias -g EG='|& egrep'
