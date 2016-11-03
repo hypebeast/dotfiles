@@ -140,3 +140,5 @@
 	sslVerify = false
 [credential]
 	helper = osxkeychain
+[credential "https://lala.com"]
+	sruml = password

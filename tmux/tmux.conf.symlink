@@ -1,9 +1,6 @@
 # Ring the bell if any background window rang a bell
 set -g bell-action any
 
-# make pbcopy and pbpaste work again under Darwin (https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard)
-if-shell 'test "$(uname -s)" = Darwin' 'set-option -g default-command "exec reattach-to-user-namespace -l zsh"'
-
 # Default termtype. If the rcfile sets $TERM, that overrides this value.
 set -g default-terminal screen-256color
 
@@ -59,8 +56,8 @@ set -g status-left '#[fg=colour235,bg=colour252,bold] ❐ #S #[fg=colour252,bg=c
 set -g window-status-format "#[fg=colour235,bg=colour252,bold] #I #W "
 set -g window-status-current-format "#[fg=colour234,bg=colour39]⮀#[fg=black,bg=colour39,noreverse,bold] #I: #W #[fg=colour39,bg=colour234,nobold]⮀"
 
-# Patch for OS X pbpaste and pbcopy under tmux.
-set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
+# make pbcopy and pbpaste work again under Darwin (https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard)
+if-shell 'test "$(uname -s)" = Darwin' 'set-option -g default-command "exec reattach-to-user-namespace -l zsh"'
 
 # Screen like binding
 unbind C-b
