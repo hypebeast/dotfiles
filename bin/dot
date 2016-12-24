@@ -6,4 +6,4 @@
 # to make sure you're on the latest and greatest.
 
 # Set OS X defaults
-~/.dotfiles/osx/set-defaults.sh
+~/.dotfiles/macOS/macos.sh
