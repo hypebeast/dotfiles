@@ -189,22 +189,24 @@ def install_homebrew
     puts "Installing Homebrew, the OSX package manager...If it's"
     puts "already installed, this will do nothing."
     puts "======================================================"
-    run %{ruby -e "$(curl -fsSkL raw.github.com/mxcl/homebrew/go)"}
+    run %{/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
   end
 
   puts
   puts
   puts "======================================================"
-  puts "Updating Homebrew."
+  puts "Installing Brew packages...There may be some warnings."
   puts "======================================================"
-  run %{brew update}
+  run %{sh -c homebrew/brew.sh}
+  puts
+  puts
 
   puts
   puts
   puts "======================================================"
-  puts "Installing Homebrew packages...There may be some warnings."
+  puts "Installing brew-cask packages...There may be some warnings."
   puts "======================================================"
-  run %{sh -c homebrew/install.sh}
+  run %{sh -c homebrew/brew-cask.sh}
   puts
   puts
 end
