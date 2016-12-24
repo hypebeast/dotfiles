@@ -86,6 +86,8 @@ brew install mc
 brew install httpie
 brew install psgrep
 brew install jq
+brew install nvm
+brew install mongodb
 
 # Remove outdated versions from the cellar.
 brew cleanup
