@@ -2,11 +2,9 @@
 
 # Install Caskroom
 
-echo "Installing brew-cask"
+echo "Installing Caskroom"
 
 brew tap caskroom/cask
-brew install brew-cask
-brew tap caskroom/versions
 
 # Install packages
 apps=(
@@ -27,6 +25,8 @@ apps=(
     keepass-x
     spotify
 )
+
+echo "Installing Cask packages"
 
 brew cask install "${apps[@]}"
 
