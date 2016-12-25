@@ -12,7 +12,7 @@ brew upgrade
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
 
-# Install some other useful utilities like `sponge`.
+# Install some other useful utilities.
 brew install moreutils
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
@@ -87,7 +87,7 @@ brew install httpie
 brew install psgrep
 brew install jq
 brew install nvm
-brew install mongodb
+brew install mongo
 
 # Remove outdated versions from the cellar.
 brew cleanup
