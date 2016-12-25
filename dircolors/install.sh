@@ -4,11 +4,11 @@
 # to support colors for GNU ls when the Solarized color scheme is used with iTerm2.
 #
 
-if [ ! -d "~/.dotfiles/libs" ]; then
-  mkdir -p "~/.dotfiles/libs"
+if [ ! -d ~/.dotfiles/libs ]; then
+  mkdir -p ~/.dotfiles/libs
 fi
 
-cd "~/.dotfiles/libs"
+cd ~/.dotfiles/libs
 
 if [ ! -d "./dircolors-solarized" ]; then
 	git clone "https://github.com/seebi/dircolors-solarized" "./dircolors-solarized"
