@@ -8,19 +8,20 @@ apps=(
     alfred
     dropbox
     firefox
-    firefox-nightly
+    firefoxnightly
     google-chrome
     google-chrome-canary
     google-drive
     iterm2
     keka
     opera
-    sublime-text3
+    sublime-text
     virtualbox
     vlc
     atom
     keepass-x
     spotify
+    docker
 )
 
 brew cask install "${apps[@]}"
