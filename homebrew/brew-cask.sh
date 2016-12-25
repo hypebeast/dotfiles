@@ -22,6 +22,8 @@ apps=(
     virtualbox
     vlc
     atom
+    keepass-x
+    spotify
 )
 
 brew cask install "${apps[@]}"
