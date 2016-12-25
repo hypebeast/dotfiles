@@ -19,7 +19,7 @@ apps=(
     virtualbox
     vlc
     atom
-    keepass-x
+    keepassx
     spotify
     docker
 )
