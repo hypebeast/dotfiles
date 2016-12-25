@@ -41,23 +41,12 @@ end
 
 desc 'Set Mac OS X default options'
 task :dot do
-    run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
+    dot
 end
 
 desc 'Run all installer scripts (install.sh)'
 task :run_installers do
-    puts
-    puts "======================================================"
-    puts "Running all installer scripts..."
-    puts "======================================================"
-    puts
-
-    scripts = Dir.glob('*/**{install.sh}')
-    scripts.each do |script|
-        puts "## Executing \"" + script + "\""
-        `sh -c "#{script}"`
-        puts
-    end
+    run_installers
 end
 
 desc 'Update brew packages'
@@ -264,6 +253,25 @@ def install_dircolors
     puts "======================================================"
 
     run %{sh -c dircolors/install.sh}
+end
+
+def run_installers
+  puts
+  puts "======================================================"
+  puts "Running all installer scripts..."
+  puts "======================================================"
+  puts
+
+  scripts = Dir.glob('*/**{install.sh}')
+  scripts.each do |script|
+      puts "## Executing \"" + script + "\""
+      `sh -c "#{script}"`
+      puts
+  end
+end
+
+def dot
+  run %{'bin/dot'} if RUBY_PLATFORM.downcase.include?("darwin")
 end
 
 
