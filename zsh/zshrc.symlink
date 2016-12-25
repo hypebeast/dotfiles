@@ -51,7 +51,7 @@ export PATH=/usr/local/bin:$PATH
 #export PROMPT="$PROMPT\$(git-radar --zsh --fetch) "
 
 # Load dircolors for the solarized theme (iTerm2)
-eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-universal`
+eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
 
 # added by travis gem
 [ -f /Users/sruml/.travis/travis.sh ] && source /Users/sruml/.travis/travis.sh
