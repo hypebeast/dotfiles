@@ -2,6 +2,8 @@
 
 # Install Caskroom
 
+echo "Installing brew-cask"
+
 brew tap caskroom/cask
 brew install brew-cask
 brew tap caskroom/versions
