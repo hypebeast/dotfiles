@@ -22,6 +22,7 @@ apps=(
     keepassx
     spotify
     docker
+    hammerspoon
 )
 
 brew cask install "${apps[@]}"
