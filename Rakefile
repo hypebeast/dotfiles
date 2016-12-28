@@ -1,28 +1,6 @@
 require 'rake'
 
 
-desc "First time installation of basic applications, tools and frameworks"
-task :bootstrap do
-    puts
-    puts "======================================================".green
-    puts "Welcome.".green
-    puts
-    puts "Installing all required programs, tools and frameworks.".green
-    puts "======================================================".green
-    puts
-
-    install_homebrew if is_darwin
-    install_ohmyzsh
-    install_zshplugins
-    install_spf13vim
-
-    run_installers
-    dot if is_darwin
-    install_term_theme if is_darwin
-    install_dircolors if is_darwin
-end
-
-
 ###########################################################
 ## iTerm specific functions
 ###########################################################
