@@ -23,6 +23,10 @@ apps=(
     spotify
     docker
     hammerspoon
+    slack
+    skype
+    intellij-idea
+    karabiner-elements
 )
 
 brew cask install "${apps[@]}"

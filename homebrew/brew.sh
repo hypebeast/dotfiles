@@ -53,7 +53,7 @@ brew install sfnt2woff
 brew install sfnt2woff-zopfli
 brew install woff2
 
-# Install other useful binaries.
+# Install other useful applications, tolls and binaries.
 brew install binutils
 brew install ack
 brew install dark-mode
@@ -87,6 +87,7 @@ brew install httpie
 brew install psgrep
 brew install jq
 brew install mongo
+brew install stow
 
 # Remove outdated versions from the cellar.
 brew cleanup
