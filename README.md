@@ -1,6 +1,19 @@
 # Dotfiles
 
-My personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
+```
+       /$$             /$$      /$$$$$$  /$$ /$$                    
+      | $$            | $$     /$$__  $$|__/| $$                    
+  /$$$$$$$  /$$$$$$  /$$$$$$  | $$  \__/ /$$| $$  /$$$$$$   /$$$$$$$
+ /$$__  $$ /$$__  $$|_  $$_/  | $$$$    | $$| $$ /$$__  $$ /$$_____/
+| $$  | $$| $$  \ $$  | $$    | $$_/    | $$| $$| $$$$$$$$|  $$$$$$
+| $$  | $$| $$  | $$  | $$ /$$| $$      | $$| $$| $$_____/ \____  $$
+|  $$$$$$$|  $$$$$$/  |  $$$$/| $$      | $$| $$|  $$$$$$$ /$$$$$$$/
+ \_______/ \______/    \___/  |__/      |__/|__/ \_______/|_______/
+```
+
+My personal dotfiles managed with [gnu stow](https://www.gnu.org/software/stow/).
+
+Supports `macOS` and `Ubuntu/Debian`.
 
 
 ## Features
@@ -13,6 +26,7 @@ My personal dotfiles managed with [stow](https://www.gnu.org/software/stow/).
   * Bootstrap script to setup a dev machine with all required packages and tools.
   * Scripts to install required packages with _brew_ and _cask_.
   * Support for macOS and Linux (Ubuntu).
+  * No dependencies, except Bash and gnu stow.
 
 
 ## Setup

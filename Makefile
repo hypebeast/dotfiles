@@ -1,16 +1,19 @@
-default: setup
+default: link
 
 bootstrap:
 	./bootstrap.sh
 
-setup:
-	stow ack bin ctags git gpg hammerspoon tmux vim zsh
+link:
+	./setup.sh link
 
 macos:
-	./macOS/macos.sh
+	./setup.sh macos
 
 brew:
 	./homebrew/brew.sh
 
 cask:
 	./homebrew/brew-cask.sh
+
+installers:
+	./setup.sh run_installers

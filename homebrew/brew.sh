@@ -53,7 +53,7 @@ brew install sfnt2woff
 brew install sfnt2woff-zopfli
 brew install woff2
 
-# Install other useful applications, tolls and binaries.
+# Install other useful applications, tools and binaries.
 brew install binutils
 brew install ack
 brew install ag
@@ -67,7 +67,6 @@ brew install p7zip
 brew install pigz
 brew install pv
 brew install rename
-brew install rhino
 brew install speedtest_cli
 brew install ssh-copy-id
 brew install testssl
@@ -89,6 +88,7 @@ brew install psgrep
 brew install jq
 brew install mongo
 brew install stow
+brew install pandoc
 
 # Remove outdated versions from the cellar.
 brew cleanup

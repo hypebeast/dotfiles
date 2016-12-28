@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 # This file:
 #
-#  - Bootstraps a dev machine for use with these dotfiles.
+#  - Provides utility functions for the main setup script.
 #
-# Usage:
-#
-#  ./bootstrap.sh [command]
 #
 # Based on a template by BASH3 Boilerplate v2.2.0
 # http://bash3boilerplate.sh/#authors
@@ -14,9 +11,7 @@
 # Copyright (c) 2013 Kevin van Zonneveld and contributors
 # You are not obligated to bundle the LICENSE file with your b3bp projects as long
 # as you leave these references intact in the header comments of your source files.
-#
-# The MIT License (MIT)
-# Copyright (c) 2016 Sebastian Ruml, <sebastian@sebastianruml.name>
+
 
 # Exit on error. Append "|| true" if you expect an error.
 set -o errexit
@@ -30,9 +25,6 @@ set -o pipefail
 # Define the environment variables (and their defaults) that this script depends on
 LOG_LEVEL="${LOG_LEVEL:-6}" # 7 = debug -> 0 = emergency
 NO_COLOR="${NO_COLOR:-}"    # true = disable color. otherwise autodetected
-
-### Helper Functions
-##############################################################################
 
 function __b3bp_log () {
   local log_level="${1}"
@@ -84,37 +76,26 @@ function notice ()    { [[ "${LOG_LEVEL:-0}" -ge 5 ]] && __b3bp_log notice "${@}
 function info ()      { [[ "${LOG_LEVEL:-0}" -ge 6 ]] && __b3bp_log info "${@}"; true; }
 function debug ()     { [[ "${LOG_LEVEL:-0}" -ge 7 ]] && __b3bp_log debug "${@}"; true; }
 
-# shellcheck disable=SC2015
-[[ "${__usage+x}" ]] || read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
-  -f --file  [arg] Filename to process. Required.
-  -t --temp  [arg] Location of tempfile. Default="/tmp/bar"
-  -v               Enable verbose mode, print script as it is executed
-  -d --debug       Enables debug mode
-  -h --help        This page
-  -n --no-color    Disable color output
-  -1 --one         Do just one thing
-EOF
 
 function help () {
   echo "" 1>&2
   echo " ${*}" 1>&2
   echo "" 1>&2
-  echo " ${__usage:-No usage available}" 1>&2
-  echo "" 1>&2
+  echo "  ${__usage:-No usage available}" 1>&2
   echo "" 1>&2
 
   if [[ "${__helptext:-}" ]]; then
-    echo " ${__helptext}" 1>&2
+    echo "  ${__helptext}" 1>&2
     echo "" 1>&2
   fi
 
   exit 1
 }
 
-
-function main () {
-  echo "Hello, World."
+function is_macos () {
+  [[ $(uname) == "Darwin" ]] || return 1
 }
 
-
-exit 0
+function is_linux () {
+  [[ $(uname) == "Linux" ]] || return 1
+}
