@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 export DOTFILES=$HOME/.dotfiles
 
 # your project folder that we can `c [tab]` to
-export PROJECTS=~/Development
+export PROJECTS=~/Coding
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -31,7 +31,7 @@ plugins=(git ruby osx rails github node npm sublime
             history-substring-search zsh-syntax-highlighting
             themes fasd web-search zsh-syntax-highlighting wd
             cp dirhistory urltools vagrant grunt common-aliases
-            copydir copyfile github taskwarrior docker docker-compose)
+            copydir copyfile github docker docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -79,6 +79,3 @@ export GOPATH=~/Development/go
 
 # GVM: THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
-
-# Docker-Machine env variables
-if which docker-machine > /dev/null; then eval "$(docker-machine env dev)"; fi
