@@ -112,7 +112,7 @@ function install_ohmyzsh () {
   info "framework for managing your ZSH configuration..."
   info "If it's already installed, this will do nothing."
 
-  if ! [[ -d "~/.oh-my-zsh" ]]; then
+  if [[ ! -d ~/.oh-my-zsh ]]; then
     info "It looks like that oh-my-zsh is already installed."
   else
     curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
@@ -124,7 +124,7 @@ function install_spf13vim () {
     info "Installing spf13-vim, the ultimate vim distribution..."
     info "If it's already installed, this will do nothing."
 
-    if ! [[ -d "~/.spf13-vim" ]]; then
+    if [[ ! -d ~/.spf13-vim ]]; then
       info "It looks like that spf13-vim is already installed."
     else
       curl http://j.mp/spf13-vim3 -L -o - | sh
@@ -135,10 +135,26 @@ function install_spf13vim () {
 function install_zshplugins () {
     info "Installing some more zsh plugins..."
 
-    if ! [[ -d "~/.oh-my-zsh" ]]; then
+    local ZSH_PLUGINS=(
+      https://github.com/zsh-users/zsh-syntax-highlighting.git
+      https://github.com/zsh-users/zsh-autosuggestions.git
+    )
+
+    if [[ ! -d ~/.oh-my-zsh ]]; then
       info "It looks like that oh-my-zsh is not installed."
     else
-      cd ~/.oh-my-zsh/custom/plugins; git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
+      cd ~/.oh-my-zsh/custom/plugins
+
+      for plugin in ${ZSH_PLUGINS[@]}; do
+        plugin_name=$(basename ${plugin} | sed 's/.git//')
+        info "Installing/Updating zsh plugin ${plugin_name}..."
+
+        if [[ ! -d ${plugin_name} ]]; then
+          git clone ${plugin}
+        else
+          cd ${plugin_name}; git pull origin master; cd ..
+        fi
+      done
     fi
 }
 

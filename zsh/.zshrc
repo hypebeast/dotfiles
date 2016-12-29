@@ -31,7 +31,8 @@ plugins=(git ruby osx rails github node npm sublime
             history-substring-search zsh-syntax-highlighting
             themes fasd web-search zsh-syntax-highlighting wd
             cp dirhistory urltools vagrant grunt common-aliases
-            copydir copyfile github docker docker-compose)
+            copydir copyfile github docker docker-compose
+            zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 

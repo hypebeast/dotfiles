@@ -17,3 +17,6 @@ cask:
 
 installers:
 	./setup.sh run_installers
+
+zshplugins:
+	./setup.sh zshplugins
