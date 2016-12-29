@@ -38,24 +38,26 @@ First, make sure you have _stow_ installed. Then, clone this repository to `~/do
 
 Bootstrap the dotfiles with
 
-  $ make bootstrap
+```
+$ make bootstrap
+```
+
 
 ### Link the dotfiles
 
 Link all dotfiles with
 
-  $ make link
+```
+$ make link
+```
 
 If you want to link individual config files you can use stow directly. For example,
 
-  $ stow git
+```
+$ stow git
+```
 
 This will link all git config files to your home directory.
-
-
-## Structure
-
-TODO
 
 
 ## Credits
@@ -64,3 +66,5 @@ TODO
 
 
 ## License
+
+See [License](./LICENSE).
