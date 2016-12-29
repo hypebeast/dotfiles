@@ -50,8 +50,12 @@ export PATH=/usr/local/bin:$PATH
 
 #export PROMPT="$PROMPT\$(git-radar --zsh --fetch) "
 
-# Load dircolors for the solarized theme (iTerm2)
-eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
+# Load dircolors
+if [[ "$OSTYPE" == darwin* ]]; then
+  eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
+else
+  eval `dircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
+fi
 
 # added by travis gem
 [ -f /Users/sruml/.travis/travis.sh ] && source /Users/sruml/.travis/travis.sh
@@ -72,7 +76,7 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 # gopath
-export GOPATH=~/Development/go
+export GOPATH=~/Coding/go
 
 # SZCMS settings
 [ -s "/projects/szcms_tools/ENV.sh" ] && source /projects/szcms_tools/ENV.sh
