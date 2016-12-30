@@ -3,4 +3,4 @@
 ####
 
 alias subl="$HOME/bin/subl -n"
-export EDITOR="vim"
+export EDITOR="atom"
