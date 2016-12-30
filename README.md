@@ -59,6 +59,17 @@ $ stow git
 
 This will link all git config files to your home directory.
 
+List all available commands with:
+
+```
+$ make help
+```
+
+
+## setup.sh
+
+TODO
+
 
 ## Credits
 
