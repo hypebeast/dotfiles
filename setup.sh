@@ -172,6 +172,25 @@ function run_installers () {
   done
 }
 
+# Run the given installer
+function run_installer () {
+   if [[ $# -ne 1 ]]; then
+     error "You must pecify the name of the installer you want to run!"
+     exit 1
+   fi
+
+   local folder=${1}
+
+   if [[ ! -d ${folder} ]]; then
+     error "Specified installer does not exist!"
+     exit 1
+   fi
+
+   info "Running installer \"${folder}\"..."
+
+   cd ${folder}; bash install.sh
+}
+
 # Set sensible macOS defaults
 function macos () {
   ./macOS/macos.sh
@@ -180,10 +199,6 @@ function macos () {
 
 # Process command line arguments
 ##########################################################
-
-if [[ "$#" -gt 1 ]]; then
-  help "Help using ${0}"
-fi
 
 if [[ "$#" -eq 0 ]]; then
   cmd="link"
@@ -201,8 +216,11 @@ case "${cmd}" in
   zshplugins )
     install_zshplugins
     ;;
-  run_installers )
+  install_all )
     run_installers
+    ;;
+  install )
+    run_installer ${2:-}
     ;;
   macos )
     macos
@@ -211,3 +229,5 @@ case "${cmd}" in
     help "Help using ${0}"
     ;;
 esac
+
+exit 0

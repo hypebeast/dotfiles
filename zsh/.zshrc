@@ -82,5 +82,9 @@ export GOPATH=~/Coding/go
 # SZCMS settings
 [ -s "/projects/szcms_tools/ENV.sh" ] && source /projects/szcms_tools/ENV.sh
 
+# tmux-powerline
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+export TMUX_POWERLINE_SEG_WEATHER_LOCATION="676757"
+
 # GVM: THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"

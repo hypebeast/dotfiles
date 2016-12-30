@@ -1,4 +1,15 @@
-default: link
+all: help
+
+help:
+	@echo ""
+	@echo "-- Help Menu"
+	@echo ""
+	@echo "   1. make bootstrap        - bootsrap your dev machine"
+	@echo "   2. make link             - link all dotfiles"
+	@echo "   3. make brew             - install brew packages"
+	@echo "   4. make cask             - install cask packages"
+	@echo "   5. make install_all      - set sensible macOS defaults"
+	@echo "   6. make zshplugins       - install zsh plugins"
 
 bootstrap:
 	./bootstrap.sh
@@ -15,8 +26,8 @@ brew:
 cask:
 	./homebrew/brew-cask.sh
 
-installers:
-	./setup.sh run_installers
+install_all:
+	./setup.sh install_all
 
 zshplugins:
 	./setup.sh zshplugins
