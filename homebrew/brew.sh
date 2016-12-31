@@ -41,7 +41,7 @@ brew install zsh
 brew install wget --with-iri
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
+brew install vim --with-override-system-vi --with-lua
 brew install homebrew/dupes/grep
 brew install homebrew/dupes/openssh
 brew install homebrew/dupes/screen
@@ -89,6 +89,7 @@ brew install jq
 brew install mongo
 brew install stow
 brew install pandoc
+brew install elixir
 
 # Remove outdated versions from the cellar.
 brew cleanup
