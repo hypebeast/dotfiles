@@ -27,6 +27,7 @@ apps=(
     skype
     intellij-idea
     karabiner-elements
+    vagrant
 )
 
 brew cask install "${apps[@]}"
