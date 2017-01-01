@@ -13,6 +13,21 @@ require "extensions"
 -- Key definitions
 ---------------------------------------------------------
 
+local k = hs.hotkey.modal.new({}, "F17", "some message")
+
+-- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
+pressedF18 = function ()
+    k:enter()
+end
+
+-- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
+-- send ESCAPE if no other keys are pressed.
+releasedF18 = function ()
+    k:exit()
+end
+
+local f18 = hs.hotkey.bind({}, "F18", pressedF18, releasedF18)
+
 local locationModifierKey = {"cmd", "shift"}
 local resizeModifierKey = {"cmd", "alt", "ctrl"}
 local nudgeModifierKey = {"alt", "shift"}
@@ -25,9 +40,15 @@ local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 -- Application definitions
 ---------------------------------------------------------
 
-local browser = "Google Chrome"
-local editor = "Sublime Text"
-local terminal = "iTerm"
+local keyToApp = {
+    ["1"] = "Google Chrome",
+    ["2"] = "iTerm",
+    ["3"] = "Atom",
+    ["4"] = "KeePass X",
+    ["5"] = "Slack",
+    ["6"] = "Skype",
+    ["Z"] = "Finder"
+}
 
 
 ---------------------------------------------------------
@@ -268,14 +289,10 @@ end)
 ---------------------------------------------------------
 
 
-hotkey.bind(hyperKey, "1", launchOrCycleFocus(browser))
-hotkey.bind(hyperKey, "2", launchOrCycleFocus(terminal))
-hotkey.bind(hyperKey, "3", launchOrCycleFocus(editor))
-hotkey.bind(hyperKey, "4", launchOrCycleFocus("KeePassX"))
-hotkey.bind(hyperKey, "5", launchOrCycleFocus("Slack"))
-hotkey.bind(hyperKey, "6", launchOrCycleFocus("Evernote"))
+for key, app in pairs(keyToApp) do
+    k:bind({}, key, launchOrCycleFocus(app))
+end
 
-hs.hotkey.bind(hyperKey, "Z", launchOrCycleFocus("Finder"))
 
 
 ---------------------------------------------------------
