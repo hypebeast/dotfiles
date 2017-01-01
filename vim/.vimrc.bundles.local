@@ -9,3 +9,6 @@ Bundle 'marijnh/tern_for_vim'
 
 " Dracula Theme (https://draculatheme.com/vim/)
 Plugin 'dracula/vim'
+
+" Elm Plugin
+Plugin 'elmcast/elm-vim'
