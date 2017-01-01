@@ -90,6 +90,7 @@ brew install mongo
 brew install stow
 brew install pandoc
 brew install elixir
+brew install reattach-to-user-namespace
 
 # Remove outdated versions from the cellar.
 brew cleanup
