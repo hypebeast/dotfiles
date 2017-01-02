@@ -12,3 +12,7 @@ Plugin 'dracula/vim'
 
 " Elm Plugin
 Plugin 'elmcast/elm-vim'
+
+" vim-node
+Plugin 'moll/vim-node'
+
