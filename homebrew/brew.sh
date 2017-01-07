@@ -91,6 +91,9 @@ brew install stow
 brew install pandoc
 brew install elixir
 brew install reattach-to-user-namespace
+brew install typesafe-activator
+brew install rbenv
+brew install golang
 
 # Remove outdated versions from the cellar.
 brew cleanup
