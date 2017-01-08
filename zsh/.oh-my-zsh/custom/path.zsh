@@ -9,18 +9,9 @@ SCALA_HOME=$HOME/bin/scala-2.11.7
 PATH=$HOME/bin:$SCALA_HOME/bin:$HOME/.dotfiles/bin:$PATH
 
 # Pythonpath
-export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-
-# Flip Path
-export FLIP_HOME=/Users/sruml/Apps/flip.3.2.1/bin
-FLIP_PATH=/Users/sruml/Apps/flip.3.2.1/bin
-PATH=$FLIP_PATH:$PATH
 
 # Anaconda
 PATH=$HOME/anaconda/bin:$PATH
-
-# QT
-PATH=$HOME/Apps/Qt/5.1.1/clang_64/bin/:$PATH
 
 # Activator
 PATH=$HOME/bin/activator/:$PATH
@@ -37,4 +28,9 @@ PATH=$HOME/.local/bin:$PATH
 # pyenv
 PATH=$HOME/.pyenv/bin:$PATH
 
+[ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH 
+
 export PATH
+
+# Python Path
+export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
