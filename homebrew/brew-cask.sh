@@ -28,6 +28,7 @@ apps=(
     intellij-idea
     karabiner-elements
     vagrant
+    java
 )
 
 brew cask install "${apps[@]}"

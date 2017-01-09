@@ -1,0 +1,10 @@
+# Usage: find-alias <file>
+# Description: List all aliases that contains the given search string
+
+find-alias () {
+    if [[ $# -gt 0 ]]; then
+        alias | grep -i $@
+    else
+        alias
+    fi
+}
