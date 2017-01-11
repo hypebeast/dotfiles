@@ -288,7 +288,7 @@ end)
 -- APP HOTKEYS
 ---------------------------------------------------------
 
-
+-- Create application hotkeys and bind them to the previously defined modal
 for key, app in pairs(keyToApp) do
     k:bind({}, key, launchOrCycleFocus(app))
 end
