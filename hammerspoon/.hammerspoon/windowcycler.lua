@@ -1,7 +1,7 @@
 -- window cycling of same app and screen using windowfilter
 
 local currentWindowSet = {}
-windowCycler = nil
+local windowCycler = nil
 
 local wf = hs.window.filter.new(function(win)
     local fw = hs.window.focusedWindow()
@@ -22,10 +22,15 @@ local function makeTableCycler(t) -- like hs.fnutils.cycle but can reverse too
   end
 end
 
-function updateWindowCycler()
+local function updateWindowCycler()
   if not hs.fnutils.contains(currentWindowSet, hs.window.focusedWindow()) then
     currentWindowSet = wf:getWindows()
     windowCycler = makeTableCycler(currentWindowSet)
   end
 end
 
+-- Cycle through the windows of an application
+function dowWindowCycling(t)
+   updateWindowCycler()
+   windowCycler(t):focus()
+end

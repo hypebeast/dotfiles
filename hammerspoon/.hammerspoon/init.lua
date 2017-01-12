@@ -301,13 +301,11 @@ end
 
 
 k:bind({}, "B", function()
-   updateWindowCycler()
-   windowCycler():focus()
+    dowWindowCycling()
  end)
 
 k:bind({}, "N", function()
-   updateWindowCycler()
-   windowCycler(-1):focus()
+    dowWindowCycling(-1)
  end)
 
 
