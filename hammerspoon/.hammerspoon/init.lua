@@ -86,7 +86,7 @@ hs.alert.show("Config loaded")
 
 local cycleScreens = hs.fnutils.cycle(hs.screen.allScreens())
 
-hotkey.bind(hyperKey, "S", function()
+k:bind({}, "S", function()
   window.focusedWindow():moveToScreen(cycleScreens())
 end)
 
@@ -94,9 +94,9 @@ end)
 --- Location bindings
 ---
 
-hs.hotkey.bind(hyperKey, "F", fullScreenCurrent)
-hs.hotkey.bind(hyperKey, "D", screenToRight)
-hs.hotkey.bind(hyperKey, "A", screenToLeft)
+k:bind({}, "F", fullScreenCurrent)
+k:bind({}, "D", screenToRight)
+k:bind({}, "A", screenToLeft)
 
 --- Fullsize
 hotkey.bind(locationModifierKey, "return", function ()
