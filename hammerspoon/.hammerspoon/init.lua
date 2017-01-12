@@ -8,6 +8,7 @@ local pasteboard = require "hs.pasteboard"
 
 require "fntools"
 require "extensions"
+require "windowCycler"
 
 ---------------------------------------------------------
 -- Key definitions
@@ -34,7 +35,6 @@ local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local sendKeyStrokesModifierKey = {"ctrl", "shift"}
 local hyperKey = {"cmd", "alt", "ctrl", "shift"}
-
 
 ---------------------------------------------------------
 -- Application definitions
@@ -284,6 +284,7 @@ end)
 -- hotkey.bind(hintModifierKey, "k", function() tiling.cycle(-1) end)
 -- hotkey.bind(hintModifierKey, "space", function() tiling.promote() end)
 
+
 ---------------------------------------------------------
 -- APP HOTKEYS
 ---------------------------------------------------------
@@ -294,42 +295,27 @@ for key, app in pairs(keyToApp) do
 end
 
 
-
 ---------------------------------------------------------
--- ON-THE-FLY KEYBIND
+-- Window cycling of the same app
 ---------------------------------------------------------
 
--- Temporarily bind an application to be toggled by the V key
--- useful for once-in-a-while applications like Preview
-local boundApplication = nil
 
-hs.hotkey.bind(hyperKey, "C", function()
-  local appName = hs.window.focusedWindow():application():title()
+k:bind({}, "B", function()
+   updateWindowCycler()
+   windowCycler():focus()
+ end)
 
-  if boundApplication then
-    boundApplication:disable()
-  end
+k:bind({}, "N", function()
+   updateWindowCycler()
+   windowCycler(-1):focus()
+ end)
 
-  boundApplication = hs.hotkey.bind(hyperKey, "V", launchOrCycleFocus(appName))
-
-  -- https://github.com/Hammerspoon/hammerspoon/issues/184#issuecomment-102835860
-  boundApplication:disable()
-  boundApplication:enable()
-
-  hs.alert(string.format("Binding: \"%s\" => ⌘ + V", appName))
-end)
-
-hotkey.bind(hyperKey, "R", launchOrCycleFocus(terminal))
-
-hotkey.bind(hyperKey, "R", function()
-  launchOrCycleFocus(terminal)
-end)
 
 ---------------------------------------------------------
 -- Do a Google search with the clipboard content
 ---------------------------------------------------------
 
-hotkey.bind(hyperKey, "G", function()
+k:bind({}, "G", function()
   local content = pasteboard.getContents()
   local searchUrl = "https://google.com/search?q=" .. content
 
