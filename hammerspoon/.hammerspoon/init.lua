@@ -8,6 +8,7 @@ local pasteboard = require "hs.pasteboard"
 
 require "fntools"
 require "extensions"
+require "windowCycler"
 
 ---------------------------------------------------------
 -- Key definitions
@@ -34,7 +35,6 @@ local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local sendKeyStrokesModifierKey = {"ctrl", "shift"}
 local hyperKey = {"cmd", "alt", "ctrl", "shift"}
-
 
 ---------------------------------------------------------
 -- Application definitions
@@ -86,7 +86,7 @@ hs.alert.show("Config loaded")
 
 local cycleScreens = hs.fnutils.cycle(hs.screen.allScreens())
 
-hotkey.bind(hyperKey, "S", function()
+k:bind({}, "S", function()
   window.focusedWindow():moveToScreen(cycleScreens())
 end)
 
@@ -94,9 +94,9 @@ end)
 --- Location bindings
 ---
 
-hs.hotkey.bind(hyperKey, "F", fullScreenCurrent)
-hs.hotkey.bind(hyperKey, "D", screenToRight)
-hs.hotkey.bind(hyperKey, "A", screenToLeft)
+k:bind({}, "F", fullScreenCurrent)
+k:bind({}, "D", screenToRight)
+k:bind({}, "A", screenToLeft)
 
 --- Fullsize
 hotkey.bind(locationModifierKey, "return", function ()
@@ -284,52 +284,36 @@ end)
 -- hotkey.bind(hintModifierKey, "k", function() tiling.cycle(-1) end)
 -- hotkey.bind(hintModifierKey, "space", function() tiling.promote() end)
 
+
 ---------------------------------------------------------
 -- APP HOTKEYS
 ---------------------------------------------------------
 
-
+-- Create application hotkeys and bind them to the previously defined modal
 for key, app in pairs(keyToApp) do
     k:bind({}, key, launchOrCycleFocus(app))
 end
 
 
-
 ---------------------------------------------------------
--- ON-THE-FLY KEYBIND
+-- Window cycling of the same app
 ---------------------------------------------------------
 
--- Temporarily bind an application to be toggled by the V key
--- useful for once-in-a-while applications like Preview
-local boundApplication = nil
 
-hs.hotkey.bind(hyperKey, "C", function()
-  local appName = hs.window.focusedWindow():application():title()
+k:bind({}, "B", function()
+    dowWindowCycling()
+ end)
 
-  if boundApplication then
-    boundApplication:disable()
-  end
+k:bind({}, "N", function()
+    dowWindowCycling(-1)
+ end)
 
-  boundApplication = hs.hotkey.bind(hyperKey, "V", launchOrCycleFocus(appName))
-
-  -- https://github.com/Hammerspoon/hammerspoon/issues/184#issuecomment-102835860
-  boundApplication:disable()
-  boundApplication:enable()
-
-  hs.alert(string.format("Binding: \"%s\" => ⌘ + V", appName))
-end)
-
-hotkey.bind(hyperKey, "R", launchOrCycleFocus(terminal))
-
-hotkey.bind(hyperKey, "R", function()
-  launchOrCycleFocus(terminal)
-end)
 
 ---------------------------------------------------------
 -- Do a Google search with the clipboard content
 ---------------------------------------------------------
 
-hotkey.bind(hyperKey, "G", function()
+k:bind({}, "G", function()
   local content = pasteboard.getContents()
   local searchUrl = "https://google.com/search?q=" .. content
 

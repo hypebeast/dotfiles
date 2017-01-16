@@ -94,6 +94,8 @@ brew install reattach-to-user-namespace
 brew install typesafe-activator
 brew install rbenv
 brew install golang
+brew install git-extras
+brew install vegeta
 
 # Remove outdated versions from the cellar.
 brew cleanup
