@@ -1,6 +1,6 @@
 " Some common settings
 syntax enable
-set background=dark
+"set background=dark
 colorscheme solarized
 
 set nospell
