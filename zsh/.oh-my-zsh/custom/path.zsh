@@ -5,10 +5,14 @@
 # Scala Home
 SCALA_HOME=$HOME/bin/scala-2.11.7
 
-# Path
-PATH=$HOME/bin:$SCALA_HOME/bin:$HOME/.dotfiles/bin:$PATH
+# Bin dir
+PATH=$HOME/bin:$PATH
 
-# Pythonpath
+# Scala
+PATH=$SCALA_HOME/bin:$PATH
+
+# Dotfiles
+PATH=$HOME/.dotfiles/bin:$PATH
 
 # Anaconda
 PATH=$HOME/anaconda/bin:$PATH
@@ -28,7 +32,9 @@ PATH=$HOME/.local/bin:$PATH
 # pyenv
 PATH=$HOME/.pyenv/bin:$PATH
 
+# Go
 [ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH 
+[ -d "${PROJECTS/go/bin}" ] && PATH=${PROJECTS}/go/bin:$PATH 
 
 export PATH
 
