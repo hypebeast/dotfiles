@@ -19,3 +19,6 @@ nnoremap <Leader>f :Unite grep:.<cr>
 
 " replacing unite with ctrl-p
 nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
+
+" toggle pastemode on F2
+set pastetoggle=<F2>
