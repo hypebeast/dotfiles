@@ -22,6 +22,27 @@ set -o nounset
 # Catch the error in case mysqldump fails (but gzip succeeds) in `mysqldump |gzip`
 set -o pipefail
 
+
+###############################################################################
+##  colors
+###############################################################################
+GREEN="\033[01;32m"
+RED="\033[01;31m"
+GRAY="\033[01;30m"
+DARKYELLOW="\033[33m"
+NORMAL="\033[00m"
+
+
+###############################################################################
+##  log
+###############################################################################
+function log_error()    { echo -e  ${RED:-}"[E]"${NORMAL:-}" $*" 1>&2;   }
+function log_warn()     { echo -e  ${DARKYELLOW:-}"[W]"${NORMAL:-}" $*"; }
+function log_info()     { echo -e  ${GREEN:-}"[I]"${NORMAL:-}" $*";      }
+function log_progress() { echo -en ${GRAY:-}"[>]"${NORMAL:-}" $*";       }
+function log_debug()    { echo -e  ${GRAY:-}"[ ]"${NORMAL:-}" $*";       }
+
+
 # Define the environment variables (and their defaults) that this script depends on
 LOG_LEVEL="${LOG_LEVEL:-6}" # 7 = debug -> 0 = emergency
 NO_COLOR="${NO_COLOR:-}"    # true = disable color. otherwise autodetected
@@ -63,7 +84,7 @@ function __b3bp_log () {
   local log_line=""
 
   while IFS=$'\n' read -r log_line; do
-    echo -e "$(date -u +"%Y-%m-%d %H:%M:%S UTC") ${color}$(printf "[%9s]" "${log_level}")${color_reset} ${log_line}" 1>&2
+    echo -e "${color}$(printf "[%9s]" "${log_level}")${color_reset} ${log_line}" 1>&2
   done <<< "${@:-}"
 }
 
