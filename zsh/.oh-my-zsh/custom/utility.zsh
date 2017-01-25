@@ -6,7 +6,7 @@ elif (( $+commands[wget] )); then
 fi
 
 # CtrlP for zsh
-ctrlp() {
+function ctrlp() {
     </dev/tty vim -c CtrlP
 }
 zle -N ctrlp

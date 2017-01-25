@@ -1,3 +1,9 @@
+#######################################
+## Set ZSH config options
+##
+## Sebastian Ruml, <sebastian@sebastianruml.name>
+## Last Edit: Mi 25. Jan 23:15:57 CET 2017
+#######################################
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 

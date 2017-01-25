@@ -1,7 +1,9 @@
-###
-# System aliases
-# Last modified: 2012.12.29
-###
+#######################################
+## Set ZSH config options
+##
+## Sebastian Ruml, <sebastian@sebastianruml.name>
+## Last Edit: Mi 25. Jan 23:46:48 CET 2017
+#######################################
 
 # ls
 alias lr='ls -alhtr'
@@ -70,3 +72,6 @@ alias pretty-json='python -m json.tool | pygmentize -l json'
 
 # ag
 alias -g agi='ag -i'
+
+# print the current date
+alias -g now='date +%F'
