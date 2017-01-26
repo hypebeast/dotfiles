@@ -28,6 +28,7 @@ DOTFILES=(
   tmux
   vim
   zsh
+  fzf
 )
 
 
