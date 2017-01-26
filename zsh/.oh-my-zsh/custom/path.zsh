@@ -1,14 +1,21 @@
-###
-# Path definitions
-###
+#######################################
+## Path
+##
+## Sebastian Ruml, <sebastian@sebastianruml.name>
+## Last Edit: Mi 25. Jan 23:18:54 CET 2017
+#######################################
 
 # Scala Home
 SCALA_HOME=$HOME/bin/scala-2.11.7
 
-# Path
-PATH=$HOME/bin:$SCALA_HOME/bin:$HOME/.dotfiles/bin:$PATH
+# Bin dir
+PATH=$HOME/bin:$PATH
 
-# Pythonpath
+# Scala
+PATH=$SCALA_HOME/bin:$PATH
+
+# Dotfiles
+PATH=$HOME/.dotfiles/bin:$PATH
 
 # Anaconda
 PATH=$HOME/anaconda/bin:$PATH
@@ -28,7 +35,12 @@ PATH=$HOME/.local/bin:$PATH
 # pyenv
 PATH=$HOME/.pyenv/bin:$PATH
 
+# Add path to our custom bins
+export PATH=/usr/local/bin:$PATH
+
+# Go
 [ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH 
+[ -d "${PROJECTS/go/bin}" ] && PATH=${PROJECTS}/go/bin:$PATH 
 
 export PATH
 

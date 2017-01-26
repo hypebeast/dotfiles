@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Install tmux-powerline from https://github.com/erikw/tmux-powerline
+# Install powerline from https://github.com/powerline/powerline
 #
 
 if [ ! -d ~/.dotfiles/libs ]; then
@@ -10,8 +10,8 @@ fi
 cd ~/.dotfiles/libs
 
 if [ ! -d "./powerline" ]; then
-	git clone "https://github.com/powerline/powerline.git" "./powerline"
-  cd "powerline"
+    git clone "https://github.com/powerline/powerline.git" "./powerline"
+    cd "powerline"
 else
 	cd "powerline"
 	git pull origin master

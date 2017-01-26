@@ -25,15 +25,53 @@ export ZSH_THEME="steeef"
 # Uncomment following line if you want to disable autosetting terminal title.
 # export DISABLE_AUTO_TITLE="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails go git textmate ruby lighthouse)
-plugins=(git ruby osx rails github node npm sublime
-            history-substring-search zsh-syntax-highlighting
-            themes fasd web-search zsh-syntax-highlighting wd
-            cp dirhistory urltools vagrant grunt common-aliases
-            copydir copyfile github docker docker-compose
-            zsh-autosuggestions)
+# define plugins
+declare -a plugins
 
+common_plugins=(
+    git
+    ruby
+    rails
+    github
+    node
+    npm
+    sublime
+    themes
+    fasd
+    web-search
+    wd
+    cp
+    dirhistory
+    urltools
+    vagrant
+    grunt
+    common-aliases
+    copydir
+    copyfile
+    github
+    docker
+    docker-compose
+    history-substring-search
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+
+linux_plugins=(
+    ubuntu
+)
+
+macos_plugins=(
+    osx
+    brew
+)
+
+if [[ "$OSTYPE" == linux* ]]; then
+    plugins=($common_plugins $linux_plugins)
+elif [[ "$OSTYPE" == darwin* ]]; then
+    plugins=($common_plugins $macos_plugins)
+fi
+
+# Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
 # Things I don't want to publish to github
@@ -45,9 +83,6 @@ if [ -d $HOME/.secrets ]; then
       source $file
   done
 fi
-
-# Add path to our custom bins
-export PATH=/usr/local/bin:$PATH
 
 #export PROMPT="$PROMPT\$(git-radar --zsh --fetch) "
 
@@ -61,7 +96,7 @@ fi
 # added by travis gem
 [ -f /Users/sruml/.travis/travis.sh ] && source /Users/sruml/.travis/travis.sh
 
-export LC_ALL=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Initialize rbenv
