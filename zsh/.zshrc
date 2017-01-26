@@ -66,7 +66,6 @@ macos_plugins=(
 )
 
 if [[ "$OSTYPE" == linux* ]]; then
-    echo "Linux"
     plugins=($common_plugins $linux_plugins)
 elif [[ "$OSTYPE" == darwin* ]]; then
     plugins=($common_plugins $macos_plugins)
