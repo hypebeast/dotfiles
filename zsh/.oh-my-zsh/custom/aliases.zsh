@@ -5,6 +5,9 @@
 ## Last Edit: Mi 25. Jan 23:46:48 CET 2017
 #######################################
 
+# unset some aliases from oh-my-zsh
+unalias sp
+
 # ls
 alias lr='ls -alhtr'
 alias l='ls -alh'
@@ -75,3 +78,4 @@ alias -g agi='ag -i'
 
 # print the current date
 alias -g now='date +%F'
+

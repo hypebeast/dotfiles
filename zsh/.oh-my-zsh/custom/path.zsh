@@ -5,11 +5,11 @@
 ## Last Edit: Mi 25. Jan 23:18:54 CET 2017
 #######################################
 
-# Scala Home
-SCALA_HOME=$HOME/bin/scala-2.11.7
-
 # Bin dir
 PATH=$HOME/bin:$PATH
+
+# additional apps dir
+PATH=$HOME/Apps:$PATH
 
 # Scala
 PATH=$SCALA_HOME/bin:$PATH
@@ -46,3 +46,6 @@ export PATH
 
 # Python Path
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
+
+# Scala Home
+SCALA_HOME=$HOME/bin/scala-2.11.7

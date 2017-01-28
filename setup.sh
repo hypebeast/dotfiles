@@ -17,7 +17,6 @@ source ./utils.sh
 
 
 # Dotfiles to link
-
 DOTFILES=(
   ack
   bin
@@ -29,6 +28,9 @@ DOTFILES=(
   vim
   zsh
   fzf
+  i3
+  i3status
+  gtk
 )
 
 
@@ -176,7 +178,7 @@ function run_installers () {
 # Run the given installer
 function run_installer () {
    if [[ $# -ne 1 ]]; then
-     error "You must pecify the name of the installer you want to run!"
+     error "You must specify the name of the installer you want to run!"
      exit 1
    fi
 
@@ -201,6 +203,7 @@ function macos () {
 # Process command line arguments
 ##########################################################
 
+# default ist the link command
 if [[ "$#" -eq 0 ]]; then
   cmd="link"
 else

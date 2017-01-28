@@ -3,15 +3,16 @@ general {
   interval = 4
 }
 
+order += "cpu_usage 0"
 order += "disk /home"
 order += "disk /"
 order += "run_watch VPN"
-order += "ethernet enp0s3"
+order += "ethernet enp5s0"
 order += "volume master"
 order += "load"
 order += "time"
 
-ethernet enp0s3 {
+ethernet enp5s0 {
   # sudo setcap cap_net_admin=ep $(which i3status)
   format_up = "E: %ip (%speed)"
   format_down = "E: down"
@@ -27,6 +28,10 @@ time {
 
 load {
   format = "%1min"
+}
+
+cpu_usage {
+  format = " %usage"
 }
 
 disk "/" {
