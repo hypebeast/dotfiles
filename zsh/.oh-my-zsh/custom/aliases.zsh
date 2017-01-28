@@ -2,7 +2,7 @@
 ## Set ZSH config options
 ##
 ## Sebastian Ruml, <sebastian@sebastianruml.name>
-## Last Edit: Mi 25. Jan 23:46:48 CET 2017
+## Last Edit: Sat Jan 28 18:09:06 CET 2017
 #######################################
 
 # ls
@@ -70,8 +70,21 @@ alias http-serve='python -m SimpleHTTPServer'
 # Pretty print JSON
 alias pretty-json='python -m json.tool | pygmentize -l json'
 
-# ag
-alias -g agi='ag -i'
+# ag - case insensitve and always search hidden files
+alias -g agi='ag -i --hidden'
 
 # print the current date
 alias -g now='date +%F'
+
+# Linux specific aliases
+if [[ $OSTYPE == linux* ]]; then
+    alias open='xdg-open'
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+fi
+
+# Create directory and change into it
+function mkd() {
+    mkdir -p "$1" && cd "$1"
+}
+
