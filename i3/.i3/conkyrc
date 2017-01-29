@@ -23,7 +23,7 @@ use_xft yes
 
 # number of cpu samples to average
 # set to 1 to disable averaging
-cpu_avg_samples 8
+cpu_avg_samples 2
 
 
 # Stuff after 'TEXT' will be formatted on screen
@@ -38,15 +38,18 @@ TEXT
 #{"full_text": " ${execpi 60 ~/bin/gmail.sh}", "color":"\#a6a6a6"},\
 #{"full_text":" ${execi 6 dropbox-cli status | sed -n 1p}", "color":"\#a6a6a6"},\
 #{"full_text":" ${execpi 60 pactl list sinks | grep "Volume: front-left" | cut -d " " -f6 }", "color":"\#a6a6a6"},\
+#{ "full_text": " ${exec xkb-switch | sed 's/us/en/' | tr '[a-z]' '[A-Z]'}", "color": "\#ffffff"  },
 
   { "full_text": "${execi 5 ~/.i3/song_title.sh}", "color": "\#beb6ec" },
-  { "full_text": " ${exec xkb-switch | sed 's/us/en/' | tr '[a-z]' '[A-Z]'}", "color": "\#ffffff"  },
-  { "full_text": "🔊 ${exec amixer -c 0 get Master | grep -Po '\d+%'}", "color": "\#6194df"},
+  { "full_text": " ${cpu}%", "color": "\#da5148" },
+  { "full_text": " ${loadavg}", "color": "\#da5148" },
+  { "full_text": " ${mem}/${memmax}", "color": "\#da5148" },
   { "full_text": " ${fs_free /}", "color": "\#48af48"  },
-  { "full_text": " ${cpu}% ${acpitemp}°", "color": "\#da5148" },
+  { "full_text": " ${fs_free /home}", "color": "\#48af48"  },
+  { "full_text": "🔊 ${exec amixer -c 0 get Master | grep -Po '\d+%'}", "color": "\#6194df"},
  
-  ${if_up enp4s0}
-    { "full_text" : " ${addr enp4s0} \u2193${downspeedf enp5s0}k \u2191${upspeedf enp4s0}k", "color" : "\#2AA198"},
+  ${if_up enp5s0}
+    { "full_text" : " ${addr enp5s0} \u2193${downspeedf enp5s0}k \u2191${upspeedf enp5s0}k", "color" : "\#2AA198"},
   ${else}
     {"full_text": "no connection","color":"\#E59847"},\
   ${endif}  

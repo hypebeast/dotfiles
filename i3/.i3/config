@@ -14,7 +14,8 @@ set $mod Mod4
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango:Ubuntu Medium 10
+#font pango:Ubuntu Mono 10
+font pango:DejaVu Sans Mono 8
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -201,7 +202,7 @@ bindsym XF86AudioPrev exec sp prev
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  status_command i3status
+  status_command ~/.i3/conky.sh
   tray_output primary
 
   colors{
@@ -215,15 +216,13 @@ bar {
   }
 
   position top
-  font pango: Monospace 10
+  font pango: Ubuntu Mono 10
 }
 
 # workspace assignment (use "xprop" to find the window class)
 assign [class="^Atom$"] $w2
-assign [class="^Franz$"] $w3
-assign [class="^Google-chrome$"] $w6
+assign [class="^Franz$"] $w9
 assign [class="^Thunderbird$"] $w7
-#assign [class="^Spotify$"] $w8
 
 for_window [class="Spotify"] move to workspace $w8
 
@@ -256,6 +255,12 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+e mode "$mode_system"
 
+# Remember last workspace to jump back to
+workspace_auto_back_and_forth yes
+
+# Jump to urgent window
+bindsym $mod+x [urgent=latest] focus
+
 client.focused          #bc3220 #bc3220 #EEEEEE #2D2D2D
 client.focused_inactive #999999 #999999 #EEEEEE #2D2D2D
 client.unfocused        #999999 #999999 #EEEEEE #2D2D2D
@@ -265,7 +270,7 @@ client.urgent           #555555 #555555 #FFFFFF #2D2D2D
 exec --no-startup-id xrandr --output DVI-I-1 --mode 1920x1200 --right-of DVI-D-0 --output DVI-D-0 --mode 1920x1200
 
 # set keyboard repeat speed
-exec --no-startup-id xset r rate 250 50
+exec --no-startup-id xset r rate 250 40
 
 # set mouse acceleration
 exec --no-startup-id xset m 4/1 4
@@ -278,12 +283,15 @@ exec --no-startup-id conky -c ~/.conky/conkyrc_right
 exec --no-startup-id conky -c ~/.conky/conkyrc_left
 exec --no-startup-id nm-applet
 exec --no-startup-id clipit
+exec --no-startup-id dropbox
 
 # autostart some of my applications
+exec --no-startup-id i3-msg 'workspace $w1; exec xfce4-terminal'
 exec --no-startup-id i3-msg 'workspace $w6; exec google-chrome;'
+exec --no-startup-id i3-msg 'workspace $w3; exec google-chrome;'
 exec --no-startup-id i3-msg 'workspace $w7; exec thunderbird;'
 exec --no-startup-id i3-msg 'workspace $w8; exec spotify;'
-exec --no-startup-id i3-msg 'workspace $w1; exec xfce'
+exec --no-startup-id i3-msg 'workspace $w9; exec slack;'
 
 # Start the session
 #exec --no-startup-id ~/.i3/autostart
