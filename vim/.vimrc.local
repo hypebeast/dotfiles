@@ -1,11 +1,14 @@
 " Some common settings
 syntax enable
+
 "set background=dark
 colorscheme solarized
 
 set nospell
 set nolist
 set number
+
+set t_Co=256 
 
 " Unite settings
 nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>
@@ -22,3 +25,15 @@ nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 fi
 
 " toggle pastemode on F2
 set pastetoggle=<F2>
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+    let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+    let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+    call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+

@@ -3,6 +3,7 @@
     allow_markup = yes
     format = "<b>%a: %s %p</b>\n%b"
     sort = yes
+	# Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
     alignment = left
     bounce_freq = 0
@@ -70,11 +71,38 @@
 # NOTE: It might be helpful to run dunst -print in a terminal in order to find
 # fitting options for rules.
 
-#[emms]
-#    appname = emms
-#    timeout = 7
-#    background = "#28774f"
-#    format = "<span font='11' foreground='#63ff30'>%s</span>\n%i\n%b"
+#[espeak]
+#    summary = "*"
+#    script = dunst_espeak.sh
 
+#[script-test]
+#    summary = "*script*"
+#    script = dunst_test.sh
+
+#[ignore]
+#    # This notification will not be displayed
+#    summary = "foobar"
+#    format = ""
+
+#[signed_on]
+#    appname = Pidgin
+#    summary = "*signed on*"
+#    urgency = low
+#
+#[signed_off]
+#    appname = Pidgin
+#    summary = *signed off*
+#    urgency = low
+#
+#[says]
+#    appname = Pidgin
+#    summary = *says*
+#    urgency = critical
+#
+#[twitter]
+#    appname = Pidgin
+#    summary = *twitter.com*
+#    urgency = normal
+#
 
 # vim: ft=cfg

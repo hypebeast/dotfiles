@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-#
-# Install various fonts
-#
+
+###############################################################################
+## Install various fonts
+###############################################################################
+
 
 if [ ! -d ~/.dotfiles/libs ]; then
   mkdir -p ~/.dotfiles/libs
@@ -36,3 +38,5 @@ if [[ $(uname) == "Linux" ]]; then
 fi
 
 exit 0
+
+# vim: set ts=4 sw=4 tw=0 et :

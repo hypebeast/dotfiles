@@ -98,6 +98,7 @@ brew install git-extras
 brew install vegeta
 brew install gpg
 brew install pwgen
+brew install pass
 
 # Remove outdated versions from the cellar.
 brew cleanup

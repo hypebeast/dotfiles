@@ -15,10 +15,10 @@ cd ~/.dotfiles/libs
 
 if [ ! -d "$INSTALL_DIR" ]; then
     git clone --depth 1 https://github.com/junegunn/fzf.git "$INSTALL_DIR"
-  cd "$INSTALL_DIR"
+    cd "$INSTALL_DIR"
 else
-	cd "$INSTALL_DIR"
-	git pull origin master
+    cd "$INSTALL_DIR"
+    git pull origin master
 fi
 
 # run the installer
