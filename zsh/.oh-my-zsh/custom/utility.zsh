@@ -1,14 +1,8 @@
-# File Download
-if (( $+commands[curl] )); then
-    alias get='curl --continue-at - --location --progress-bar --remote-name --remote-time'
-elif (( $+commands[wget] )); then
-    alias get='wget --continue --progress=bar --timestamping'
-fi
+#######################################
+## Utility functions
+##
+## Sebastian Ruml, <sebastian@sebastianruml.name>
+## Last Edit: Sat Jan 28 15:15:58 CET 2017
+#######################################
 
-# CtrlP for zsh
-function ctrlp() {
-    </dev/tty vim -c CtrlP
-}
-zle -N ctrlp
 
-bindkey "^p" ctrlp

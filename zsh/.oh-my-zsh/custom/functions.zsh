@@ -1,6 +1,6 @@
 #######################################
 # Various ZSH Functions
-# Last edit: 
+# Last edit: Sat Jan 28 14:24:13 CET 2017
 #######################################
 
 
@@ -75,3 +75,40 @@ function find-exec {
 function psu {
   ps -U "${1:-$USER}" -o 'pid,%cpu,%mem,command' "${(@)argv[2,-1]}"
 }
+
+# Display markdown documents with lynx
+function view-markdown() {
+  local file=$1
+  pandoc $file | lynx -stdin
+}
+alias vmk=view-markdown
+
+# File download
+function get() {
+  local file=$1
+
+  if (( $+commands[curl] )); then
+    curl --continue-at - --location --progress-bar --remote-name --remote-time $1
+  elif (( $+commands[wget] )); then
+    wget --continue --progress=bar --timestamping $1
+  fi
+}
+
+# CtrlP for zsh
+function ctrlp() {
+    </dev/tty vim -c CtrlP
+}
+zle -N ctrlp
+
+bindkey "^p" ctrlp
+
+# search for aliases
+function find-alias () {
+    if [[ $# -gt 0 ]]; then
+        alias | grep -i $@
+    else
+        alias
+    fi
+}
+alias fa=find-alias
+

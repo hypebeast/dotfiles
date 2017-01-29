@@ -36,16 +36,10 @@ PATH=$HOME/.local/bin:$PATH
 PATH=$HOME/.pyenv/bin:$PATH
 
 # Add path to our custom bins
-export PATH=/usr/local/bin:$PATH
+PATH=/usr/local/bin:$PATH
 
-# Go
+# Go binaries
 [ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH 
 [ -d "${PROJECTS/go/bin}" ] && PATH=${PROJECTS}/go/bin:$PATH 
 
 export PATH
-
-# Python Path
-export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
-
-# Scala Home
-SCALA_HOME=$HOME/bin/scala-2.11.7

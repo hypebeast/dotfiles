@@ -12,18 +12,19 @@
 # Copyright (c) 2016 Sebastian Ruml, <sebastian@sebastianruml.name>
 
 
-# Source the util functions
+# Source some util functions
 source ./utils.sh
 
 
 # Dotfiles to link
-DOTFILES=(
+
+declare -a DOTFILES
+
+COMMON_DOTFILES=(
   ack
   bin
   ctags
   git
-  gpg
-  hammerspoon
   tmux
   vim
   zsh
@@ -33,7 +34,28 @@ DOTFILES=(
   gtk
 )
 
+LINUX_DOTFILES=(
+  i3
+  i3status
+  X
+  xfce4-terminal
+  dunst
+  conky
+  compton
+)
 
+MACOS_DOTFILES=(
+  hammerspoon
+)
+
+if is_macos; then
+    DOTFILES=("${COMMON_DOTFILES}" "${MACOS_DOTFILES}")
+else
+    DOTFILES=("${COMMON_DOTFILES}" "${MACOS_DOTFILES}")
+fi
+
+
+###########################################################
 # Usage and help text
 ###########################################################
 
@@ -50,6 +72,7 @@ read -r -d '' __helptext <<-'EOF' || true
 EOF
 
 
+###########################################################
 # Setup/Install functions
 ###########################################################
 
@@ -71,10 +94,6 @@ function bootstrap () {
   install_zshplugins
 
   is_macos && macos
-
-  # TODO
-  # install_term_theme
-  # install_dircolors
 
   exit 0
 }
@@ -161,13 +180,6 @@ function install_zshplugins () {
     fi
 }
 
-# Install dircolors
-function install_dircolors () {
-  info "Installing dircolors..."
-
-  ./dircolors/install.sh
-}
-
 # Run all installer scripts
 function run_installers () {
   for installer in $(find . -type f -name 'install.sh'); do
@@ -228,6 +240,12 @@ case "${cmd}" in
     ;;
   macos )
     macos
+    ;;
+  brew )
+    install_homebrew
+    ;;
+  apt )
+    install_apt_packages
     ;;
   *)
     help "Help using ${0}"
