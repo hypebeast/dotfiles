@@ -223,7 +223,9 @@ assign [class="^Atom$"] $w2
 assign [class="^Franz$"] $w3
 assign [class="^Google-chrome$"] $w6
 assign [class="^Thunderbird$"] $w7
-assign [class="^Spotify$"] $w8
+#assign [class="^Spotify$"] $w8
+
+for_window [class="Spotify"] move to workspace $w8
 
 # custom window settings
 #for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
