@@ -114,3 +114,28 @@ URxvt*keysym.M-F9:  \033[20;3~
 URxvt*keysym.M-F10: \033[21;3~
 URxvt*keysym.M-F11: \033[23;3~
 URxvt*keysym.M-F12: \033[24;3~
+
+!! Rofi config
+rofi.opacity: 85
+rofi.width: 1924
+rofi.lines: 7
+rofi.columns: 4
+rofi.font: SourceCodePro 9
+rofi.fg: #E5DBCF
+rofi.bg: #0F3B5F
+rofi.hlfg: #0F3B5F
+rofi.hlbg: #CC9752
+rofi.bc: #CC9752
+rofi.bw: 2
+rofi.location: 6
+rofi.padding: 2
+rofi.yoffset: -22
+rofi.xoffset: 0
+rofi.fixed-num-lines: true
+rofi.hmode: false
+rofi.terminal: x-terminal-emulator
+rofi.ssh-set-title: true
+rofi.disable-history: true
+rofi.key-window: mod4+Tab
+rofi.key-run: mod4+p
+rofi.key-ssh: mod1+F3

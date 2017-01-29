@@ -38,10 +38,11 @@ LINUX_DOTFILES=(
   i3
   i3status
   X
-  xfce4-terminal
+  xfce-terminal
   dunst
   conky
   compton
+  fonts
 )
 
 MACOS_DOTFILES=(
