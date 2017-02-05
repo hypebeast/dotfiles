@@ -223,11 +223,10 @@ bar {
 
 # workspace assignment (use "xprop" to find the window class)
 assign [class="^Atom$"] $ws2
-assign [class="^google-chrome$"] $ws3
-assign [class="^Franz$"] $ws9
+assign [class="^Google-chrome$"] $ws3
 assign [class="^Thunderbird$"] $ws7
-
-for_window [class="Spotify"] move to workspace $ws8
+for_window [class="^Slack$"] move to workspace $ws8
+for_window [class="^Spotify$"] move to workspace $ws9
 
 # custom window settings
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
@@ -300,11 +299,13 @@ exec --no-startup-id pasystray
 
 # autostart some of my applications
 exec --no-startup-id i3-msg 'workspace number 1; exec xfce4-terminal; exec xfce4-terminal; layout tabbed; focus left;'
-exec --no-startup-id i3-msg 'exec google-chrome;'
+#exec --no-startup-id i3-msg 'exec google-chrome;'
 #exec --no-startup-id i3-msg 'workspace number 3; exec google-chrome;'
-#exec --no-startup-id i3-msg 'workspace number 7; exec thunderbird;'
-#exec --no-startup-id i3-msg 'workspace number 8; exec slack;'
+exec --no-startup-id i3-msg 'exec thunderbird;'
+exec --no-startup-id i3-msg 'exec slack;'
 exec --no-startup-id i3-msg 'exec spotify;'
+exec --no-startup-id i3-msg 'exec keepassx;'
+exec --no-startup-id i3-msg 'exec urxvt -name scratchpad;'
 
 # Start the session
 #exec --no-startup-id ~/.i3/autostart
