@@ -224,6 +224,7 @@ bar {
 # workspace assignment (use "xprop" to find the window class)
 assign [class="^Atom$"] $ws2
 assign [class="^Google-chrome$"] $ws3
+assign [class="^KeepassX$"] $ws5
 assign [class="^Thunderbird$"] $ws7
 for_window [class="^Slack$"] move to workspace $ws8
 for_window [class="^Spotify$"] move to workspace $ws9
