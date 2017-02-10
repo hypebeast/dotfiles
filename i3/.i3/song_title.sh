@@ -7,4 +7,4 @@ if [[ "$STATUS" == 'Playing' ]]; then
   echo "𝅘𝅥𝅮 $ARTIST - $TITLE"
 fi
 
-# vim: ft=shell
+# vim: ft=sh

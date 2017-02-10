@@ -43,7 +43,7 @@ TEXT
   { "full_text": "${execi 5 ~/.i3/song_title.sh}", "color": "\#beb6ec" },
   { "full_text": " ${cpu}%", "color": "\#da5148" },
   { "full_text": " ${loadavg}", "color": "\#da5148" },
-  { "full_text": " ${mem}/${memmax}", "color": "\#da5148" },
+  { "full_text": " ${mem}/${memmax}", "color": "\#da5148" },
   { "full_text": " ${fs_free /}", "color": "\#48af48"  },
   { "full_text": " ${fs_free /home}", "color": "\#48af48"  },
   { "full_text": "🔊 ${exec amixer -c 0 get Master | grep -Po '\d+%'}", "color": "\#6194df"},

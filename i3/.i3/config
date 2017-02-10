@@ -111,55 +111,55 @@ bindsym $alt+Tab focus right
 bindsym $alt+Shift+Tab focus left
 
 # define names for workspaces with some nice symbols
-set $w1 ❶
-set $w2 ❷
-set $w3 ❸
-set $w4 ❹
-set $w5 ❺
-set $w6 ❻
-set $w7 ❼
-set $w8 ❽
-set $w9 ❾
-set $w10 ❿
+set $ws1 "1:  "
+set $ws2 "2: editor"
+set $ws3 "3: &#xf268;"
+set $ws4 "4: test"
+set $ws5 "5: pass"
+set $ws6 "6: &#xf268;"
+set $ws7 "7: "
+set $ws8 "8: slack"
+set $ws9 "9: spotify"
+set $ws10 "10: test"
 
 # switch to workspace
-bindsym $mod+1 workspace $w1
-bindsym $mod+2 workspace $w2
-bindsym $mod+3 workspace $w3
-bindsym $mod+4 workspace $w4
-bindsym $mod+5 workspace $w5
-bindsym $mod+6 workspace $w6
-bindsym $mod+7 workspace $w7
-bindsym $mod+8 workspace $w8
-bindsym $mod+9 workspace $w9
-bindsym $mod+0 workspace $w10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 bindsym $mod+Page_Down workspace prev
 bindsym $mod+Page_Up workspace next
 bindsym $mod+Tab workspace back_and_forth
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $w1
-bindsym $mod+Shift+2 move container to workspace $w2
-bindsym $mod+Shift+3 move container to workspace $w3
-bindsym $mod+Shift+4 move container to workspace $w4
-bindsym $mod+Shift+5 move container to workspace $w5
-bindsym $mod+Shift+6 move container to workspace $w6
-bindsym $mod+Shift+7 move container to workspace $w7
-bindsym $mod+Shift+8 move container to workspace $w8
-bindsym $mod+Shift+9 move container to workspace $w9
-bindsym $mod+Shift+10 move container to workspace $w10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+10 move container to workspace $ws10
 
 # workspace screens
-workspace $w1 output DVI-I-1
-workspace $w2 output DVI-I-1
-workspace $w3 output DVI-I-1
-workspace $w4 output DVI-I-1
-workspace $w5 output DVI-I-1
-workspace $w6 output DVI-D-0
-workspace $w7 output DVI-D-0
-workspace $w8 output DVI-D-0
-workspace $w9 output DVI-D-0
-workspace $w10 output DVI-D-0
+workspace $ws1 output DVI-I-1
+workspace $ws2 output DVI-I-1
+workspace $ws3 output DVI-I-1
+workspace $ws4 output DVI-I-1
+workspace $ws5 output DVI-I-1
+workspace $ws6 output DVI-D-0
+workspace $ws7 output DVI-D-0
+workspace $ws8 output DVI-D-0
+workspace $ws9 output DVI-D-0
+workspace $ws10 output DVI-D-0
 
 
 # border changing
@@ -193,8 +193,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # pulse audio volume control
-bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 0 -- '-5%'
-bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 0 -- '+5%'
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 2 -5%
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 2 +5%
 bindsym XF86AudioPlay exec sp play
 bindsym XF86AudioNext exec sp next
 bindsym XF86AudioPrev exec sp prev
@@ -216,20 +216,22 @@ bar {
   }
 
   position top
-  font pango: Ubuntu Mono 10
+  font pango: FontAwesome 8, Ubuntu Mono 10
+  tray_output DVI-I-1
+  tray_output DVI-D-0
 }
 
 # workspace assignment (use "xprop" to find the window class)
-assign [class="^Atom$"] $w2
-assign [class="^Franz$"] $w9
-assign [class="^Thunderbird$"] $w7
-
-for_window [class="Spotify"] move to workspace $w8
+assign [class="^Atom$"] $ws2
+assign [class="^Google-chrome$"] $ws3
+assign [class="^KeepassX$"] $ws5
+assign [class="^Thunderbird$"] $ws7
+for_window [class="^Slack$"] move to workspace $ws8
+for_window [class="^Spotify$"] move to workspace $ws9
 
 # custom window settings
-#for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
-#for_window [class="^Google-chrome$"] border none
-#for_window [title="Lingea Lexicon 5$"] border none
+for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
+for_window [class="^Google-chrome$"] border none
 
 # get elluminate working
 #for_window [title="^Elluminate Live!"] floating enable
@@ -261,16 +263,25 @@ workspace_auto_back_and_forth yes
 # Jump to urgent window
 bindsym $mod+x [urgent=latest] focus
 
+# Screenshots
+bindsym Print exec "scrot -e 'mv $f ~/Documents/Screenshots'"
+bindsym $mod+Print exec "scrot -ue 'mv $f ~/Documents/Screenshots'"
+
 client.focused          #bc3220 #bc3220 #EEEEEE #2D2D2D
 client.focused_inactive #999999 #999999 #EEEEEE #2D2D2D
 client.unfocused        #999999 #999999 #EEEEEE #2D2D2D
 client.urgent           #555555 #555555 #FFFFFF #2D2D2D
 
+#client.focused          #292929 #292929 #292929 #292929
+#client.unfocused        #262626 #5a5349 #5a5349 #a8bac4
+#client.focused_inactive #26262626 #262626 #262626 #262626
+#client.urgent           #CCE8D4 #CCE8D4 #CCE8D4 #CCE8D4
+
 # set monitor layout
 exec --no-startup-id xrandr --output DVI-I-1 --mode 1920x1200 --right-of DVI-D-0 --output DVI-D-0 --mode 1920x1200
 
 # set keyboard repeat speed
-exec --no-startup-id xset r rate 250 40
+exec --no-startup-id xset r rate 250 80
 
 # set mouse acceleration
 exec --no-startup-id xset m 4/1 4
@@ -281,17 +292,21 @@ exec --no-startup-id compton
 exec --no-startup-id dunst
 exec --no-startup-id conky -c ~/.conky/conkyrc_right
 exec --no-startup-id conky -c ~/.conky/conkyrc_left
-exec --no-startup-id nm-applet
+#exec --no-startup-id nm-applet
+exec --no-startup-id pa-applet
 exec --no-startup-id clipit
-exec --no-startup-id dropbox
+exec --no-startup-id dropbox start
+exec --no-startup-id pasystray
 
 # autostart some of my applications
-exec --no-startup-id i3-msg 'workspace $w1; exec xfce4-terminal'
-exec --no-startup-id i3-msg 'workspace $w6; exec google-chrome;'
-exec --no-startup-id i3-msg 'workspace $w3; exec google-chrome;'
-exec --no-startup-id i3-msg 'workspace $w7; exec thunderbird;'
-exec --no-startup-id i3-msg 'workspace $w8; exec spotify;'
-exec --no-startup-id i3-msg 'workspace $w9; exec slack;'
+exec --no-startup-id i3-msg 'workspace number 1; exec xfce4-terminal; exec xfce4-terminal; layout tabbed; focus left;'
+#exec --no-startup-id i3-msg 'exec google-chrome;'
+#exec --no-startup-id i3-msg 'workspace number 3; exec google-chrome;'
+exec --no-startup-id i3-msg 'exec thunderbird;'
+exec --no-startup-id i3-msg 'exec slack;'
+exec --no-startup-id i3-msg 'exec spotify;'
+exec --no-startup-id i3-msg 'exec keepassx;'
+exec --no-startup-id i3-msg 'exec urxvt -name scratchpad;'
 
 # Start the session
 #exec --no-startup-id ~/.i3/autostart

@@ -105,6 +105,8 @@ function link () {
   info "Hook our dotfiles into system standard positions..."
 
   stow "${DOTFILES[@]}"
+
+  info "Done!"
 }
 
 # Install brew and cask packages
