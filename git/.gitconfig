@@ -142,3 +142,5 @@
 	helper = osxkeychain
 [credential "https://lala.com"]
 	sruml = password
+[gpg]
+	program = /usr/local/bin/gpg2
