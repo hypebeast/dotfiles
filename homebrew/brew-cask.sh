@@ -29,6 +29,7 @@ apps=(
     karabiner-elements
     vagrant
     java
+    nvalt
 )
 
 brew cask install "${apps[@]}"
