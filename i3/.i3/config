@@ -46,10 +46,12 @@ bindsym $mod+q kill
 # start j4-dmenu-desktop
 bindsym $mod+space exec --no-startup-id j4-dmenu-desktop  j4-dmenu-desktop --dmenu="dmenu -b -i -nb '#000000' -nf '#CFCFCF' -sb '#D53C0A' -sf '#FFFFFF' -fn 'Droid Sans:pixelsize=13'" --term="gnome-terminal"
 
-# start customized rofi for launching any program
-set $execute exec rofi -show run -eh 2 -padding 400 -fullscreen
-bindsym $mod+d $execute
-bindsym XF86Search $execute
+# Rofi commands
+bindsym $mod+d exec rofi -show run -eh 2 -padding 400 -fullscreen
+bindsym $mod+Shift+d exec rofi -show ssh -padding 400 -fullscreen
+bindsym $mod+w exec --no-startup-id websearch_surfraw.sh
+bindsym $mod+Shift+w exec --no-startup-id rofi-surfraw-bookmark.sh
+
 
 # reload/restart/exit
 bindsym $mod+Shift+c reload
@@ -222,15 +224,16 @@ bar {
 }
 
 # workspace assignment (use "xprop" to find the window class)
+assign [class="^xfce4-terminal$"] $ws1
 assign [class="^Atom$"] $ws2
 assign [class="^Google-chrome$"] $ws3
-assign [class="^KeepassX$"] $ws5
+assign [class="^Keepass$"] $ws5
 assign [class="^Thunderbird$"] $ws7
 for_window [class="^Slack$"] move to workspace $ws8
 for_window [class="^Spotify$"] move to workspace $ws9
 
 # custom window settings
-for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
+for_window [class="^Xfce4-terminal$" window_role="scratchpad"] border 1pixel; move scratchpad
 for_window [class="^Google-chrome$"] border none
 
 # get elluminate working
@@ -257,11 +260,23 @@ mode "$mode_system" {
 }
 bindsym $mod+Shift+e mode "$mode_system"
 
+
+# Press $mod+o followed by either f, t, Esc or Return to launch firefox,
+# thunderbird or return to the default mode, respectively.
+set $mode_launcher Launcher
+mode "$mode_launcher" {
+    bindsym l exec lxappearance  
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+x mode "$mode_launcher"
+
 # Remember last workspace to jump back to
 workspace_auto_back_and_forth yes
 
 # Jump to urgent window
-bindsym $mod+x [urgent=latest] focus
+#bindsym $mod+x [urgent=latest] focus
 
 # Screenshots
 bindsym Print exec "scrot -e 'mv $f ~/Documents/Screenshots'"
@@ -299,14 +314,14 @@ exec --no-startup-id dropbox start
 exec --no-startup-id pasystray
 
 # autostart some of my applications
-exec --no-startup-id i3-msg 'workspace number 1; exec xfce4-terminal; exec xfce4-terminal; layout tabbed; focus left;'
+exec --no-startup-id i3-msg 'exec xfce4-terminal; exec xfce4-terminal; layout tabbed; focus left;'
 #exec --no-startup-id i3-msg 'exec google-chrome;'
 #exec --no-startup-id i3-msg 'workspace number 3; exec google-chrome;'
 exec --no-startup-id i3-msg 'exec thunderbird;'
 exec --no-startup-id i3-msg 'exec slack;'
 exec --no-startup-id i3-msg 'exec spotify;'
 exec --no-startup-id i3-msg 'exec keepassx;'
-exec --no-startup-id i3-msg 'exec urxvt -name scratchpad;'
+exec --no-startup-id i3-msg 'exec xfce4-terminal --role scratchpad;'
 
 # Start the session
 #exec --no-startup-id ~/.i3/autostart

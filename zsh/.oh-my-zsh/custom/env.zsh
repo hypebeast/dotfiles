@@ -9,6 +9,9 @@
 alias subl="$HOME/bin/subl -n"
 export EDITOR="atom"
 
+# Browser
+export BROWSER="google-chrome"
+
 # Python Path
 export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 
