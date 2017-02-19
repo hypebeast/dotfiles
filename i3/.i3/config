@@ -49,7 +49,7 @@ bindsym $mod+space exec --no-startup-id j4-dmenu-desktop  j4-dmenu-desktop --dme
 # Rofi commands
 bindsym $mod+d exec rofi -show run -eh 2 -padding 400 -fullscreen
 bindsym $mod+Shift+d exec rofi -show ssh -padding 400 -fullscreen
-bindsym $mod+w exec --no-startup-id websearch_surfraw.sh
+bindsym $mod+w exec --no-startup-id rofi-surfraw-websearch.sh
 bindsym $mod+Shift+w exec --no-startup-id rofi-surfraw-bookmark.sh
 
 
@@ -224,7 +224,7 @@ bar {
 }
 
 # workspace assignment (use "xprop" to find the window class)
-assign [class="^xfce4-terminal$"] $ws1
+assign [class="^Xfce4-terminal$"] $ws1
 assign [class="^Atom$"] $ws2
 assign [class="^Google-chrome$"] $ws3
 assign [class="^Keepass$"] $ws5
