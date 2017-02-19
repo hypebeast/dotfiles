@@ -218,7 +218,7 @@ urxvt.background:   [93]#101010
 !URxvt*color15:      #A020F0
 
 !! Rofi config
-rofi.opacity: 85
+rofi.opacity: 90
 rofi.lines: 7
 rofi.columns: 4
 rofi.font: Source Code Pro for Powerline 9
