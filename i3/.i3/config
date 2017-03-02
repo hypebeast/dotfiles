@@ -263,7 +263,7 @@ bindsym $mod+Shift+e mode "$mode_system"
 
 # Press $mod+o followed by either f, t, Esc or Return to launch firefox,
 # thunderbird or return to the default mode, respectively.
-set $mode_launcher Launcher
+set $mode_launcher Launch (l) lxappearance
 mode "$mode_launcher" {
     bindsym l exec lxappearance  
 
@@ -305,8 +305,6 @@ exec --no-startup-id xset m 4/1 4
 exec --no-startup-id feh --bg-fill /usr/share/backgrounds/girl_face_explosion.jpg
 exec --no-startup-id compton
 exec --no-startup-id dunst
-exec --no-startup-id conky -c ~/.conky/conkyrc_right
-exec --no-startup-id conky -c ~/.conky/conkyrc_left
 #exec --no-startup-id nm-applet
 exec --no-startup-id pa-applet
 exec --no-startup-id clipit
