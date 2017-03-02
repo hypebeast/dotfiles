@@ -9,3 +9,5 @@ cleaned_bookmarks=$(cat ${BOOKMARKS_FILE} | sed '/^$/d' | sed '/^#/d' | sed '/^\
 bookmarks=$(echo -e "$cleaned_bookmarks" | awk -F' ' '{$1=substr($1, 0, 49); $1=sprintf("%-55s", $1);print}' | sort)
 
 surfraw "$(echo -e "${bookmarks}" | ${LAUNCHER} | awk -F' ' '{print $2}')"
+
+exit 0
