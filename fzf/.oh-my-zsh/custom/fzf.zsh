@@ -5,9 +5,11 @@
 # Last edit: 2017.01.25
 ############################################
 
-
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Set default options for Ctrl-R
+export FZF_CTRL_R_OPTS='--exact'
 
 # cdf - cd into the directory of the selected file
 cdf() {
