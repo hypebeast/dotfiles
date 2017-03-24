@@ -30,6 +30,7 @@ apps=(
     vagrant
     java
     nvalt
+    anaconda
 )
 
 brew cask install "${apps[@]}"
