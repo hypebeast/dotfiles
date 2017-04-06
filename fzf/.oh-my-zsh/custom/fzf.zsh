@@ -36,7 +36,7 @@ fkill() {
   fi
 }
 
-# fbr - checkout git  ranch (including remote branches)
+# fbr - checkout git branch (including remote branches)
 fbr() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
