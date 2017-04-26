@@ -257,19 +257,21 @@ end)
 --- Spotify
 ---
 
-hotkey.bind(hyperKey, 'I', spotify.displayCurrentTrack)
-hotkey.bind(hyperKey, 'space', function()
+k:bind({}, 'I', spotify.displayCurrentTrack)
+k:bind({}, 'space', function()
   local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
 
   spotify.play()
   notify.new({title="Spotify Play/Pause", informativeText=info}):send():release()
 end)
-hotkey.bind(hyperKey, 'n', function()
+
+k:bind({}, 'n', function()
   spotify.next()
   local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
   notify.new({title="Spotify - Next Track", informativeText=info}):send():release()
 end)
-hotkey.bind(hyperKey, 'p', function()
+
+k:bind({}, 'p', function()
   spotify.previous()
   local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
   notify.new({title="Spotify - Previous Track", informativeText=info}):send():release()
@@ -319,3 +321,19 @@ k:bind({}, "G", function()
 
   hs.execute("open " .. searchUrl)
 end)
+
+
+
+---------------------------------------------------------
+-- Outlook
+---------------------------------------------------------
+
+-- map Ctrl-e to a
+outlookArchiveMessage = hs.hotkey.new('', 'a', function()
+  outlookArchiveMessage:disable() -- does not work without this, even though it should
+  hs.eventtap.keyStroke({"ctrl"}, "e")
+end)
+
+hs.window.filter.new('Microsoft Outlook')
+  :subscribe(hs.window.filter.windowFocused, function() outlookArchiveMessage:enable() end)
+  :subscribe(hs.window.filter.windowUnfocused, function() outlookArchiveMessage:disable() end)
