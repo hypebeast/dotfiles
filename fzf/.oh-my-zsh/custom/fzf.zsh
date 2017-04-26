@@ -12,7 +12,7 @@
 export FZF_CTRL_R_OPTS='--exact'
 
 # Set default options for Alt-C
-export FZF_ALT_C_OPTS="--preview 'tree --C {} | head -200'"
+export FZF_ALT_C_OPTS="--exact --preview 'tree -C {} | head -200'"
 
 # cdf - cd into the directory of the selected file
 cdf() {
