@@ -329,11 +329,11 @@ end)
 ---------------------------------------------------------
 
 -- map Ctrl-e to a
-outlookArchiveMessage = hs.hotkey.new('', 'a', function()
-  outlookArchiveMessage:disable() -- does not work without this, even though it should
-  hs.eventtap.keyStroke({"ctrl"}, "e")
-end)
-
-hs.window.filter.new('Microsoft Outlook')
-  :subscribe(hs.window.filter.windowFocused, function() outlookArchiveMessage:enable() end)
-  :subscribe(hs.window.filter.windowUnfocused, function() outlookArchiveMessage:disable() end)
+-- outlookArchiveMessage = hs.hotkey.new('', 'a', function()
+--   -- outlookArchiveMessage:disable() -- does not work without this, even though it should
+--   hs.eventtap.keyStroke({"ctrl"}, "e")
+-- end)
+--
+-- hs.window.filter.new('Microsoft Outlook')
+--   :subscribe(hs.window.filter.windowFocused, function() outlookArchiveMessage:enable() end)
+--   :subscribe(hs.window.filter.windowUnfocused, function() outlookArchiveMessage:disable() end)
