@@ -42,4 +42,9 @@ PATH=/usr/local/bin:$PATH
 [ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH 
 [ -d "${PROJECTS/go/bin}" ] && PATH=${PROJECTS}/go/bin:$PATH 
 
+# use coreutils installed from brew on MacOS
+if [[ "$OSTYPE" == darwin* ]]; then
+    PATH="$(brew --prefix coreutils)/libexec/gnubin":$PATH
+fi
+
 export PATH
