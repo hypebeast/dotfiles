@@ -111,8 +111,12 @@ export PYENV_ROOT="$HOME/.pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# gopath
-export GOPATH=~/Coding/go
+# autoenv
+if [[ "$OSTYPE" == darwin* ]]; then
+    source $(brew --prefix autoenv)/activate.sh
+else
+    source `which activate.sh`
+fi
 
 # SZCMS settings
 [ -s "/projects/szcms_tools/ENV.sh" ] && source /projects/szcms_tools/ENV.sh

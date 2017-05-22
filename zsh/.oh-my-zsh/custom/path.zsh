@@ -37,6 +37,7 @@ PATH=$HOME/.pyenv/bin:$PATH
 
 # Add path to our custom bins
 PATH=/usr/local/bin:$PATH
+PATH=/usr/local/bin_local:$PATH
 
 # Go binaries
 [ -d "/usr/local/go/bin" ] && PATH=/usr/local/go/bin:$PATH 

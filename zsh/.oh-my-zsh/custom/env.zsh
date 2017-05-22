@@ -17,3 +17,6 @@ export PYTHONPATH=/usr/local/lib/python:$PYTHONPATH
 
 # Scala Home
 export SCALA_HOME=$HOME/bin/scala-2.11.7
+
+# gopath
+export GOPATH=~/Coding/go

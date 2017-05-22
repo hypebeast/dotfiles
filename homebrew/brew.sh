@@ -100,6 +100,7 @@ brew install gpg
 brew install pwgen
 brew install pass
 brew install scala
+brew install autoenv
 
 # Remove outdated versions from the cellar.
 brew cleanup
