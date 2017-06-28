@@ -49,8 +49,8 @@ bindsym $mod+space exec --no-startup-id j4-dmenu-desktop  j4-dmenu-desktop --dme
 # Rofi commands
 bindsym $mod+d exec rofi -show run -eh 2 -padding 400 -fullscreen
 bindsym $mod+Shift+d exec rofi -show ssh -padding 400 -fullscreen
-bindsym $mod+w exec --no-startup-id rofi-surfraw-websearch.sh
-bindsym $mod+Shift+w exec --no-startup-id rofi-surfraw-bookmark.sh
+bindsym $mod+w exec --no-startup-id rofi-surfraw-websearch.sh && i3-msg '[class="^Google-chrome$"] focus'
+bindsym $mod+Shift+w exec --no-startup-id /bin/bash -c "rofi-surfraw-bookmark.sh" && i3-msg '[class="^Google-chrome$"] focus'
 
 
 # reload/restart/exit
@@ -282,6 +282,9 @@ workspace_auto_back_and_forth yes
 bindsym Print exec "scrot -e 'mv $f ~/Documents/Screenshots'"
 bindsym $mod+Print exec "scrot -ue 'mv $f ~/Documents/Screenshots'"
 
+# gopass
+bindsym $mod+p exec "gopass completion dmenu"
+
 client.focused          #bc3220 #bc3220 #EEEEEE #2D2D2D
 client.focused_inactive #999999 #999999 #EEEEEE #2D2D2D
 client.unfocused        #999999 #999999 #EEEEEE #2D2D2D
@@ -309,6 +312,7 @@ exec --no-startup-id dunst
 exec --no-startup-id pa-applet
 exec --no-startup-id clipit
 exec --no-startup-id dropbox start
+exec --no-startup-id owncloud
 exec --no-startup-id pasystray
 exec --no-startup-id ~/.i3/start-gnome-keyring.sh
 
