@@ -281,6 +281,7 @@ workspace_auto_back_and_forth yes
 # Screenshots
 bindsym Print exec "scrot -e 'mv $f ~/Documents/Screenshots'"
 bindsym $mod+Print exec "scrot -ue 'mv $f ~/Documents/Screenshots'"
+bindsym $alt+Print exec "scrot -se 'mv $f ~/Documents/Screenshots'"
 
 # gopass
 bindsym $mod+p exec "gopass completion dmenu"
