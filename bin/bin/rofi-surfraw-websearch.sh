@@ -2,14 +2,13 @@
 
 default_search_engine="google"
 help_color="#0C73C2"
-
-list_search_engines=$(surfraw -elvi | awk '{if (NR != 1) print "?"$1}')
+help_msg="<span color=\"$help_color\">Hit Tab to complete search engine name
+Searches without prepended engine use "$default_search_engine"</span>"
+search_engines=$(surfraw -elvi | awk '{if (NR != 1) print "?"$1}')
 
 
 function main() {
-	HELP_MSG="<span color=\"$help_color\">Hit Tab to complete search engine name
-Searches without prepended engine use "$default_search_engine"</span>"
-	elvi=$(echo -e "${list_search_engines}" | rofi -padding 400 -fullscreen -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -mesg "${HELP_MSG}" -i -p "websearch: ")
+	elvi=$(echo -e "${search_engines}" | rofi -padding 400 -fullscreen -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -mesg "${help_msg}" -i -p "websearch: ")
 
 	if [[ $elvi == "" ]]; then exit 1
 	elif [[ $elvi == "?"* ]]; then
