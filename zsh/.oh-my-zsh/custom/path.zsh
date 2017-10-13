@@ -48,4 +48,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
     PATH="$(brew --prefix coreutils)/libexec/gnubin":$PATH
 fi
 
+# Composer binaries
+PATH=~/.composer/vendor/bin:$PATH
+
 export PATH

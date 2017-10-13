@@ -7,7 +7,7 @@
 
 # Editor
 alias subl="$HOME/bin/subl -n"
-export EDITOR="atom"
+export EDITOR="code"
 
 # Browser
 export BROWSER="google-chrome"
@@ -20,3 +20,4 @@ export SCALA_HOME=$HOME/bin/scala-2.11.7
 
 # gopath
 export GOPATH=~/Coding/go
+
