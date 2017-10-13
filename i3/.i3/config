@@ -205,7 +205,7 @@ bindsym XF86AudioPrev exec sp prev
 # finds out, if available)
 bar {
   status_command ~/.i3/conky.sh
-  tray_output primary
+  #tray_output primary
 
   colors{
     background #232323
@@ -227,7 +227,7 @@ bar {
 assign [class="^Xfce4-terminal$"] $ws1
 #assign [class="^Atom$"] $ws2
 #assign [class="^Google-chrome$"] $ws3
-assign [class="^Keepass$"] $ws5
+assign [class="^KeePassX$"] $ws5
 assign [class="^Thunderbird$"] $ws7
 for_window [class="^Slack$"] move to workspace $ws8
 for_window [class="^Spotify$"] move to workspace $ws9
@@ -284,7 +284,7 @@ bindsym $mod+Print exec "scrot -ue 'mv $f ~/Documents/Screenshots'"
 bindsym $alt+Print exec "scrot -se 'mv $f ~/Documents/Screenshots'"
 
 # gopass
-bindsym $mod+p exec "gopass completion dmenu"
+bindsym $mod+p exec "gopass ls --flat | rofi -dmenu -i -padding 400 -fullscreen -p 'Password: ' | xargs --no-run-if-empty gopass show -c"
 
 client.focused          #bc3220 #bc3220 #EEEEEE #2D2D2D
 client.focused_inactive #999999 #999999 #EEEEEE #2D2D2D
@@ -322,9 +322,9 @@ exec --no-startup-id i3-msg 'exec xfce4-terminal; exec xfce4-terminal; layout ta
 #exec --no-startup-id i3-msg 'exec google-chrome;'
 #exec --no-startup-id i3-msg 'workspace number 3; exec google-chrome;'
 exec --no-startup-id i3-msg 'exec thunderbird;'
-exec --no-startup-id i3-msg 'exec slack;'
-exec --no-startup-id i3-msg 'exec spotify;'
-exec --no-startup-id i3-msg 'exec keepassx;'
+#exec --no-startup-id i3-msg 'exec slack;'
+#exec --no-startup-id i3-msg 'exec spotify;'
+#exec --no-startup-id i3-msg 'exec keepassx;'
 exec --no-startup-id i3-msg 'exec xfce4-terminal --role scratchpad;'
 
 # Start the session

@@ -29,14 +29,12 @@ COMMON_DOTFILES=(
   vim
   zsh
   fzf
-  i3
-  i3status
-  gtk
 )
 
 LINUX_DOTFILES=(
   i3
   i3status
+  gtk
   X
   xfce-terminal
   dunst
@@ -62,7 +60,7 @@ fi
 
 read -r -d '' __usage <<-'EOF' || true
   link             Link all dotfiles to its places (default command)
-  boostrap         Boostrap and prepare the dev machine
+  bootstrap         Boostrap and prepare the dev machine
   -h --help        Show this help
 EOF
 
@@ -95,6 +93,13 @@ function bootstrap () {
   install_zshplugins
 
   is_macos && macos
+
+  # Link all dotfiles
+  info "Linking all dotfiles..."
+
+  link
+
+  info "Done!"
 
   exit 0
 }
@@ -193,7 +198,7 @@ function run_installers () {
 # Run the given installer
 function run_installer () {
    if [[ $# -ne 1 ]]; then
-     error "You must specify the name of the installer you want to run!"
+     error "You must specify the name of the folder where the installer script is located!"
      exit 1
    fi
 
@@ -204,7 +209,7 @@ function run_installer () {
      exit 1
    fi
 
-   info "Running installer \"${folder}\"..."
+   info "Running installer \"${folder}\\install.sh\"..."
 
    cd ${folder}; bash install.sh
 }
@@ -218,7 +223,7 @@ function macos () {
 # Process command line arguments
 ##########################################################
 
-# default ist the link command
+# default is the link command
 if [[ "$#" -eq 0 ]]; then
   cmd="link"
 else
