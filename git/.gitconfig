@@ -137,7 +137,7 @@
 [github]
 	user = hypebeast
 [http]
-	sslVerify = false
+	sslVerify = true
 [credential]
 	helper = osxkeychain
 [credential "https://lala.com"]
