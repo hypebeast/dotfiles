@@ -112,6 +112,7 @@ function find-alias () {
 }
 alias fa=find-alias
 
+# My personal wiki
 function open-notes () {
     cd $HOME/Netlight/documents/work-notebook
     vim -c CtrlP
