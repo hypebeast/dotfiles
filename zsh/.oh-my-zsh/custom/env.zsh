@@ -7,7 +7,7 @@
 
 # Editor
 alias subl="$HOME/bin/subl -n"
-export EDITOR="code"
+export EDITOR="neovim"
 
 # Browser
 export BROWSER="google-chrome"
