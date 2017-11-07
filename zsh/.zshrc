@@ -57,7 +57,6 @@ common_plugins=(
 )
 
 linux_plugins=(
-    ubuntu
 )
 
 macos_plugins=(
