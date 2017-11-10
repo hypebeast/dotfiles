@@ -57,6 +57,7 @@ brew install woff2
 brew install binutils
 brew install ack
 brew install ag
+brew install pt
 brew install dark-mode
 brew install git
 brew install git-lfs

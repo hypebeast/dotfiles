@@ -76,6 +76,9 @@ alias pretty-json='python -m json.tool | pygmentize -l json'
 # ag - case insensitve and always search hidden files
 alias -g agi='ag -i --hidden'
 
+# pt - case insensitve and always search hidden files
+alias -g pti='pt -i --hidden'
+
 # print the current date
 alias -g now='date +%F'
 
