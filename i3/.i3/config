@@ -319,13 +319,13 @@ exec --no-startup-id ~/.i3/start-gnome-keyring.sh
 
 # autostart some of my applications
 exec --no-startup-id i3-msg 'exec xfce4-terminal; exec xfce4-terminal; layout tabbed; focus left;'
+exec --no-startup-id i3-msg 'exec thunderbird;'
+#exec --no-startup-id i3-msg 'exec xfce4-terminal --role scratchpad;'
 #exec --no-startup-id i3-msg 'exec google-chrome;'
 #exec --no-startup-id i3-msg 'workspace number 3; exec google-chrome;'
-exec --no-startup-id i3-msg 'exec thunderbird;'
 #exec --no-startup-id i3-msg 'exec slack;'
 #exec --no-startup-id i3-msg 'exec spotify;'
 #exec --no-startup-id i3-msg 'exec keepassx;'
-exec --no-startup-id i3-msg 'exec xfce4-terminal --role scratchpad;'
 
 # Start the session
 #exec --no-startup-id ~/.i3/autostart

@@ -35,6 +35,9 @@ PATH=$HOME/.local/bin:$PATH
 # pyenv
 PATH=$HOME/.pyenv/bin:$PATH
 
+# rbenv
+PATH=$HOME/.rbenv/bin:$PATH
+
 # Add path to our custom bins
 PATH=/usr/local/bin:$PATH
 PATH=/usr/local/bin_local:$PATH
