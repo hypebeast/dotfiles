@@ -55,6 +55,7 @@ common_plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     kubectl
+    go
 )
 
 linux_plugins=(
@@ -69,6 +70,8 @@ if [[ "$OSTYPE" == linux* ]]; then
     plugins=($common_plugins $linux_plugins)
 elif [[ "$OSTYPE" == darwin* ]]; then
     plugins=($common_plugins $macos_plugins)
+else
+    plugins=($common_plugins)
 fi
 
 # Load oh-my-zsh
@@ -120,3 +123,4 @@ export TMUX_POWERLINE_SEG_WEATHER_LOCATION="676757"
 
 # GVM: THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
+
