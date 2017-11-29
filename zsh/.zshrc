@@ -54,6 +54,7 @@ common_plugins=(
     history-substring-search
     zsh-autosuggestions
     zsh-syntax-highlighting
+    kubectl
 )
 
 linux_plugins=(
