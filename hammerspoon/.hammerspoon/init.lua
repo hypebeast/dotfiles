@@ -4,7 +4,9 @@ local window = require "hs.window"
 local spotify = require "hs.spotify"
 local notify = require "hs.notify"
 local pasteboard = require "hs.pasteboard"
+local hints = require "hs.hints"
 -- local tiling = require "mjolnir.tiling"
+
 
 require "fntools"
 require "extensions"
@@ -245,12 +247,12 @@ end)
 ---
 --- Hints
 ---
---- hotkey.bind(hintModifierKey, "e", hints.windowHints)
+hotkey.bind(hintModifierKey, "e", hints.windowHints)
 
 -- This switches between windows of the focused app
--- hotkey.bind(hintModifierKey, "j", function()
---    hints.appHints(window.focusedWindow():application())
--- end)
+hotkey.bind(hintModifierKey, "j", function()
+    hints.appHints(window.focusedWindow():application())
+end)
 
 
 ---
@@ -323,6 +325,15 @@ k:bind({}, "G", function()
 end)
 
 
+---------------------------------------------------------
+-- Window switching
+--------------------------------------------------------
+
+-- default windowfilter: only visible windows, all Spaces
+switcher = hs.window.switcher.new()
+
+hs.hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
+hs.hotkey.bind('alt-shift', 'tab', 'Prev window', function() switcher:previous() end)
 
 ---------------------------------------------------------
 -- Outlook
