@@ -54,7 +54,7 @@ vf() {
 vg() {
     local file
 
-    file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
+    file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1}')"
 
     if [[ -n $file  ]]
     then
