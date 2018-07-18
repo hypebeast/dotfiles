@@ -45,3 +45,29 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 vmap <F6> :!xclip -f -sel clip<CR>
 map <F7> mz:-1r !xclip -o -sel clip<CR>`z
 
+"
+" vimiwiki!
+"
+let g:vimwiki_list = [
+  \{
+    \'path': '~/dev/brain/',
+    \'index': 'Home',
+    \'syntax': 'markdown',
+    \'ext': '.md'
+  \},
+  \{
+    \'path': '~/dev/hackclub/hackclub/',
+    \'index': 'README',
+    \'syntax': 'markdown',
+    \'ext': '.md'
+  \}
+\]
+
+" use leader + key for interacting with links
+nmap <Leader>wf <Plug>VimwikiFollowLink
+nmap <Leader>wg <Plug>VimwikiTabnewLink
+nmap <Leader>we <Plug>VimwikiSplitLink
+nmap <Leader>wq <Plug>VimwikiVSplitLink
+nmap <Leader>wb <Plug>VimwikiGoBackLink
+nmap <Leader>wn <Plug>VimwikiNextLink
+nmap <Leader>wp <Plug>VimwikiPrevLink
