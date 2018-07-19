@@ -16,7 +16,7 @@ function cnotes-new() {
 
 	echo "Selected folder \"${dir}\"\n"
 
-	read "file?Enter file name for new note: "
+	read "file?Enter title for new note: "
 
 	file=${dir}/${file}
 
