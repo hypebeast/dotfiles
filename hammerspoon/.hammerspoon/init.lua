@@ -30,12 +30,12 @@ end
 
 local f18 = hs.hotkey.bind({}, "F18", pressedF18, releasedF18)
 
+local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 local locationModifierKey = {"cmd", "shift"}
 local resizeModifierKey = {"cmd", "alt", "ctrl"}
 local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local sendKeyStrokesModifierKey = {"ctrl", "shift"}
-local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 
 ---------------------------------------------------------
 -- Application definitions
@@ -44,7 +44,7 @@ local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 local keyToApp = {
     ["1"] = "Google Chrome",
     ["2"] = "iTerm",
-    ["3"] = "Atom",
+    ["3"] = "Code",
     ["4"] = "KeePassX",
     ["5"] = "Slack",
     ["6"] = "Skype",
@@ -296,6 +296,10 @@ end)
 for key, app in pairs(keyToApp) do
     k:bind({}, key, launchOrCycleFocus(app))
 end
+
+k:bind({}, "V", function()
+	hs.execute("code ~/Documents/private_wiki")
+end)
 
 
 ---------------------------------------------------------
