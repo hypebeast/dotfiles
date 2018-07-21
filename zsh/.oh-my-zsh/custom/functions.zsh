@@ -118,3 +118,8 @@ function open-notes () {
     vim -c CtrlP
 }
 alias opn=open-notes
+
+# recive infos about HTTP status codes
+function status-code () {
+    curl -s https://httpstatuses.com/$1 | lynx -stdin
+}
