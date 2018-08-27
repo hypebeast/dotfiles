@@ -7,6 +7,17 @@
 # Load fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# fzf + ag configuration
+if _has fzf && _has ag; then
+  export FZF_DEFAULT_COMMAND='ag --nocolor -g ""'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS='
+  --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+  --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+  '
+fi
+
 # Set default options for Ctrl-R
 export FZF_CTRL_R_OPTS='--exact'
 
@@ -54,7 +65,7 @@ vf() {
 vg() {
     local file
 
-    file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1 " +" $2}')"
+    file="$(ag --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1}')"
 
     if [[ -n $file  ]]
     then
@@ -91,6 +102,30 @@ fbr() {
   branch=$(echo "$branches" |
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+
+# fshow - git commit browser
+fshow() {
+  local execute
+
+  execute="grep -o \"[a-f0-9]\{7\}\" \
+    | head -1 \
+    | xargs -I % sh -c 'git show --color=always % | less -R'"
+
+  git log \
+    --graph \
+    --color=always \
+    --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" \
+    | fzf \
+        --ansi \
+        --no-sort \
+        --reverse \
+        --tiebreak=index \
+        --bind=ctrl-s:toggle-sort \
+        --bind "ctrl-m:execute: ($execute) <<'FZF-EOF'
+  {}
+FZF-EOF"
 }
 
 # Find bookmarks and open it with surfraw

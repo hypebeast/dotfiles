@@ -1,5 +1,4 @@
-local application = require "hs.application"
-local hotkey = require "hs.hotkey"
+local application = require "hs.application" local hotkey = require "hs.hotkey"
 local window = require "hs.window"
 local spotify = require "hs.spotify"
 local notify = require "hs.notify"
@@ -31,12 +30,12 @@ end
 
 local f18 = hs.hotkey.bind({}, "F18", pressedF18, releasedF18)
 
+local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 local locationModifierKey = {"cmd", "shift"}
 local resizeModifierKey = {"cmd", "alt", "ctrl"}
 local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local sendKeyStrokesModifierKey = {"ctrl", "shift"}
-local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 
 ---------------------------------------------------------
 -- Application definitions
@@ -45,7 +44,7 @@ local hyperKey = {"cmd", "alt", "ctrl", "shift"}
 local keyToApp = {
     ["1"] = "Google Chrome",
     ["2"] = "iTerm",
-    ["3"] = "Atom",
+    ["3"] = "Code",
     ["4"] = "KeePassX",
     ["5"] = "Slack",
     ["6"] = "Skype",
@@ -298,6 +297,10 @@ for key, app in pairs(keyToApp) do
     k:bind({}, key, launchOrCycleFocus(app))
 end
 
+k:bind({}, "V", function()
+	hs.execute("code ~/Documents/private_wiki")
+end)
+
 
 ---------------------------------------------------------
 -- Window cycling of the same app
@@ -332,19 +335,30 @@ end)
 -- default windowfilter: only visible windows, all Spaces
 switcher = hs.window.switcher.new()
 
-hs.hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
-hs.hotkey.bind('alt-shift', 'tab', 'Prev window', function() switcher:previous() end)
+hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
+hotkey.bind('alt-shift', 'tab', 'Prev window', function() switcher:previous() end)
 
 ---------------------------------------------------------
--- Outlook
----------------------------------------------------------
+-- Move window to space
+--------------------------------------------------------
 
--- map Ctrl-e to a
--- outlookArchiveMessage = hs.hotkey.new('', 'a', function()
---   -- outlookArchiveMessage:disable() -- does not work without this, even though it should
---   hs.eventtap.keyStroke({"ctrl"}, "e")
--- end)
---
--- hs.window.filter.new('Microsoft Outlook')
---   :subscribe(hs.window.filter.windowFocused, function() outlookArchiveMessage:enable() end)
---   :subscribe(hs.window.filter.windowUnfocused, function() outlookArchiveMessage:disable() end)
+local spaces = require("hs._asm.undocumented.spaces")
+
+-- move current window to the space sp
+function MoveWindowToSpace(sp)
+    local win = hs.window.focusedWindow()      -- current window
+    local uuid = win:screen():spacesUUID()     -- uuid for current screen
+    local spaceID = spaces.layout()[uuid][sp]  -- internal index for sp
+
+    spaces.moveWindowToSpace(win:id(), spaceID) -- move window to new space
+    spaces.changeToSpace(spaceID)              -- follow window to new space
+end
+
+hotkey.bind(locationModifierKey, "1", function()
+	MoveWindowToSpace(1)
+end)
+
+hotkey.bind(locationModifierKey, "2", function()
+	MoveWindowToSpace(2)
+end)
+

@@ -51,6 +51,7 @@ bindsym $mod+d exec rofi -show run -eh 2 -padding 400 -fullscreen
 bindsym $mod+Shift+d exec rofi -show ssh -padding 400 -fullscreen
 bindsym $mod+w exec --no-startup-id rofi-surfraw-websearch.sh && i3-msg '[class="^Google-chrome$"] focus'
 bindsym $mod+Shift+w exec --no-startup-id /bin/bash -c "rofi-surfraw-bookmark.sh" && i3-msg '[class="^Google-chrome$"] focus'
+bindsym $mod+u exec --no-startup-id /bin/bash -c "rofi-dictcc.sh"
 
 
 # reload/restart/exit

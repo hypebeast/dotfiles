@@ -93,3 +93,6 @@ fi
 function mkd() {
     mkdir -p "$1" && cd "$1"
 }
+
+# Midnight Commander
+alias -g mc='mc --nosubshell'
