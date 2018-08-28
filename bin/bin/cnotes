@@ -1,0 +1,218 @@
+#!/bin/bash
+
+# https://sipb.mit.edu/doc/safe-shell/
+# GLOBBING IS NOT ALLOWED!!
+# set -euf -o pipefail
+
+# Set $IFS to only newline and tab.
+#
+# http://www.dwheeler.com/essays/filenames-in-shell.html
+IFS=$'\n\t'
+
+###############################################################################
+# Constants
+###############################################################################
+
+CNOTES_WIKI_DIR=${CNOTES_WIKI_DIR:-}
+CNOTES_EDITOR=${EDITOR:-vim}
+FZF_OPTIONS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse ${FZF_DEFAULT_OPTS:-} --exact --print-query --preview 'mdv {}| head -200' --preview-window=right:60%:wrap --exit-0"
+
+###############################################################################
+# Environment
+###############################################################################
+
+# $_ME
+#
+# Set to the program's basename.
+_ME=$(basename "${0}")
+
+###############################################################################
+# Debug
+###############################################################################
+
+# _debug()
+#
+# Usage:
+#   _debug printf "Debug info. Variable: %s\n" "$0"
+#
+# A simple function for executing a specified command if the `$_USE_DEBUG`
+# variable has been set. The command is expected to print a message and
+# should typically be either `echo`, `printf`, or `cat`.
+__DEBUG_COUNTER=0
+_debug() {
+  if [[ "${_USE_DEBUG:-"0"}" -eq 1 ]]
+  then
+    __DEBUG_COUNTER=$((__DEBUG_COUNTER+1))
+    # Prefix debug message with "bug (U+1F41B)"
+    printf "🐛  %s " "${__DEBUG_COUNTER}"
+    "${@}"
+    printf "――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――\\n"
+  fi
+}
+# debug()
+#
+# Usage:
+#   debug "Debug info. Variable: $0"
+#
+# Print the specified message if the `$_USE_DEBUG` variable has been set.
+#
+# This is a shortcut for the _debug() function that simply echos the message.
+debug() {
+  _debug echo "${@}"
+}
+
+###############################################################################
+# Die
+###############################################################################
+
+# _die()
+#
+# Usage:
+#   _die printf "Error message. Variable: %s\n" "$0"
+#
+# A simple function for exiting with an error after executing the specified
+# command. The command is expected to print a message and should typically
+# be either `echo`, `printf`, or `cat`.
+_die() {
+  # Prefix die message with "cross mark (U+274C)", often displayed as a red x.
+  printf "❌  "
+  "${@}" 1>&2
+  exit 1
+}
+
+# die()
+#
+# Usage:
+#   die "Error message. Variable: $0"
+#
+# Exit with an error and print the specified message.
+#
+# This is a shortcut for the _die() function that simply echos the message.
+die() {
+  _die echo "${@}"
+}
+
+###############################################################################
+# Help
+###############################################################################
+
+# _print_help()
+#
+# Usage:
+#   _print_help
+#
+# Print the program help information.
+_print_help() {
+  cat <<HEREDOC
+                      __                 
+  ____   ____   _____/  |_  ____   ______
+_/ ___\ /    \ /  _ \   __\/ __ \ /  ___/
+\  \___|   |  (  <_> )  | \  ___/ \___ \ 
+ \___  >___|  /\____/|__|  \___  >____  >
+     \/     \/                 \/     \/ 
+Command line note management tool.
+
+Usage:
+  ${_ME} [--options]
+  ${_ME} -h | --help
+
+Options:
+  -h --help  Display this help information.
+  --debug    Enable debug messages
+HEREDOC
+}
+
+###############################################################################
+# Options
+###############################################################################
+
+# Parse Options ###############################################################
+
+# Initialize program option variables.
+_PRINT_HELP=0
+_USE_DEBUG=0
+
+while [[ ${#} -gt 0 ]]
+do
+  __option="${1:-}"
+  __maybe_param="${2:-}"
+  case "${__option}" in
+    -h|--help)
+      _PRINT_HELP=1
+      ;;
+    --debug)
+      _USE_DEBUG=1
+      ;;
+    -*)
+      _die printf "Unexpected option: %s\\n" "${__option}"
+      ;;
+  esac
+  shift
+done
+
+###############################################################################
+# Program Functions
+###############################################################################
+
+_create_note() {
+  local command="${1}"
+  local title=$(echo "${command}" | sed 's/^new //')
+  local filename="$(date +%F)-$(echo "${title}" | tr " " "_").md"
+
+  local cmd="command find -L ${CNOTES_WIKI_DIR} -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune -o -type d -print 2> /dev/null"
+	local dir="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse ${FZF_DEFAULT_OPTS:-} ${FZF_ALT_C_OPTS:-}" fzf-tmux +m)"
+  local file=${dir}/${filename}
+
+  pushd ${CNOTES_WIKI_DIR} > /dev/null
+
+  cat <<TEXT > "${file}"
+# ${title}
+
+Created: $(date +%F)
+
+TODO
+TEXT
+
+  [[ -n ${file} ]] && ${CNOTES_EDITOR} ${file}
+  popd > /dev/null
+}
+
+_open_note() {
+  local note="${1}"
+  pushd ${CNOTES_WIKI_DIR} > /dev/null
+  
+  [[ -n "${note}" ]] && ${CNOTES_EDITOR} ${note}
+  
+  popd > /dev/null
+}
+
+###############################################################################
+# Main
+###############################################################################
+
+_main() {
+  if ((_PRINT_HELP))
+  then
+    _print_help
+    exit
+  fi
+
+  pushd ${CNOTES_WIKI_DIR} > /dev/null  
+  out=$(fzf --height ${FZF_TMUX_HEIGHT:-40%} --reverse ${FZF_DEFAULT_OPTS:-} --exact --print-query --preview 'mdv {}| head -200' --preview-window=right:60%:wrap --exit-0 --select-1)
+  popd > /dev/null
+
+  command=$(echo "${out}" | head -1)
+
+  case "${command}" in
+  "new "*)
+  _create_note "${command}"
+  ;;
+  *)
+  file=$(echo "${out}" | head -2 | tail -1)
+  _open_note "${file}"
+  ;;
+  esac
+}
+
+_main "$@"
+exit
