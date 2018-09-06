@@ -53,6 +53,8 @@ brew install sfnt2woff
 brew install sfnt2woff-zopfli
 brew install woff2
 
+brew tap mike-engel/jwt-cli
+
 # Install other useful applications, tools and binaries.
 brew install binutils
 brew install ack
@@ -103,6 +105,7 @@ brew install pass
 brew install scala
 brew install autoenv
 brew install kubectx
+brew install jwt-cli
 
 # Remove outdated versions from the cellar.
 brew cleanup

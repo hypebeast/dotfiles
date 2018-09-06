@@ -18,7 +18,6 @@ apps=(
     sublime-text
     virtualbox
     vlc
-    atom
     keepassx
     spotify
     docker
@@ -30,7 +29,6 @@ apps=(
     vagrant
     java
     nvalt
-    anaconda
 )
 
 brew cask install "${apps[@]}"
