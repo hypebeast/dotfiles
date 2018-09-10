@@ -106,6 +106,8 @@ brew install scala
 brew install autoenv
 brew install kubectx
 brew install jwt-cli
+brew install ripgrep
+brew install tavianator/tap/bfs
 
 # Remove outdated versions from the cellar.
 brew cleanup
