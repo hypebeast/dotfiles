@@ -14,11 +14,11 @@ alias l='ls -alh'
 alias ll='ls -lFh'
 
 # Aliases for the wonderful tree command
-alias t1='tree -d -L 1'
-alias t2='tree -d -L 2'
-alias t3='tree -d -L 3'
-alias t3='tree -d -L 3'
-alias t4='tree -d -L 4'
+alias t1='tree -I "node_modules|vendor" -d -L 1'
+alias t2='tree -I "node_modules|vendor" -d -L 2'
+alias t3='tree -I "node_modules|vendor" -d -L 3'
+alias t3='tree -I "node_modules|vendor" -d -L 3'
+alias t4='tree -I "node_modules|vendor" -d -L 4'
 
 # PS
 alias psa="ps aux"
