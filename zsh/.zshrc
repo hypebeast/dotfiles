@@ -99,6 +99,11 @@ else
   eval `dircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
 fi
 
+# Set xterm to support 256 colors
+if [ "$COLORTERM" == "xfce4-terminal" ] ; then
+    export TERM=xterm-256color
+fi
+
 # added by travis gem
 [ -f /Users/sruml/.travis/travis.sh ] && source /Users/sruml/.travis/travis.sh
 
