@@ -35,7 +35,6 @@ declare -a plugins
 common_plugins=(
     git
     ruby
-    rails
     github
     node
     npm
