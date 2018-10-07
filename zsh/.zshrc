@@ -35,7 +35,6 @@ declare -a plugins
 common_plugins=(
     git
     ruby
-    rails
     github
     node
     npm
@@ -98,6 +97,11 @@ if [[ "$OSTYPE" == darwin* ]]; then
   eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
 else
   eval `dircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
+fi
+
+# Set xterm to support 256 colors
+if [ "$COLORTERM" == "xfce4-terminal" ] ; then
+    export TERM=xterm-256color
 fi
 
 # added by travis gem
