@@ -21,3 +21,6 @@ export SCALA_HOME=$HOME/bin/scala-2.11.7
 # gopath
 export GOPATH=~/Coding/go
 
+# ripgrep
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep/rg.conf
+
