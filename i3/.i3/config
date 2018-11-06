@@ -196,8 +196,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # pulse audio volume control
-bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 2 -5%
-bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 2 +5%
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 1 -5%
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 +5%
 bindsym XF86AudioPlay exec sp play
 bindsym XF86AudioNext exec sp next
 bindsym XF86AudioPrev exec sp prev
@@ -220,8 +220,8 @@ bar {
 
   position top
   font pango: FontAwesome 8, Ubuntu Mono 10
-  tray_output DVI-I-1
   tray_output DVI-D-0
+  tray_output DVI-I-1
 }
 
 # workspace assignment (use "xprop" to find the window class)
