@@ -60,6 +60,7 @@ brew install binutils
 brew install ack
 brew install ag
 brew install pt
+brew install ripgrep
 brew install dark-mode
 brew install git
 brew install git-lfs
@@ -106,8 +107,8 @@ brew install scala
 brew install autoenv
 brew install kubectx
 brew install jwt-cli
-brew install ripgrep
 brew install tavianator/tap/bfs
+brew install wrk
 
 # Remove outdated versions from the cellar.
 brew cleanup
