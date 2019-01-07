@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-# Install command-line tools using Homebrew.
+################################################################################
+## Install command-line tools using Homebrew.
+################################################################################
+
+apps=()
+taps=()
 
 # Make sure we’re using the latest Homebrew.
 brew update
@@ -109,6 +114,7 @@ brew install kubectx
 brew install jwt-cli
 brew install tavianator/tap/bfs
 brew install wrk
+brew tap johanhaleby/kubetail && brew install kubetail
 
 # Remove outdated versions from the cellar.
 brew cleanup
