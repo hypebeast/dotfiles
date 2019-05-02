@@ -101,7 +101,6 @@ fbr() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 
-
 # fshow - git commit browser
 fshow() {
   local execute

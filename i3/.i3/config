@@ -171,6 +171,10 @@ bindsym $mod+b border toggle
 # scratchpad
 bindsym $mod+i move scratchpad
 bindsym $mod+o scratchpad show
+#bindsym $mod+Shift+BackSpace move scratchpad
+#bindsym $mod+backslash scratchpad show
+#bindsym $mod+BackSpace [class="Termite"] scratchpad show
+bindsym $mod+n [class="^keepassx$"] scratchpad show
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -196,8 +200,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # pulse audio volume control
-bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 1 -5%
-bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 1 +5%
+bindsym XF86AudioLowerVolume exec ~/.i3/pactl_volume.sh -5%
+bindsym XF86AudioRaiseVolume exec ~/.i3/pactl_volume.sh +5%
 bindsym XF86AudioPlay exec sp play
 bindsym XF86AudioNext exec sp next
 bindsym XF86AudioPrev exec sp prev
@@ -228,7 +232,7 @@ bar {
 assign [class="^Xfce4-terminal$"] $ws1
 #assign [class="^Atom$"] $ws2
 #assign [class="^Google-chrome$"] $ws3
-assign [class="^KeePassX$"] $ws5
+assign [class="^keepassx$"] $ws5
 assign [class="^Thunderbird$"] $ws7
 for_window [class="^Slack$"] move to workspace $ws8
 for_window [class="^Spotify$"] move to workspace $ws9
@@ -285,7 +289,8 @@ bindsym $mod+Print exec "scrot -ue 'mv $f ~/Documents/Screenshots'"
 bindsym $alt+Print exec "scrot -se 'mv $f ~/Documents/Screenshots'"
 
 # gopass
-bindsym $mod+p exec "gopass ls --flat | rofi -dmenu -i -padding 400 -fullscreen -p 'Password: ' | xargs --no-run-if-empty gopass show -c"
+#bindsym $mod+p exec "gopass ls --flat | rofi -dmenu -i -padding 400 -fullscreen -p 'Password: ' | xargs --no-run-if-empty gopass show -c"
+bindsym $mod+p exec "~/.local/venvs/keepmenu/bin/python ~/.local/venvs/keepmenu/bin/keepmenu"
 
 client.focused          #bc3220 #bc3220 #EEEEEE #2D2D2D
 client.focused_inactive #999999 #999999 #EEEEEE #2D2D2D
@@ -321,6 +326,7 @@ exec --no-startup-id ~/.i3/start-gnome-keyring.sh
 # autostart some of my applications
 exec --no-startup-id i3-msg 'exec xfce4-terminal; exec xfce4-terminal; layout tabbed; focus left;'
 exec --no-startup-id i3-msg 'exec thunderbird;'
+exec --no-startup-id i3-msg "~/.local/venvs/keepmenu/bin/python ~/.local/venvs/keepmenu/bin/keepmenu"
 #exec --no-startup-id i3-msg 'exec xfce4-terminal --role scratchpad;'
 #exec --no-startup-id i3-msg 'exec google-chrome;'
 #exec --no-startup-id i3-msg 'workspace number 3; exec google-chrome;'
