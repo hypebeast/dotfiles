@@ -115,6 +115,7 @@ brew install jwt-cli
 brew install tavianator/tap/bfs
 brew install wrk
 brew tap johanhaleby/kubetail && brew install kubetail
+brew install sipcalc
 
 # Remove outdated versions from the cellar.
 brew cleanup
