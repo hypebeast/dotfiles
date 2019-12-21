@@ -15,7 +15,7 @@ export PROJECTS=~/Coding
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-export ZSH_THEME="spaceship"
+export ZSH_THEME=""
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -80,6 +80,10 @@ fi
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+# Load pure prompt (https://github.com/sindresorhus/pure)
+autoload -U promptinit; promptinit
+prompt pure
+
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
 
@@ -122,9 +126,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# SZCMS settings
-[ -s "/projects/szcms_tools/ENV.sh" ] && source /projects/szcms_tools/ENV.sh
-
 # tmux-powerline
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 export TMUX_POWERLINE_SEG_WEATHER_LOCATION="676757"
@@ -132,3 +133,13 @@ export TMUX_POWERLINE_SEG_WEATHER_LOCATION="676757"
 # GVM: THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
 
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh

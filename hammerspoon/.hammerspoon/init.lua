@@ -6,11 +6,6 @@ local pasteboard = require "hs.pasteboard"
 local hints = require "hs.hints"
 -- local tiling = require "mjolnir.tiling"
 
-
-require "fntools"
-require "extensions"
-require "windowCycler"
-
 ---------------------------------------------------------
 -- Key definitions
 ---------------------------------------------------------
@@ -36,6 +31,16 @@ local resizeModifierKey = {"cmd", "alt", "ctrl"}
 local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local sendKeyStrokesModifierKey = {"ctrl", "shift"}
+-- local focusKey = {"ctrl", "alt"}
+
+---------------------------------------------------------
+-- Load modules
+---------------------------------------------------------
+
+require "fntools"
+require "extensions"
+require "windowCycler"
+-- require "focus"
 
 ---------------------------------------------------------
 -- Application definitions
