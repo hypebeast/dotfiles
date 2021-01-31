@@ -118,11 +118,11 @@ set $ws1 "1:  "
 set $ws2 "2: &#xf268;"
 set $ws3 "3: various"
 set $ws4 "4: various"
-set $ws5 "5: pass"
+set $ws5 "5: various"
 set $ws6 "6: &#xf268;"
 set $ws7 "7: "
 set $ws8 "8: slack"
-set $ws9 "9: spotify"
+set $ws9 "9: various"
 set $ws10 "10: various"
 
 # switch to workspace
@@ -168,13 +168,12 @@ workspace $ws10 output DVI-D-0
 # border changing
 bindsym $mod+b border toggle
 
+###
 # scratchpad
+###
+
 bindsym $mod+i move scratchpad
 bindsym $mod+o scratchpad show
-#bindsym $mod+Shift+BackSpace move scratchpad
-#bindsym $mod+backslash scratchpad show
-#bindsym $mod+BackSpace [class="Termite"] scratchpad show
-bindsym $mod+n [class="^keepassx$"] scratchpad show
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -232,7 +231,7 @@ bar {
 assign [class="^Xfce4-terminal$"] $ws1
 #assign [class="^Atom$"] $ws2
 #assign [class="^Google-chrome$"] $ws3
-assign [class="^keepassx$"] $ws5
+#assign [class="^keepassx$"] $ws5
 assign [class="^Thunderbird$"] $ws7
 for_window [class="^Slack$"] move to workspace $ws8
 for_window [class="^Spotify$"] move to workspace $ws9
@@ -323,15 +322,35 @@ exec --no-startup-id owncloud
 exec --no-startup-id pasystray
 exec --no-startup-id ~/.i3/start-gnome-keyring.sh
 
+###
 # autostart some of my applications
+###
+
 exec --no-startup-id i3-msg 'exec xfce4-terminal; exec xfce4-terminal; layout tabbed; focus left;'
 exec --no-startup-id i3-msg 'exec thunderbird;'
 exec --no-startup-id i3-msg "~/.local/venvs/keepmenu/bin/python ~/.local/venvs/keepmenu/bin/keepmenu"
-#exec --no-startup-id i3-msg 'exec xfce4-terminal --role scratchpad;'
+exec --no-startup-id i3-msg 'exec keepassx --role scratchpad;'
 #exec --no-startup-id i3-msg 'exec google-chrome;'
 #exec --no-startup-id i3-msg 'workspace number 3; exec google-chrome;'
 #exec --no-startup-id i3-msg 'exec slack;'
-#exec --no-startup-id i3-msg 'exec spotify;'
+
+
+# Scratchpad Terminal 
+bindsym $mod+$alt+t [con_mark="terminal"] scratchpad show
+for_window [con_mark="terminal"] move scratchpad
+exec --no-startup-id i3-msg 'exec --mark terminal xfce4-terminal;'
+
+# Spotify
+bindsym $mod+$alt+m [con_mark="music"] scratchpad show
+for_window [class="Spotify"] mark "music", move scratchpad
+exec --no-startup-id i3-msg 'exec spotify;'
+
+# Notes
+bindsym $mod+Shift+$alt+n mark "notes", move scratchpad
+bindsym $mod+$alt+n [con_mark="notes"] scratchpad show
+for_window [con_mark="notes"] move scratchpad
+exec --no-startup-id i3-msg 'exec --mark notes code ~/Documents/private_wiki;'
+
 #exec --no-startup-id i3-msg 'exec keepassx;'
 
 # Start the session
