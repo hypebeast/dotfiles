@@ -336,6 +336,7 @@ exec --no-startup-id i3-msg 'exec keepassx --role scratchpad;'
 
 
 # Scratchpad Terminal 
+bindsym $mod+Shift+$alt+t mark "terminal", move scratchpad
 bindsym $mod+$alt+t [con_mark="terminal"] scratchpad show
 for_window [con_mark="terminal"] move scratchpad
 exec --no-startup-id i3-msg 'exec --mark terminal xfce4-terminal;'
@@ -351,7 +352,12 @@ bindsym $mod+$alt+n [con_mark="notes"] scratchpad show
 for_window [con_mark="notes"] move scratchpad
 exec --no-startup-id i3-msg 'exec --mark notes code ~/Documents/private_wiki;'
 
-#exec --no-startup-id i3-msg 'exec keepassx;'
+# Keepass
+bindsym $mod+Shift+$alt+k mark "keepass", move scratchpad
+bindsym $mod+$alt+k [con_mark="keepass"] scratchpad show
+for_window [con_mark="keepass"] move scratchpad
+exec --no-startup-id i3-msg 'exec --mark keepass keepassxc;'
+
 
 # Start the session
 #exec --no-startup-id ~/.i3/autostart
