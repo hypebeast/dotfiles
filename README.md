@@ -1,8 +1,8 @@
 # Dotfiles
 
 ```
-       /$$             /$$      /$$$$$$  /$$ /$$                    
-      | $$            | $$     /$$__  $$|__/| $$                    
+       /$$             /$$      /$$$$$$  /$$ /$$
+      | $$            | $$     /$$__  $$|__/| $$
   /$$$$$$$  /$$$$$$  /$$$$$$  | $$  \__/ /$$| $$  /$$$$$$   /$$$$$$$
  /$$__  $$ /$$__  $$|_  $$_/  | $$$$    | $$| $$ /$$__  $$ /$$_____/
 | $$  | $$| $$  \ $$  | $$    | $$_/    | $$| $$| $$$$$$$$|  $$$$$$
@@ -15,24 +15,29 @@ My personal dotfiles managed with [gnu stow](https://www.gnu.org/software/stow/)
 
 Supports `macOS` and `Ubuntu/Debian`.
 
-
 ## Features
 
-  * oh-my-zsh for zsh config.
-  * spf13-vim for vim config.
-  * Every config file/folder gets linked to its place in the system. No copy of files.
-  * Clear structure of config files: every application has its their own folder.
-  * Every config file is linked with stow. No other tool is used.
-  * Bootstrap script to setup a dev machine with all required packages and tools.
-  * Scripts to install required packages with _brew_ and _cask_.
-  * Support for macOS and Linux (Ubuntu).
-  * No dependencies, except Bash and gnu stow.
+- oh-my-zsh for zsh config.
+- spf13-vim for vim config.
+- Every config file/folder gets linked to its place in the system. No copy of files.
+- Clear structure of config files: every application has its their own folder.
+- Every config file is linked with stow. No other tool is used.
+- Bootstrap script to setup a dev machine with all required packages and tools.
+- Scripts to install required packages with _brew_ and _cask_.
+- Support for macOS and Linux (Ubuntu).
+- No dependencies, except Bash and gnu stow.
 
+## 🚀 Installation
 
-## Setup
+Execute the [`installer`](installer) from your terminal in order to avoid even having to manually install git!
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/hypebeast/dotfiles/master/installer)
+```
+
+## Setup (⚠️ Outdated documentation ⚠️)
 
 First, make sure you have _stow_ installed. Then, clone this repository to `~/dotfiles`.
-
 
 ### Bootstrap your Development Machine
 
@@ -41,7 +46,6 @@ Bootstrap the dotfiles with
 ```
 $ make bootstrap
 ```
-
 
 ### Link the dotfiles
 
@@ -65,16 +69,9 @@ List all available commands with:
 $ make help
 ```
 
-
-## setup.sh
-
-TODO
-
-
 ## Credits
 
 TODO
-
 
 ## License
 

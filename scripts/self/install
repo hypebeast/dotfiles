@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+####
+## Based on CodelyTV/dotfiles
+####
+
+set -euo pipefail
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until `.macos` has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+source "$DOTFILES/scripts/core/_main.sh"
+source "$DOTFILES/scripts/self/utils/install.sh"
+
+##? Install the dotfiles
+#?? 1.0.0
+##?
+##? Usage:
+##?    install
+
+#docs::eval_help "$@"
+
+"$DOTFILES/bin/dot" self update
+
+# log::note "💻 Installing Zim Framework for ZSH"
+# source ~/.dotfiles/modules/zimfw/zimfw.zsh install
+
+# Install oh-my-zsh
+log::note "💻 Installing oh-my-zsh for ZSH"
+source "$DOTFILES/modules/ohmyzsh/tools/install.sh"
+
+# Install spf13-vim
+log::note "💻 Installing spf13-vim"
+install_spf13vim
+
+# Install zsh_plugins
+log::note "💻 Installing zshplugins"
+install_zshplugins
+
+if platform::is_macos; then
+  log::note "🍎 Installing MacOS custom packages"
+
+  install_macos_custom
+fi
+
+if platform::is_linux; then
+  log::note "🐧 Installing Linux custom packages"
+
+  install_linux_custom
+fi
+
+# log::note "🐍 Installing python packages"
+# pip install -r "$DOTFILES/langs/python/requirements.txt" || true
+# pip install -r "$DOTFILES/langs/python/requirements.txt"
+
+# log::note "🌈 Installing npm packages"
+# xargs npm install -g <"$DOTFILES/langs/js/global_modules.txt"
+
+log::note "💻 Setting ZSH as the default shell"
+command -v zsh | sudo tee -a /etc/shells
+chsh -s "$(command -v zsh)"
+
+log::note "🔀 Setting Git config"
+read -rp "✉️ What is you email? " git_email
+read -rp "👤 And your name? " git_name
+
+git config --global user.email "$git_email"
+git config --global user.name "$git_name"
+
+log::success "🎉 Done!"

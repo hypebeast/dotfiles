@@ -80,9 +80,11 @@ fi
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
+#ZSH_THEME="powerlevel10k/powerlevel10k"
+
 # Load pure prompt (https://github.com/sindresorhus/pure)
-autoload -U promptinit; promptinit
-prompt pure
+# autoload -U promptinit; promptinit
+# prompt pure
 
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"

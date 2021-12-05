@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+##? Setups the environment
+#?? 1.0.0
+##?
+##? Usage:
+##?    install
+
+echo "🚀 Welcome to the hypebeast/dotfiles installer!"
+echo "-----------------------------------------------"
+echo
+export DOTFILES="$HOME/.dotfiles"
+echo "👉  Cloning into: '$DOTFILES'"
+
+# To test that git is installed (if not macOS will prompt an installer)
+git --version
+
+git clone --depth 1 git@github.com:hypebeast/dotfiles.git "$DOTFILES"
+
+"$DOTFILES/bin/dot" self install
