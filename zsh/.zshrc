@@ -143,3 +143,4 @@ export TMUX_POWERLINE_SEG_WEATHER_LOCATION="676757"
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [[ -f /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
+export PATH="$HOME/.poetry/bin:$PATH"
