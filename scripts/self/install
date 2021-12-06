@@ -60,7 +60,7 @@ pip3 install -r "$DOTFILES/langs/python/requirements.txt" || true
 pip3 install -r "$DOTFILES/langs/python/requirements.txt"
 
 log::note "🌈 Installing npm packages"
-xargs npm install -g <"$DOTFILES/langs/js/global_modules.txt"
+xargs npm install -g <"$DOTFILES/langs/node/global_modules.txt"
 
 log::note "💻 Setting ZSH as the default shell"
 command -v zsh | sudo tee -a /etc/shells
