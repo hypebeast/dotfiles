@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ####
-## Based on CodelyTV/dotfiles
+## Based on CodelyTV/dotfiles and denisidoro/dotfiles
 ####
 
 # Exit on error. Append "|| true" if you expect an error.
@@ -16,6 +16,8 @@ set -o pipefail
 if ! ${DOT_MAIN_SOURCED:-false}; then
   source "$DOTFILES/scripts/core/utils.sh"
   source "$DOTFILES/scripts/core/log.sh"
+  source "$DOTFILES/scripts/core/documentation.sh"
+  source "$DOTFILES/scripts/core/platform.sh"
 
   readonly DOT_MAIN_SOURCED=true
 fi

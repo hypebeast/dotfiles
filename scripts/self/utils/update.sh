@@ -33,6 +33,7 @@ LINUX_DOTFILES=(
   conky
   compton
   fonts
+  polybar
 )
 
 MACOS_DOTFILES=(
@@ -76,17 +77,17 @@ apply_macos_symlinks() {
 
   link "$MACOS_DOTFILES"
 
-  # sudo ln -sf "$DOTFILES/mac/plist/limit.maxfiles.plist" "/Library/LaunchDaemons/limit.maxfiles.plist"
-  # sudo ln -sf "$DOTFILES/mac/plist/limit.maxproc.plist" "/Library/LaunchDaemons/limit.maxproc.plist"
-  # sudo chmod 644 "/Library/LaunchDaemons/limit.maxfiles.plist"
-  # sudo chmod 644 "/Library/LaunchDaemons/limit.maxproc.plist"
-  # sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
-  # sudo chown root:wheel /Library/LaunchDaemons/limit.maxproc.plist
-  # sudo launchctl load -w "/Library/LaunchDaemons/limit.maxfiles.plist"
-  # sudo launchctl load -w "/Library/LaunchDaemons/limit.maxproc.plist"
+  sudo ln -sf "$DOTFILES/mac/plist/limit.maxfiles.plist" "/Library/LaunchDaemons/limit.maxfiles.plist"
+  sudo ln -sf "$DOTFILES/mac/plist/limit.maxproc.plist" "/Library/LaunchDaemons/limit.maxproc.plist"
+  sudo chmod 644 "/Library/LaunchDaemons/limit.maxfiles.plist"
+  sudo chmod 644 "/Library/LaunchDaemons/limit.maxproc.plist"
+  sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
+  sudo chown root:wheel /Library/LaunchDaemons/limit.maxproc.plist
+  sudo launchctl load -w "/Library/LaunchDaemons/limit.maxfiles.plist"
+  sudo launchctl load -w "/Library/LaunchDaemons/limit.maxproc.plist"
 }
 
-apply_macos_symlinks() {
+apply_linux_symlinks() {
   log::note "Hook our Linux dotfiles into system standard positions..."
 
   link "$LINUX_DOTFILES"

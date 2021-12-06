@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+source "$DOTFILES/scripts/core/_main.sh"
+
+##? ZSH helpers
+#?? 1.0.0
+##?
+##? Usage:
+##?    zsh test_performance     # Print the current ZSH performance
+##?    zsh reload_completions   # Reload the ZSH completions
+
+docs::eval_help "$@"
+
+case $1 in
+"test_performance")
+  echo "🍎 With native macOS ZSH"
+  /bin/zsh --version
+  for i in $(seq 1 10); do /usr/bin/time /bin/zsh -i -c exit; done
+
+  echo "🍻 With Brew ZSH"
+  /usr/local/bin/zsh --version
+  for i in $(seq 1 10); do /usr/bin/time /usr/local/bin/zsh -i -c exit; done
+  ;;
+"reload_completions")
+  /bin/zsh -c "autoload -U compaudit && autoload -Uz compinit && compinit"
+
+  echo "👌 Done!"
+  ;;
+*)
+  docs::eval_help --help
+  ;;
+esac

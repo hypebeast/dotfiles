@@ -21,7 +21,7 @@ source "$DOTFILES/scripts/self/utils/install.sh"
 ##? Usage:
 ##?    install
 
-#docs::eval_help "$@"
+docs::eval_help "$@"
 
 "$DOTFILES/bin/dot" self update
 
@@ -52,12 +52,12 @@ if platform::is_linux; then
   install_linux_custom
 fi
 
-# log::note "🐍 Installing python packages"
-# pip install -r "$DOTFILES/langs/python/requirements.txt" || true
-# pip install -r "$DOTFILES/langs/python/requirements.txt"
+log::note "🐍 Installing python packages"
+pip install -r "$DOTFILES/langs/python/requirements.txt" || true
+pip install -r "$DOTFILES/langs/python/requirements.txt"
 
-# log::note "🌈 Installing npm packages"
-# xargs npm install -g <"$DOTFILES/langs/js/global_modules.txt"
+log::note "🌈 Installing npm packages"
+xargs npm install -g <"$DOTFILES/langs/js/global_modules.txt"
 
 log::note "💻 Setting ZSH as the default shell"
 command -v zsh | sudo tee -a /etc/shells

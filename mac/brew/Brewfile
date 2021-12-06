@@ -17,9 +17,8 @@ brew "findutils"
 brew "gnu-sed"
 brew "bash"
 brew "bash-completion2"
-brew "zsh"
-brew "wget", args: { with-iri }
-brew "vim", args: { with-override-system-vi, with-lua}
+brew "wget", args: [ "with-iri" ]
+brew "vim", args: [ "with-override-system-vi", "with-lua" ]
 brew "homebrew/dupes/grep"
 brew "homebrew/dupes/openssh"
 brew "homebrew/dupes/screen"
@@ -67,16 +66,20 @@ brew "kubectx"
 brew "jwt-cli"
 brew "docker", link: false
 brew "git"
+brew "git-extras"
 brew "git-delta"
 brew "gnu-getopt"
 brew "python@3.8"
 brew "imagemagick"
 brew "node"
+brew "nvm"
 brew "zsh"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 brew "romkatv/powerlevel10k/powerlevel10k"
 brew "pure"
+brew "diff-so-fancy"
+brew "autojump"
 
 cask "alfred"
 cask "bartender"
@@ -98,8 +101,23 @@ cask "firefox"
 cask "virtualbox"
 cask "vlc"
 cask "karabiner-elements"
+cask "postman"
+cask "signal"
+cask "miro"
+
+#####
+# Fonts
+#####
+
 cask "font-hack-nerd-font"
 cask "font-inconsolata-for-powerline"
 cask "font-menlo-for-powerline"
-cask "postman"
-cask "signal"
+cask 'font-source-code-pro-for-powerline'
+cask 'font-source-code-pro'
+cask 'font-source-sans-pro'
+cask 'font-source-serif-pro'
+cask 'font-meslo-nerd-font'
+cask 'font-fira-code'
+cask 'font-firacode-nerd-font'
+cask 'font-hack-nerd-font'
+cask 'font-iosevka-nerd-font'

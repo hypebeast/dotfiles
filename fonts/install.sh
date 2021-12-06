@@ -4,6 +4,8 @@
 ## Install fonts
 ###############################################################################
 
+source "$DOTFILES/scripts/core/_main.sh"
+
 ensure_libs_dir() {
     if [ ! -d ~/.dotfiles/libs ]; then
         mkdir -p ~/.dotfiles/libs
@@ -12,7 +14,11 @@ ensure_libs_dir() {
 
 # Install fonts for powerline from https://github.com/powerline/fonts
 install_powerline_fonts() {
-    install_dir="powerline-fonts"
+    local install_dir="powerline-fonts"
+
+    if platform::is_macos; then
+      exit 0
+    fi
 
     if [ ! -d "${install_dir}" ]; then
         git clone "https://github.com/powerline/fonts" "${install_dir}"
@@ -26,30 +32,11 @@ install_powerline_fonts() {
     popd
 }
 
-# Install siji fonts from https://github.com/stark/siji.git
-install_siji_font() {
-    install_dir="siji"
-
-    if [[ $(uname) == "Linux" ]]; then
-        if [ ! -d "${install_dir}" ]; then
-            git clone "https://github.com/stark/siji.git" "${install_dir}"
-        fi
-    
-        pushd "${install_dir}"
-        
-        git pull origin master
-        ./install.sh
-
-        popd
-    fi
-}
-
 main() {
     pushd ~/.dotfiles/libs
 
     ensure_libs_dir
     install_powerline_fonts
-    install_siji_font
 
     popd
 

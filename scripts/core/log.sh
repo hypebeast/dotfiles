@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ####
-## Based on CodelyTV/dotfiles
+## Based on CodelyTV/dotfiles and denisidoro/dotfiles
 ####
 
 echoerr() {
