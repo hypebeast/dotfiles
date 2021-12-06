@@ -4,6 +4,17 @@
 ## Based on CodelyTV/dotfiles
 ####
 
+# Install oh-my-zsh
+install_ohmyzsh() {
+  if [[ ! -d ~/.oh-my-zsh ]]; then
+    log::note "It looks like that oh-my-zsh is already installed."
+  else
+    log::note "💻 Installing oh-my-zsh for ZSH"
+    sh "$DOTFILES/modules/ohmyzsh/tools/install.sh" --unattended
+    rm -f $HOME/.zshrc
+  fi
+}
+
 # Install vimrc (https://github.com/amix/vimrc)
 install_vimrc() {
     if [[ -d ~/.vim_runtime ]]; then
