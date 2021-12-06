@@ -32,7 +32,7 @@ update_submodules
 
 # Install oh-my-zsh
 log::note "💻 Installing oh-my-zsh for ZSH"
-sh "$DOTFILES/modules/ohmyzsh/tools/install.sh --unattended"
+sh "$DOTFILES/modules/ohmyzsh/tools/install.sh" --unattended
 
 # Install spf13-vim
 log::note "💻 Installing spf13-vim"
