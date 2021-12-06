@@ -6,7 +6,7 @@
 
 # Install vimrc (https://github.com/amix/vimrc)
 install_vimrc() {
-    if [[ ! -d ~/.vim_runtime ]]; then
+    if [[ -d ~/.vim_runtime ]]; then
       log::note "It looks like that vimrc is already installed."
     else
       git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime

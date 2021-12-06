@@ -31,8 +31,12 @@ log::note "Updating submodules"
 update_submodules
 
 # Install oh-my-zsh
-log::note "💻 Installing oh-my-zsh for ZSH"
-sh "$DOTFILES/modules/ohmyzsh/tools/install.sh" --unattended
+if [[ ! -d ~/.oh-my-zsh ]]; then
+    log::note "It looks like that oh-my-zsh is already installed."
+else
+  log::note "💻 Installing oh-my-zsh for ZSH"
+  sh "$DOTFILES/modules/ohmyzsh/tools/install.sh" --unattended
+fi
 
 # Install vimrc
 log::note "💻 Installing vimrc"
