@@ -62,20 +62,21 @@ update_submodules() {
 
 # Hook our dotfiles into system standard positions.
 link() {
-  stow "$[@]"
+  declare -a packages=("${1}")
+  stow "${packages[@]}"
 }
 
 
 apply_common_symlinks() {
   log::note "Hook our common dotfiles into system standard positions..."
 
-  link "$COMMON_DOTFILES"
+  link "${COMMON_DOTFILES[@]}"
 }
 
 apply_macos_symlinks() {
   log::note "Hook our MacOS dotfiles into system standard positions..."
 
-  link "$MACOS_DOTFILES"
+  link "${MACOS_DOTFILES[@]}"
 
   sudo ln -sf "$DOTFILES/mac/plist/limit.maxfiles.plist" "/Library/LaunchDaemons/limit.maxfiles.plist"
   sudo ln -sf "$DOTFILES/mac/plist/limit.maxproc.plist" "/Library/LaunchDaemons/limit.maxproc.plist"
@@ -90,7 +91,7 @@ apply_macos_symlinks() {
 apply_linux_symlinks() {
   log::note "Hook our Linux dotfiles into system standard positions..."
 
-  link "$LINUX_DOTFILES"
+  link "${LINUX_DOTFILES[@]}"
 }
 
 project_status() {
