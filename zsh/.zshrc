@@ -34,11 +34,9 @@ declare -a plugins
 
 common_plugins=(
     git
-    ruby
     github
     node
     npm
-    sublime
     themes
     fasd
     web-search
@@ -83,8 +81,8 @@ source $ZSH/oh-my-zsh.sh
 #ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Load pure prompt (https://github.com/sindresorhus/pure)
-# autoload -U promptinit; promptinit
-# prompt pure
+autoload -U promptinit; promptinit
+prompt pure
 
 # Things I don't want to publish to github
 [[ -s "$HOME/.secrets" ]] && source "$HOME/.secrets"
@@ -110,14 +108,8 @@ if [[ "$COLORTERM" == xfce4-terminal ]]; then
     export TERM=xterm-256color
 fi
 
-# added by travis gem
-[ -f /Users/sruml/.travis/travis.sh ] && source /Users/sruml/.travis/travis.sh
-
 #export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-# Initialize rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -128,21 +120,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# tmux-powerline
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-export TMUX_POWERLINE_SEG_WEATHER_LOCATION="676757"
-
 # GVM: THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
 
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/seru/.nvm/versions/node/v8.10.0/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.zsh
 export PATH="$HOME/.poetry/bin:$PATH"
