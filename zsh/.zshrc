@@ -56,14 +56,13 @@ common_plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     kubectl
-    go
 )
 
 linux_plugins=(
 )
 
 macos_plugins=(
-    osx
+    macos
     brew
 )
 
