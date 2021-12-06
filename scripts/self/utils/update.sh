@@ -6,7 +6,6 @@
 
 COMMON_DOTFILES=(
   ack
-  bin
   ctags
   git
   tmux
