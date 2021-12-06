@@ -14,7 +14,6 @@ set -o nounset
 set -o pipefail
 
 if ! ${DOT_MAIN_SOURCED:-false}; then
-  source "$DOTFILES/scripts/core/utils.sh"
   source "$DOTFILES/scripts/core/args.sh"
   source "$DOTFILES/scripts/core/log.sh"
   source "$DOTFILES/scripts/core/documentation.sh"
