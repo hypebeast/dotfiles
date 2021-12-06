@@ -14,6 +14,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 source "$DOTFILES/scripts/core/_main.sh"
 source "$DOTFILES/scripts/self/utils/install.sh"
+source "$DOTFILES/scripts/self/utils/update.sh"
 
 ##? Install the dotfiles
 #?? 1.0.0
@@ -23,10 +24,11 @@ source "$DOTFILES/scripts/self/utils/install.sh"
 
 docs::eval_help "$@"
 
-"$DOTFILES/bin/dot" self update
-
 # log::note "💻 Installing Zim Framework for ZSH"
 # source ~/.dotfiles/modules/zimfw/zimfw.zsh install
+
+log::note "Updating submodules"
+update_submodules
 
 # Install oh-my-zsh
 log::note "💻 Installing oh-my-zsh for ZSH"
@@ -69,5 +71,8 @@ read -rp "👤 And your name? " git_name
 
 git config --global user.email "$git_email"
 git config --global user.name "$git_name"
+
+# Link all dotfiles
+"$DOTFILES/bin/dot" self update
 
 log::success "🎉 Done!"
