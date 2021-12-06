@@ -104,6 +104,7 @@ cask "karabiner-elements"
 cask "postman"
 cask "signal"
 cask "miro"
+cask "bitwarden"
 
 #####
 # Fonts
