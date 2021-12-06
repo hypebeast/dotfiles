@@ -76,8 +76,8 @@ apply_macos_symlinks() {
   sudo chmod 644 "/Library/LaunchDaemons/limit.maxproc.plist"
   sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
   sudo chown root:wheel /Library/LaunchDaemons/limit.maxproc.plist
-  sudo launchctl load -w "/Library/LaunchDaemons/limit.maxfiles.plist"
-  sudo launchctl load -w "/Library/LaunchDaemons/limit.maxproc.plist"
+  # sudo launchctl load -w "/Library/LaunchDaemons/limit.maxfiles.plist" || true
+  # sudo launchctl load -w "/Library/LaunchDaemons/limit.maxproc.plist" || true
 }
 
 apply_linux_symlinks() {

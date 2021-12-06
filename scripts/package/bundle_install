@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+source "$DOTFILES/scripts/core/_main.sh"
+
+##? Install all formulaes from Brewfile
+#?? 1.0.0
+##?
+##? Usage:
+##?    bundle_install
+
+docs::eval "$@"
+
+brew bundle --file="$DOTFILES/mac/brew/Brewfile"

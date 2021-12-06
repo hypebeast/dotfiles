@@ -74,6 +74,13 @@ else
     plugins=($common_plugins)
 fi
 
+# Load dircolors
+if [[ "$OSTYPE" == darwin* ]]; then
+  test -r ~/.dir_colors && eval $(gdircolors ~/.dir_colors)
+else
+  test -r ~/.dir_colors && eval $(dircolors ~/.dir_colors)
+fi
+
 # Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -94,13 +101,6 @@ if [ -d $HOME/.secrets ]; then
 fi
 
 #export PROMPT="$PROMPT\$(git-radar --zsh --fetch) "
-
-# Load dircolors
-if [[ "$OSTYPE" == darwin* ]]; then
-  eval `gdircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
-else
-  eval `dircolors ${DOTFILES}/libs/dircolors-solarized/dircolors.ansi-dark`
-fi
 
 # Set xterm to support 256 colors
 if [[ "$COLORTERM" == xfce4-terminal ]]; then
