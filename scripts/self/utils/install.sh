@@ -6,7 +6,7 @@
 
 # Install oh-my-zsh
 install_ohmyzsh() {
-  if [[ ! -d ~/.oh-my-zsh ]]; then
+  if [[ -d ~/.oh-my-zsh ]]; then
     log::note "It looks like that oh-my-zsh is already installed."
   else
     log::note "💻 Installing oh-my-zsh for ZSH"

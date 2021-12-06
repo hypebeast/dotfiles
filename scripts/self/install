@@ -66,12 +66,12 @@ log::note "💻 Setting ZSH as the default shell"
 command -v zsh | sudo tee -a /etc/shells
 chsh -s "$(command -v zsh)"
 
-log::note "🔀 Setting Git config"
-read -rp "✉️ What is you email? " git_email
-read -rp "👤 And your name? " git_name
+# log::note "🔀 Setting Git config"
+# read -rp "✉️ What is you email? " git_email
+# read -rp "👤 And your name? " git_name
 
-git config --global user.email "$git_email"
-git config --global user.name "$git_name"
+# git config --global user.email "$git_email"
+# git config --global user.name "$git_name"
 
 # Link all dotfiles
 "$DOTFILES/bin/dot" self update

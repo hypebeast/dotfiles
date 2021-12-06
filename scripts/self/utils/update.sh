@@ -59,23 +59,16 @@ update_submodules() {
   for submodule in "$DOTFILES/modules/"*; do git submodule update --init --recursive --remote --merge "$submodule"; done
 }
 
-# Hook our dotfiles into system standard positions.
-link() {
-  declare -a packages=("${1}")
-  stow "${packages[@]}"
-}
-
-
 apply_common_symlinks() {
   log::note "Hook our common dotfiles into system standard positions..."
 
-  link "${COMMON_DOTFILES[@]}"
+  stow "${COMMON_DOTFILES[@]}"
 }
 
 apply_macos_symlinks() {
   log::note "Hook our MacOS dotfiles into system standard positions..."
 
-  link "${MACOS_DOTFILES[@]}"
+  stow "${MACOS_DOTFILES[@]}"
 
   sudo ln -sf "$DOTFILES/mac/plist/limit.maxfiles.plist" "/Library/LaunchDaemons/limit.maxfiles.plist"
   sudo ln -sf "$DOTFILES/mac/plist/limit.maxproc.plist" "/Library/LaunchDaemons/limit.maxproc.plist"
@@ -90,7 +83,7 @@ apply_macos_symlinks() {
 apply_linux_symlinks() {
   log::note "Hook our Linux dotfiles into system standard positions..."
 
-  link "${LINUX_DOTFILES[@]}"
+  stow "${LINUX_DOTFILES[@]}"
 }
 
 project_status() {
