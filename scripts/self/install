@@ -55,8 +55,9 @@ if platform::is_linux; then
 fi
 
 log::note "🐍 Installing python packages"
-pip install -r "$DOTFILES/langs/python/requirements.txt" || true
-pip install -r "$DOTFILES/langs/python/requirements.txt"
+python3 -m pip install --upgrade pip
+pip3 install -r "$DOTFILES/langs/python/requirements.txt" || true
+pip3 install -r "$DOTFILES/langs/python/requirements.txt"
 
 log::note "🌈 Installing npm packages"
 xargs npm install -g <"$DOTFILES/langs/js/global_modules.txt"
