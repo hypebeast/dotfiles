@@ -34,9 +34,9 @@ update_submodules
 log::note "💻 Installing oh-my-zsh for ZSH"
 sh "$DOTFILES/modules/ohmyzsh/tools/install.sh" --unattended
 
-# Install spf13-vim
-log::note "💻 Installing spf13-vim"
-install_spf13vim
+# Install vimrc
+log::note "💻 Installing vimrc"
+install_vimrc
 
 # Install zsh_plugins
 log::note "💻 Installing zshplugins"

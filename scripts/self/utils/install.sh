@@ -4,12 +4,13 @@
 ## Based on CodelyTV/dotfiles
 ####
 
-# Install spf13-vim
-install_spf13vim() {
-    if [[ ! -d ~/.spf13-vim ]]; then
-      log::note "It looks like that spf13-vim is already installed."
+# Install vimrc (https://github.com/amix/vimrc)
+install_vimrc() {
+    if [[ ! -d ~/.vim_runtime ]]; then
+      log::note "It looks like that vimrc is already installed."
     else
-      curl http://j.mp/spf13-vim3 -L -o - | sh
+      git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+      sh ~/.vim_runtime/install_awesome_vimrc.sh
     fi
 }
 
@@ -55,6 +56,7 @@ install_macos_custom() {
   echo "⚡️ Installing brew if not installed"
   if ! [ -x "$(command -v brew)" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
   fi
 
   echo "📦 Installing brew apps"
