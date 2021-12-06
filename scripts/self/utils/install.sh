@@ -57,6 +57,8 @@ install_macos_custom() {
   if ! [ -x "$(command -v brew)" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.zprofile"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> "$HOME/.bashrc"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
   fi
 
   echo "📦 Installing brew apps"
