@@ -15,7 +15,7 @@ docs::eval "$@"
 if [[ -z $1 ]]; then
   package=$(brew search --cask | fzf)
 else
-  package=$(brew search --cask | grep $1 | fzf)
+  package=$(brew search --cask $1 | fzf)
 fi
 
 if [[ -z ${package} ]]; then
@@ -24,4 +24,4 @@ if [[ -z ${package} ]]; then
   exit 1
 fi
 
-brew cask install ${package}
+brew install --cask ${package}

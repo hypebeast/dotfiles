@@ -31,6 +31,7 @@ local resizeModifierKey = {"cmd", "alt", "ctrl"}
 local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local sendKeyStrokesModifierKey = {"ctrl", "shift"}
+local screenModifierKey = {"alt", "cmd"}
 -- local focusKey = {"ctrl", "alt"}
 
 ---------------------------------------------------------
@@ -39,7 +40,7 @@ local sendKeyStrokesModifierKey = {"ctrl", "shift"}
 
 require "fntools"
 require "extensions"
-require "windowCycler"
+-- require "windowCycler"
 -- require "focus"
 
 ---------------------------------------------------------
@@ -308,20 +309,6 @@ end)
 
 
 ---------------------------------------------------------
--- Window cycling of the same app
----------------------------------------------------------
-
-
-k:bind({}, "B", function()
-    dowWindowCycling()
- end)
-
-k:bind({}, "N", function()
-    dowWindowCycling(-1)
- end)
-
-
----------------------------------------------------------
 -- Do a Google search with the clipboard content
 ---------------------------------------------------------
 
@@ -338,32 +325,52 @@ end)
 --------------------------------------------------------
 
 -- default windowfilter: only visible windows, all Spaces
-switcher = hs.window.switcher.new()
+--switcher = hs.window.switcher.new()
 
-hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
-hotkey.bind('alt-shift', 'tab', 'Prev window', function() switcher:previous() end)
+--hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
+--hotkey.bind('alt-shift', 'tab', 'Prev window', function() switcher:previous() end)
+
+---------------------------------------------------------
+-- Move app to next screen
+--------------------------------------------------------
+function moveToNextScreen()
+  local app = hs.window.focusedWindow()
+  app:moveToScreen(app:screen():next())
+  app:maximize()
+end
+
+hs.hotkey.bind(screenModifierKey, "n", moveToNextScreen)
+
+-- set up your windowfilter
+-- switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
+-- switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter{}) -- include minimized/hidden windows, current Space only
+-- switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome', 'Firefox'} -- specialized switcher for your dozens of browser windows :)
+
+-- bind to hotkeys; WARNING: at least one modifier key is required!
+-- hs.hotkey.bind('alt','tab','Next window',function()switcher_browsers:next()end)
+-- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher_browsers:previous()end)
 
 ---------------------------------------------------------
 -- Move window to space
 --------------------------------------------------------
 
-local spaces = require("hs._asm.undocumented.spaces")
+-- local spaces = require("hs._asm.undocumented.spaces")
 
--- move current window to the space sp
-function MoveWindowToSpace(sp)
-    local win = hs.window.focusedWindow()      -- current window
-    local uuid = win:screen():spacesUUID()     -- uuid for current screen
-    local spaceID = spaces.layout()[uuid][sp]  -- internal index for sp
+-- -- move current window to the space sp
+-- function MoveWindowToSpace(sp)
+--     local win = hs.window.focusedWindow()      -- current window
+--     local uuid = win:screen():spacesUUID()     -- uuid for current screen
+--     local spaceID = spaces.layout()[uuid][sp]  -- internal index for sp
 
-    spaces.moveWindowToSpace(win:id(), spaceID) -- move window to new space
-    spaces.changeToSpace(spaceID)              -- follow window to new space
-end
+--     spaces.moveWindowToSpace(win:id(), spaceID) -- move window to new space
+--     spaces.changeToSpace(spaceID)              -- follow window to new space
+-- end
 
-hotkey.bind(locationModifierKey, "1", function()
-	MoveWindowToSpace(1)
-end)
+-- hotkey.bind(locationModifierKey, "1", function()
+-- 	MoveWindowToSpace(1)
+-- end)
 
-hotkey.bind(locationModifierKey, "2", function()
-	MoveWindowToSpace(2)
-end)
+-- hotkey.bind(locationModifierKey, "2", function()
+-- 	MoveWindowToSpace(2)
+-- end)
 

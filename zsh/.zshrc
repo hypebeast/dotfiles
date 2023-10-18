@@ -38,7 +38,6 @@ common_plugins=(
     node
     npm
     themes
-    fasd
     web-search
     wd
     cp
@@ -47,7 +46,6 @@ common_plugins=(
     vagrant
     grunt
     common-aliases
-    copydir
     copyfile
     github
     docker
@@ -115,11 +113,22 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-if which pyenv > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+eval "$(pyenv init -)"
 
 # GVM: THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "$HOME/.gvm/bin/gvm-init.sh" ]] && source "$HOME/.gvm/bin/gvm-init.sh"
 
 export PATH="$HOME/.poetry/bin:$PATH"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Load private developer tools
+[[ -s "$HOME/.developer-toolbox" ]] && source "$HOME/.developer-toolbox/developer-toolbox.sh"
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+eval "$(zoxide init zsh)"export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

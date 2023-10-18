@@ -112,13 +112,6 @@ function find-alias () {
 }
 alias fa=find-alias
 
-# My personal wiki
-function open-notes () {
-    cd $HOME/Netlight/documents/work-notebook
-    vim -c CtrlP
-}
-alias opn=open-notes
-
 # recive infos about HTTP status codes
 function status-code () {
     curl -s https://httpstatuses.com/$1 | lynx -stdin

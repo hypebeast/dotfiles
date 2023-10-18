@@ -2,3 +2,6 @@ libs/
 dircolors-solarized/
 diff
 bin/bin/powerline*
+pyenv/.pyenv/versions/
+pyenv/.pyenv/shims/
+pyenv/.pyenv/plugins/

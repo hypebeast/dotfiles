@@ -12,8 +12,8 @@ source "$DOTFILES/scripts/core/_main.sh"
 
 docs::eval "$@"
 
-echo '♢ Outdated App Store apps:'
-mas outdated
+#echo '♢ Outdated App Store apps:'
+#mas outdated
 
 echo ''
 echo '♢ Outdated brew apps:'
@@ -22,4 +22,4 @@ brew outdated
 
 echo ''
 echo '♢ Outdated brew cask apps:'
-brew cask outdated | grep -v real-vnc
+brew cask outdated

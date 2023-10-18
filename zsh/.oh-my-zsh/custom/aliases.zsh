@@ -17,8 +17,8 @@ alias ll='ls -lFh'
 alias t1='tree -I "node_modules|vendor" -d -L 1'
 alias t2='tree -I "node_modules|vendor" -d -L 2'
 alias t3='tree -I "node_modules|vendor" -d -L 3'
-alias t3='tree -I "node_modules|vendor" -d -L 3'
 alias t4='tree -I "node_modules|vendor" -d -L 4'
+alias t5='tree -I "node_modules|vendor" -d -L 5'
 
 # PS
 alias psa="ps aux"

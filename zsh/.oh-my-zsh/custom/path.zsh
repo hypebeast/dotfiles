@@ -54,4 +54,7 @@ fi
 # Composer binaries
 PATH=~/.composer/vendor/bin:$PATH
 
+# Dotnet tools path
+PATH=$HOME/.dotnet/tools:$PATH
+
 export PATH
