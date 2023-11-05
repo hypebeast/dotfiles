@@ -10,4 +10,6 @@ if test -e "~/.config/nvim"
   mv ~/.config/nvim{,.bak}
 end
 
-git clone https://github.com/LazyVim/starter ~/.config/nvim
+if not test -e "~/.config/nvim"
+  git clone https://github.com/LazyVim/starter ~/.config/nvim
+end
