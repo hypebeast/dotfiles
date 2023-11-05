@@ -43,7 +43,7 @@ if ! which brew; then
   success "Finished installing Brew"
 fi
 
-info "Installing Brew packages"
+info "Installing Brew packages..."
 brew bundle --file="$DOTFILES/packages/Brewfile"
 success "Finished installing Brew packages"
 
