@@ -1,7 +1,8 @@
 #!/usr/bin/env fish
 
-if test -e "~/.config/nvim" and test -e "~/.config/nvim.bak"
-  echo "Cancel LazyVim nvim configuration installation, because there is already an backup folder for the config."
+if test -e "~/.config/nvim"
+  and test -e "~/.config/nvim.bak"
+  echo "LazyVim installation is canceld, because there is already an backup folder for the nvim config."
   exit
 end
 

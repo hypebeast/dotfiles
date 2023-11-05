@@ -101,7 +101,7 @@ $DOTFILES_ROOT/fish/bootstrap.fish
 # Run all installers
 for installer in */install.fish
   # Skipt the main installer script
-  if contains "scripts" $installer
+  if contains scripts $installer
     continue
   end
 
