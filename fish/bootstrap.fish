@@ -7,7 +7,7 @@ set -Ux DOTFILES ~/.dotfiles
 set -Ux PROJECTS ~/Coding
 
 # Set PATH
-fish_add_path -a $DOTFILES/bin $HOME/.bin $HOME/.local/bin
+fish_add_path -a $DOTFILES/bin $HOME/.bin $HOME/.local/bin /opt/homebrew/bin
 
 # Setup all fish functions
 for f in $DOTFILES/*/functions
