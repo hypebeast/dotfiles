@@ -95,13 +95,13 @@ mkdir -p ~/.bin
 
 # Run bootstrap installer
 $DOTFILES_ROOT/fish/bootstrap.fish
-	and success 'Finished running initial install script'
-	or abort 'Failed running initial install script'
+	and success 'Finished running initial Fish bootstrap script'
+	or abort 'Failed running initial Fish bootstrap script'
 
 # Run all installers
 for installer in */install.fish
   # Skipt the main installer script
-  if contains scripts $installer
+  if string match -q -- "scripts" $installer
     continue
   end
 
