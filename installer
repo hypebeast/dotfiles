@@ -19,4 +19,5 @@ git --version
 
 git clone --depth 1 https://github.com/hypebeast/dotfiles.git "$DOTFILES"
 
-"$DOTFILES/bin/dot" self install
+cd "$DOTFILES"
+./scripts/bootstrap.sh

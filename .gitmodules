@@ -1,9 +1,0 @@
-[submodule "modules/ohmyzsh"]
-	path = modules/ohmyzsh
-	url = https://github.com/ohmyzsh/ohmyzsh.git
-[submodule "scripts/self/modules/z"]
-	path = scripts/self/modules/z
-	url = https://github.com/rupa/z.git
-[submodule "modules/z"]
-	path = modules/z
-	url = https://github.com/rupa/z.git

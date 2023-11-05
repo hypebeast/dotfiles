@@ -1,7 +1,0 @@
-####
-## Prints all hosts that could be found in ~/.ssh/config
-###
-
-sshhosts () {
- awk '$1 ~/Host/' ~/.ssh/config
-}

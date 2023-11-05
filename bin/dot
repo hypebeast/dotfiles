@@ -1,0 +1,76 @@
+#!/usr/bin/env fish
+
+###############################################################################
+## Script to manage the dotfiles
+###############################################################################
+
+source ./scripts/functions.fish
+
+set DOTFILES $HOME/.dotfiles
+
+function usage -d "Show dot usage"
+  echo "Usage: dot [brew|dotfiles]"
+  echo "Actions:"
+  echo "  brew                    Installs all brew packages"
+  echo "  dotfiles                Installs all dotfiles"
+  echo "  packages                Installs application packages (not yet implementd!)"
+  echo "  macos                   Set MacOS config"
+  exit 1
+end
+
+function install_brew_packages -d "Installs all brew packages"
+  info "Installing Brew packages..."
+
+	if command -qs brew
+		brew bundle --file="$DOTFILES/packages/Brewfile"
+	end
+
+  success "Finished installing brew packages"
+end
+
+function install_dotfiles -d "Installs all dotfiles"
+  info "Installing dotfiles..."
+
+  cd $DOTFILES
+  ./scripts/install.fish
+  
+  success "Dotfiles successfully installed"
+end
+
+function set_macos_config -d "Set MacOS configurations"
+  info "Installing MacOS configurations..."
+
+  cd $DOTFILES
+  ./macos/macos.sh
+  ./macos/dock.sh
+
+  success "Finished setting MacOS configurations"
+end
+
+if test (count $argv) -lt 1
+  usage
+end
+
+set action $argv[1]
+set --erase argv[1]
+
+switch "$action"
+  case brew
+    brew $argv &
+  case check
+    if test -e $pomo_file
+      cat $pomo_file
+    else
+      echo "No timer running"
+    end
+  case stop
+    if test -e $pomo_file
+      printf "Stopped running timer at %s minutes left\n" (cat $pomo_file)
+      rm $pomo_file
+    else
+      echo "No timer running"
+    end
+  case "*"
+    printf "Unknown action\n"
+    usage
+end

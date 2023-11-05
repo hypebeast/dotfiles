@@ -1,3 +1,0 @@
-color = true
-ignore = ["vendor", ".git", "node_modules"]
-color-path = "1;34"

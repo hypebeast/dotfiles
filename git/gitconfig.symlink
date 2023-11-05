@@ -1,0 +1,73 @@
+[alias]
+  log = log --date=local
+  co = checkout
+  wtf     = !$ZSH/bin/git-wtf
+  count   = !git shortlog -sn
+	append = commit --amend --no-edit
+
+  # checkout
+  co = checkout                     # checkout
+  nb = checkout -b                  # create and switch to a new branch (mnemonic: "git new branch branchname...")
+
+  # reset
+  unstage = reset HEAD              # remove files from index (tracking)
+  uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
+
+  # status
+  s = status                        # status
+
+  # stash
+  ss = stash                        # stash changes
+  sl = stash list                   # list stashes
+  sa = stash apply                  # apply stash (restore changes)
+  sd = stash drop                   # drop stashes (destory changes)
+
+[log]
+  date = local
+
+[blame]
+  date = local
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  ui = true
+
+[core]
+  excludesfile = ~/.gitignore
+  editor = vim
+  pager = delta
+
+[apply]
+        whitespace = nowarn
+
+[mergetool]
+        keepBackup = false
+
+[difftool]
+        prompt = false
+
+[help]
+        autocorrect = 1
+
+[push]
+        # See `git help config` (search for push.default)
+        # for more information on different options of the below setting.
+        #
+        # Setting to git 2.0 default to suppress warning message
+        default = simple
+
+[user]
+	name = Sebastian Ruml
+	email = sebastian@sebastianruml.name
+
+[credential]
+	helper = cache
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	line-numbers = true
+	decorations = true
