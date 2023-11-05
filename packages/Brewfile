@@ -106,6 +106,7 @@ cask "signal"
 cask "miro"
 cask "mark-text"
 cask "stats"
+cask "dash"
 
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
