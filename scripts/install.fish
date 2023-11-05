@@ -42,6 +42,9 @@ function install_dotfiles
 	# Ripgrep
 	link_file $DOTFILES_ROOT/ripgrep/rg.conf $HOME/.config/ripgrep/rg.conf backup
 
+  # Hammerspoon
+	link_file $DOTFILES_ROOT/hammerspoon/.hammerspoon $HOME/.hammerspoon backup
+
 	# Nvim
 	# link_file $DOTFILES_ROOT/nvim/config $HOME/.config/nvim backup
 
