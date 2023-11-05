@@ -11,10 +11,9 @@ set -euo pipefail
 
 DOTFILES="$HOME/.dotfiles"
 
-DIR=$(dirname "$0")
-cd "$DIR"
+source "$DOTFILES/scripts/functions.sh"
 
-source ./scripts/functions.sh
+cd "$DOTFILES"
 
 info "Prompting for sudo password..."
 if sudo -v; then

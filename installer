@@ -11,8 +11,13 @@ set -euo pipefail
 echo "🚀 Welcome to the hypebeast/dotfiles installer!"
 echo "-----------------------------------------------"
 echo
+
 export DOTFILES="$HOME/.dotfiles"
+
 echo "👉  Cloning into: '$DOTFILES'"
+echo "❗ If no developers are found, MacOS will request to install it. You need to wait until the installation is complete. After that, you need to restart this script."
+echo
+echo
 
 # To test that git is installed (if not macOS will prompt an installer)
 git --version
