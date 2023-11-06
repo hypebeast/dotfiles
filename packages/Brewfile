@@ -108,6 +108,7 @@ cask "mark-text"
 cask "stats"
 cask "dash"
 cask "todoist"
+cask "obsidian"
 
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
