@@ -17,7 +17,7 @@ local alert = require "hs.alert"
 local grid = require "hs.grid"
 local geometry = require "hs.geometry"
 
-require("application_window_states")
+require("lib/application_window_states")
 
 ---------------------------------------------------------
 -- Shared Globals
