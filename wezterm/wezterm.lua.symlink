@@ -10,13 +10,46 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
--- This is where you actually apply your config choices
+----
+-- Theme settings
+----
 
--- For example, changing the color scheme:
 config.color_scheme = 'Afterglow (Gogh)'
 
--- Font
+----
+-- Font settings
+----
+
 config.font = wezterm.font 'Fira Code'
+
+----
+-- Key Binding settings
+----
+config.keys = {
+  -- Turn off the default CMD-m Hide action, allowing CMD-m to
+  -- be potentially recognized and handled by the tab
+  {
+    key = 'LeftArrow',
+    mods = 'CMD',
+    action = wezterm.action.ActivateTabRelative(-1),
+  },
+  {
+    key = 'RightArrow',
+    mods = 'CMD',
+    action = wezterm.action.ActivateTabRelative(1),
+  },
+  {
+    key = ',',
+    mods = 'CMD',
+    action = wezterm.action.MoveTabRelative(-1),
+  },
+  {
+    key = '.',
+    mods = 'CMD',
+    action = wezterm.action.MoveTabRelative(1),
+  },
+}
+
 
 -- and finally, return the configuration to wezterm
 return config
