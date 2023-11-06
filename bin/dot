@@ -56,20 +56,11 @@ set --erase argv[1]
 
 switch "$action"
   case brew
-    brew $argv &
-  case check
-    if test -e $pomo_file
-      cat $pomo_file
-    else
-      echo "No timer running"
-    end
-  case stop
-    if test -e $pomo_file
-      printf "Stopped running timer at %s minutes left\n" (cat $pomo_file)
-      rm $pomo_file
-    else
-      echo "No timer running"
-    end
+    brew
+  case macos
+    set_macos_config
+  case dotfiles:
+    install_dotfiles
   case "*"
     printf "Unknown action\n"
     usage
