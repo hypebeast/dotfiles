@@ -1,4 +1,5 @@
-local application = require "hs.application" local hotkey = require "hs.hotkey"
+local application = require "hs.application"
+local hotkey = require "hs.hotkey"
 local window = require "hs.window"
 local spotify = require "hs.spotify"
 local notify = require "hs.notify"
