@@ -33,6 +33,10 @@ local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
 local sendKeyStrokesModifierKey = {"ctrl", "shift"}
 local screenModifierKey = {"alt", "cmd"}
+
+local windowModifierKey = {"cmd", "ctrl"}
+local windowResizeKey = {"cmd", "alt"}
+
 -- local focusKey = {"ctrl", "alt"}
 
 ---------------------------------------------------------
