@@ -4,9 +4,7 @@
 ## Script to manage the dotfiles
 ###############################################################################
 
-source ./scripts/functions.fish
-
-set DOTFILES $HOME/.dotfiles
+source "$DOTFILES/scripts/functions.fish"
 
 function usage -d "Show dot usage"
   echo "Usage: dot [brew|dotfiles]"
