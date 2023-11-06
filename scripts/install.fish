@@ -96,7 +96,7 @@ mkdir -p ~/.bin
 	and success 'creating bin dir'
 	or abort 'creating bin dir'
 
-# Run bootstrap installer
+# Run Fish bootstrap script
 $DOTFILES_ROOT/fish/bootstrap.fish
 	and success 'Finished running initial Fish bootstrap script'
 	or abort 'Failed running initial Fish bootstrap script'

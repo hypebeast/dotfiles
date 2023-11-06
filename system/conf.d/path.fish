@@ -1,0 +1,1 @@
+fish_add_path -a $DOTFILES/bin $HOME/.bin $HOME/.local/bin /opt/homebrew/bin /usr/local/bin
