@@ -39,13 +39,13 @@ config.keys = {
     action = wezterm.action.ActivateTabRelative(1),
   },
   {
-    key = ',',
-    mods = 'CMD',
+    key = 'LeftArrow',
+    mods = 'CMD|SHIFT',
     action = wezterm.action.MoveTabRelative(-1),
   },
   {
-    key = '.',
-    mods = 'CMD',
+    key = 'RightArrow',
+    mods = 'CMD|SHIFT',
     action = wezterm.action.MoveTabRelative(1),
   },
 }
