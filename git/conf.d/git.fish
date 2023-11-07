@@ -6,7 +6,6 @@ abbr -a gs 'git status -sb'
 abbr -a gm 'git pull --ff-only'
 abbr -a gl 'git pull --prune'
 abbr -a gr 'git rb FETCH_HEAD'
-abbr -a ga 'git add'
 abbr -a glg "git log --graph --decorate --oneline --abbrev-commit"
 abbr -a glga "git log --graph --decorate --oneline --abbrev-commit --all"
 abbr -a gp 'git push origin HEAD'
