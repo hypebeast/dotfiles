@@ -80,7 +80,7 @@ brew "pipx"
 brew "pyenv"
 brew "pwgen"
 brew "fish"
-brew "syncthing"
+brew "flyctl"
 
 cask "raycast"
 cask "appcleaner"
@@ -109,6 +109,7 @@ cask "stats"
 cask "dash"
 cask "todoist"
 cask "obsidian"
+cask "syncthing"
 
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
@@ -116,7 +117,3 @@ cask "font-hack-nerd-font"
 cask "font-inconsolata-for-powerline"
 cask "font-iosevka-nerd-font"
 cask "font-menlo-for-powerline"
-
-
-
-
