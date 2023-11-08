@@ -110,6 +110,7 @@ cask "dash"
 cask "todoist"
 cask "obsidian"
 cask "syncthing"
+cask "alt-tab"
 
 cask "font-fira-code"
 cask "font-fira-code-nerd-font"
