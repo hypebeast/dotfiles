@@ -3,8 +3,8 @@
 abbr -a less 'less -r'
 
 if command -qs exa
-    alias l='exa -lh --icons'
-    alias ll='exa -lah --icons'
+    alias l='exa -lah --icons'
+    alias ll='exa -lh --icons'
     alias lr='exa -lhr --icons'
     alias lt='exa -l --icons --tree --level=2'
     alias lt='exa -l --icons --tree --level=2'
