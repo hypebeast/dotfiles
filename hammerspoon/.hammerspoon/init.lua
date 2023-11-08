@@ -5,48 +5,27 @@ local spotify = require "hs.spotify"
 local notify = require "hs.notify"
 local pasteboard = require "hs.pasteboard"
 local hints = require "hs.hints"
--- local tiling = require "mjolnir.tiling"
+require "lib/extensions"
+
+---------------------------------------------------------
+-- Load Spoons
+---------------------------------------------------------
+
+hs.loadSpoon("MiroWindowsManager")
 
 ---------------------------------------------------------
 -- Key definitions
 ---------------------------------------------------------
 
-local k = hs.hotkey.modal.new({}, "F17", "some message")
-
--- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
-pressedF18 = function ()
-    k:enter()
-end
-
--- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
--- send ESCAPE if no other keys are pressed.
-releasedF18 = function ()
-    k:exit()
-end
-
-local f18 = hs.hotkey.bind({}, "F18", pressedF18, releasedF18)
-
 local hyperKey = {"cmd", "alt", "ctrl", "shift"}
-local locationModifierKey = {"cmd", "shift"}
-local resizeModifierKey = {"cmd", "alt", "ctrl"}
+-- window location modifier key
+local windowModifierKey = {"cmd", "ctrl"}
+-- window resizing key
+local windowResizeKey = {"cmd", "alt"}
 local nudgeModifierKey = {"alt", "shift"}
 local hintModifierKey = {"cmd", "ctrl"}
-local sendKeyStrokesModifierKey = {"ctrl", "shift"}
-local screenModifierKey = {"alt", "cmd"}
+local screenModifierKey = {"cmd", "alt"}
 
-local windowModifierKey = {"cmd", "ctrl"}
-local windowResizeKey = {"cmd", "alt"}
-
--- local focusKey = {"ctrl", "alt"}
-
----------------------------------------------------------
--- Load modules
----------------------------------------------------------
-
-require "lib/fntools"
-require "lib/extensions"
--- require "windowCycler"
--- require "focus"
 
 ---------------------------------------------------------
 -- Application definitions
@@ -68,7 +47,7 @@ local keyToApp = {
 ---------------------------------------------------------
 
 -- disable animations
-hs.window.animationDuration = 0
+hs.window.animationDuration = 0.1
 
 -- hide window shadows
 hs.window.setShadows(false)
@@ -96,96 +75,109 @@ hs.alert.show("Config loaded")
 -- SCREENS
 ---------------------------------------------------------
 
-local cycleScreens = hs.fnutils.cycle(hs.screen.allScreens())
+-- local cycleScreens = hs.fnutils.cycle(hs.screen.allScreens())
 
-k:bind({}, "S", function()
-  window.focusedWindow():moveToScreen(cycleScreens())
-end)
+-- k:bind({}, "S", function()
+--   window.focusedWindow():moveToScreen(cycleScreens())
+-- end)
+
+---------------------------------------------------------
+-- Window handling
+---------------------------------------------------------
 
 ---
 --- Location bindings
 ---
 
-k:bind({}, "F", fullScreenCurrent)
-k:bind({}, "D", screenToRight)
-k:bind({}, "A", screenToLeft)
+-- k:bind({}, "F", fullScreenCurrent)
+-- k:bind({}, "D", screenToRight)
+-- k:bind({}, "A", screenToLeft)
+
+spoon.MiroWindowsManager:bindHotkeys({
+  up = {windowModifierKey, "up"},
+  right = {windowModifierKey, "right"},
+  down = {windowModifierKey, "down"},
+  left = {windowModifierKey, "left"},
+  fullscreen = {windowModifierKey, "return"},
+  nextscreen = {windowModifierKey, "n"}
+})
 
 --- Fullsize
-hotkey.bind(locationModifierKey, "return", function ()
-    local win = window.focusedWindow()
-    win:maximize()
-end)
+-- hotkey.bind(locationModifierKey, "return", function ()
+--     local win = window.focusedWindow()
+--     win:maximize()
+-- end)
 
 --- Lefthalf
-hotkey.bind(locationModifierKey, "H", function ()
-    local win = window.focusedWindow()
-    local winFrame = win:frame()
-    local screen = win:screen()
-    local screenFrame = screen:frame()
-    local width = screenFrame.w / 2
-    local height = screenFrame.h
+-- hotkey.bind(locationModifierKey, "H", function ()
+--     local win = window.focusedWindow()
+--     local winFrame = win:frame()
+--     local screen = win:screen()
+--     local screenFrame = screen:frame()
+--     local width = screenFrame.w / 2
+--     local height = screenFrame.h
 
-    winFrame.x = 0
-    winFrame.y = 0
-    winFrame.w = width
-    winFrame.h = height
-    win:setFrame(winFrame)
-end)
+--     winFrame.x = 0
+--     winFrame.y = 0
+--     winFrame.w = width
+--     winFrame.h = height
+--     win:setFrame(winFrame)
+-- end)
 
 --- Righthalf
-hotkey.bind(locationModifierKey, "L", function ()
-    local win = window.focusedWindow()
-    local winFrame = win:frame()
-    local screen = win:screen()
-    local screenFrame = screen:frame()
-    local width = screenFrame.w / 2
-    local height = screenFrame.h
+-- hotkey.bind(locationModifierKey, "L", function ()
+--     local win = window.focusedWindow()
+--     local winFrame = win:frame()
+--     local screen = win:screen()
+--     local screenFrame = screen:frame()
+--     local width = screenFrame.w / 2
+--     local height = screenFrame.h
 
-    winFrame.x = width
-    winFrame.y = 0
-    winFrame.w = width
-    winFrame.h = height
-    win:setFrame(winFrame)
-end)
+--     winFrame.x = width
+--     winFrame.y = 0
+--     winFrame.w = width
+--     winFrame.h = height
+--     win:setFrame(winFrame)
+-- end)
 
 --- Bottomhalf
-hotkey.bind(locationModifierKey, "J", function ()
-    local win = window.focusedWindow()
-    local winFrame = win:frame()
-    local screen = win:screen()
-    local screenFrame = screen:frame()
-    local width = screenFrame.w
-    local height = screenFrame.h / 2
+-- hotkey.bind(locationModifierKey, "J", function ()
+--     local win = window.focusedWindow()
+--     local winFrame = win:frame()
+--     local screen = win:screen()
+--     local screenFrame = screen:frame()
+--     local width = screenFrame.w
+--     local height = screenFrame.h / 2
 
-    winFrame.x = 0
-    winFrame.y = height
-    winFrame.w = width
-    winFrame.h = height
-    win:setFrame(winFrame)
-end)
+--     winFrame.x = 0
+--     winFrame.y = height
+--     winFrame.w = width
+--     winFrame.h = height
+--     win:setFrame(winFrame)
+-- end)
 
 --- Tophalf
-hotkey.bind(locationModifierKey, "K", function ()
-    local win = window.focusedWindow()
-    local winFrame = win:frame()
-    local screen = win:screen()
-    local screenFrame = screen:frame()
-    local width = screenFrame.w
-    local height = screenFrame.h / 2
+-- hotkey.bind(locationModifierKey, "K", function ()
+--     local win = window.focusedWindow()
+--     local winFrame = win:frame()
+--     local screen = win:screen()
+--     local screenFrame = screen:frame()
+--     local width = screenFrame.w
+--     local height = screenFrame.h / 2
 
-    winFrame.x = 0
-    winFrame.y = 0
-    winFrame.w = width
-    winFrame.h = height
-    win:setFrame(winFrame)
-end)
+--     winFrame.x = 0
+--     winFrame.y = 0
+--     winFrame.w = width
+--     winFrame.h = height
+--     win:setFrame(winFrame)
+-- end)
 
 ---
 --- Resize bindings
 ---
 
 --- Increase width
-hotkey.bind(resizeModifierKey, "right", function()
+hotkey.bind(windowResizeKey, "right", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.w = f.w + 80
@@ -193,7 +185,7 @@ hotkey.bind(resizeModifierKey, "right", function()
 end)
 
 --- Decrease width
-hotkey.bind(resizeModifierKey, "left", function()
+hotkey.bind(windowResizeKey, "left", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.w = f.w - 80
@@ -201,7 +193,7 @@ hotkey.bind(resizeModifierKey, "left", function()
 end)
 
 --- Increase height
-hotkey.bind(resizeModifierKey, "up", function()
+hotkey.bind(windowResizeKey, "up", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.h = f.h + 80
@@ -209,7 +201,7 @@ hotkey.bind(resizeModifierKey, "up", function()
 end)
 
 --- Decrease width
-hotkey.bind(resizeModifierKey, "down", function()
+hotkey.bind(windowResizeKey, "down", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.h = f.h - 80
@@ -265,75 +257,25 @@ hotkey.bind(hintModifierKey, "j", function()
 end)
 
 
----
---- Spotify
----
-
-k:bind({}, 'I', spotify.displayCurrentTrack)
-k:bind({}, 'space', function()
-  local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
-
-  spotify.play()
-  notify.new({title="Spotify Play/Pause", informativeText=info}):send():release()
-end)
-
-k:bind({}, 'n', function()
-  spotify.next()
-  local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
-  notify.new({title="Spotify - Next Track", informativeText=info}):send():release()
-end)
-
-k:bind({}, 'p', function()
-  spotify.previous()
-  local info = string.format("\"%s\" - \"%s\"", spotify.getCurrentArtist(), spotify.getCurrentTrack())
-  notify.new({title="Spotify - Previous Track", informativeText=info}):send():release()
-end)
-
----
---- Tiling
----
-
--- hotkey.bind(hintModifierKey, "c", function() tiling.cyclelayout() end)
--- hotkey.bind(hintModifierKey, "j", function() tiling.cycle(1) end)
--- hotkey.bind(hintModifierKey, "k", function() tiling.cycle(-1) end)
--- hotkey.bind(hintModifierKey, "space", function() tiling.promote() end)
-
-
----------------------------------------------------------
--- APP HOTKEYS
----------------------------------------------------------
-
--- Create application hotkeys and bind them to the previously defined modal
-for key, app in pairs(keyToApp) do
-    k:bind({}, key, launchOrCycleFocus(app))
-end
-
-k:bind({}, "V", function()
-	hs.execute("code ~/Documents/private_wiki")
-end)
-
-
----------------------------------------------------------
--- Do a Google search with the clipboard content
----------------------------------------------------------
-
-k:bind({}, "G", function()
-  local content = pasteboard.getContents()
-  local searchUrl = "https://google.com/search?q=" .. content
-
-  hs.execute("open " .. searchUrl)
-end)
-
-
 ---------------------------------------------------------
 -- Window switching
 --------------------------------------------------------
 
 -- default windowfilter: only visible windows, all Spaces
---switcher = hs.window.switcher.new()
+-- switcher = hs.window.switcher.new()
 
---hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
---hotkey.bind('alt-shift', 'tab', 'Prev window', function() switcher:previous() end)
+-- hotkey.bind('alt', 'tab', 'Next window', function() switcher:next() end)
+-- hotkey.bind('alt-shift', 'tab', 'Prev window', function() switcher:previous() end)
+
+-- set up your windowfilter
+-- switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
+-- switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter{}) -- include minimized/hidden windows, current Space only
+-- switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome', 'Firefox'} -- specialized switcher for your dozens of browser windows :)
+
+-- bind to hotkeys; WARNING: at least one modifier key is required!
+-- hs.hotkey.bind('alt','tab','Next window',function()switcher_browsers:next()end)
+-- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher_browsers:previous()end)
+
 
 ---------------------------------------------------------
 -- Move app to next screen
@@ -346,36 +288,22 @@ end
 
 hs.hotkey.bind(screenModifierKey, "n", moveToNextScreen)
 
--- set up your windowfilter
--- switcher = hs.window.switcher.new() -- default windowfilter: only visible windows, all Spaces
--- switcher_space = hs.window.switcher.new(hs.window.filter.new():setCurrentSpace(true):setDefaultFilter{}) -- include minimized/hidden windows, current Space only
--- switcher_browsers = hs.window.switcher.new{'Safari','Google Chrome', 'Firefox'} -- specialized switcher for your dozens of browser windows :)
-
--- bind to hotkeys; WARNING: at least one modifier key is required!
--- hs.hotkey.bind('alt','tab','Next window',function()switcher_browsers:next()end)
--- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher_browsers:previous()end)
 
 ---------------------------------------------------------
--- Move window to space
+-- App Window Switcher 
 --------------------------------------------------------
 
--- local spaces = require("hs._asm.undocumented.spaces")
-
--- -- move current window to the space sp
--- function MoveWindowToSpace(sp)
---     local win = hs.window.focusedWindow()      -- current window
---     local uuid = win:screen():spacesUUID()     -- uuid for current screen
---     local spaceID = spaces.layout()[uuid][sp]  -- internal index for sp
-
---     spaces.moveWindowToSpace(win:id(), spaceID) -- move window to new space
---     spaces.changeToSpace(spaceID)              -- follow window to new space
--- end
-
--- hotkey.bind(locationModifierKey, "1", function()
--- 	MoveWindowToSpace(1)
--- end)
-
--- hotkey.bind(locationModifierKey, "2", function()
--- 	MoveWindowToSpace(2)
--- end)
-
+hs.loadSpoon("AppWindowSwitcher")
+    -- :setLogLevel("debug") -- uncomment for console debug log
+    :bindHotkeys({
+        [{
+          "org.mozilla.firefox",
+        }] = {"cmd", "."},
+        -- [{"com.apple.Safari",
+        --   "com.google.Chrome",
+        --   "com.kagi.kagimacOS",
+        --   "com.microsoft.edgemac", 
+        --   "org.mozilla.firefox"}]     = {hyper, "q"},
+        -- ["Hammerspoon"]               = {hyper, "h"},
+        -- [{"O", "o"}]                  = {hyper, "o"},
+    })
