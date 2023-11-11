@@ -82,6 +82,7 @@ brew "pwgen"
 brew "fish"
 brew "flyctl"
 brew "dotnet"
+brew "dotnet-sdk"
 
 cask "raycast"
 cask "appcleaner"
