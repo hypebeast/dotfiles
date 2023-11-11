@@ -81,6 +81,7 @@ brew "pyenv"
 brew "pwgen"
 brew "fish"
 brew "flyctl"
+brew "dotnet"
 
 cask "raycast"
 cask "appcleaner"
