@@ -86,6 +86,7 @@ brew "libpq"
 brew "fortune"
 brew "cowsay"
 brew "lolcat"
+brew "deno"
 
 cask "raycast"
 cask "appcleaner"
