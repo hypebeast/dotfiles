@@ -1,5 +1,10 @@
 #!/usr/bin/env fish
 
+function fish_greeting
+    fortune | cowsay | lolcat
+end
+funcsave -q fish_greeting
+
 abbr -a less 'less -r'
 
 if command -qs exa
