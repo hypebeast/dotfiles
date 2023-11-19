@@ -1,11 +1,9 @@
-local application = require "hs.application"
-local hotkey = require "hs.hotkey"
-local window = require "hs.window"
-local spotify = require "hs.spotify"
-local notify = require "hs.notify"
-local pasteboard = require "hs.pasteboard"
-local hints = require "hs.hints"
-require "lib/extensions"
+local hotkey = require("hs.hotkey")
+local window = require("hs.window")
+local hints = require("hs.hints")
+
+require("lib/extensions")
+require("lib/spotify")
 
 ---------------------------------------------------------
 -- Load Spoons
@@ -17,30 +15,28 @@ hs.loadSpoon("MiroWindowsManager")
 -- Key definitions
 ---------------------------------------------------------
 
-local hyperKey = {"cmd", "alt", "ctrl", "shift"}
+local hyperKey = { "cmd", "alt", "ctrl", "shift" }
 -- window location modifier key
-local windowModifierKey = {"cmd", "ctrl"}
+local windowModifierKey = { "cmd", "ctrl" }
 -- window resizing key
-local windowResizeKey = {"cmd", "alt"}
-local nudgeModifierKey = {"alt", "shift"}
-local hintModifierKey = {"cmd", "ctrl"}
-local screenModifierKey = {"cmd", "alt"}
-
+local windowResizeKey = { "cmd", "alt" }
+local nudgeModifierKey = { "alt", "shift" }
+local hintModifierKey = { "cmd", "ctrl" }
+local screenModifierKey = { "cmd", "alt" }
 
 ---------------------------------------------------------
 -- Application definitions
 ---------------------------------------------------------
 
 local keyToApp = {
-    ["1"] = "Google Chrome",
-    ["2"] = "iTerm",
-    ["3"] = "Code",
-    ["4"] = "KeePassX",
-    ["5"] = "Slack",
-    ["6"] = "Skype",
-    ["Z"] = "Finder"
+  ["1"] = "Google Chrome",
+  ["2"] = "iTerm",
+  ["3"] = "Code",
+  ["4"] = "KeePassX",
+  ["5"] = "Slack",
+  ["6"] = "Skype",
+  ["Z"] = "Finder",
 }
-
 
 ---------------------------------------------------------
 -- Global settings
@@ -52,21 +48,20 @@ hs.window.animationDuration = 0.1
 -- hide window shadows
 hs.window.setShadows(false)
 
-
 ---------------------------------------------------------
 -- Config reload
 ---------------------------------------------------------
 
 function reloadConfig(files)
-    doReload = false
-    for _,file in pairs(files) do
-        if file:sub(-4) == ".lua" then
-            doReload = true
-        end
+  doReload = false
+  for _, file in pairs(files) do
+    if file:sub(-4) == ".lua" then
+      doReload = true
     end
-    if doReload then
-        hs.reload()
-    end
+  end
+  if doReload then
+    hs.reload()
+  end
 end
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
@@ -94,12 +89,12 @@ hs.alert.show("Config loaded")
 -- k:bind({}, "A", screenToLeft)
 
 spoon.MiroWindowsManager:bindHotkeys({
-  up = {windowModifierKey, "up"},
-  right = {windowModifierKey, "right"},
-  down = {windowModifierKey, "down"},
-  left = {windowModifierKey, "left"},
-  fullscreen = {windowModifierKey, "return"},
-  nextscreen = {windowModifierKey, "n"}
+  up = { windowModifierKey, "up" },
+  right = { windowModifierKey, "right" },
+  down = { windowModifierKey, "down" },
+  left = { windowModifierKey, "left" },
+  fullscreen = { windowModifierKey, "return" },
+  nextscreen = { windowModifierKey, "n" },
 })
 
 --- Fullsize
@@ -208,7 +203,6 @@ hotkey.bind(windowResizeKey, "down", function()
   win:setFrame(f)
 end)
 
-
 ---
 --- Nudge Bindings
 ---
@@ -245,7 +239,6 @@ hotkey.bind(nudgeModifierKey, "down", function()
   win:setFrame(f)
 end)
 
-
 ---
 --- Hints
 ---
@@ -253,9 +246,8 @@ hotkey.bind(hintModifierKey, "e", hints.windowHints)
 
 -- This switches between windows of the focused app
 hotkey.bind(hintModifierKey, "j", function()
-    hints.appHints(window.focusedWindow():application())
+  hints.appHints(window.focusedWindow():application())
 end)
-
 
 ---------------------------------------------------------
 -- Window switching
@@ -276,7 +268,6 @@ end)
 -- hs.hotkey.bind('alt','tab','Next window',function()switcher_browsers:next()end)
 -- hs.hotkey.bind('alt-shift','tab','Prev window',function()switcher_browsers:previous()end)
 
-
 ---------------------------------------------------------
 -- Move app to next screen
 --------------------------------------------------------
@@ -288,22 +279,22 @@ end
 
 hs.hotkey.bind(screenModifierKey, "n", moveToNextScreen)
 
-
 ---------------------------------------------------------
--- App Window Switcher 
+-- App Window Switcher
 --------------------------------------------------------
 
-hs.loadSpoon("AppWindowSwitcher")
-    -- :setLogLevel("debug") -- uncomment for console debug log
-    :bindHotkeys({
-        [{
-          "org.mozilla.firefox",
-        }] = {"cmd", "."},
-        -- [{"com.apple.Safari",
-        --   "com.google.Chrome",
-        --   "com.kagi.kagimacOS",
-        --   "com.microsoft.edgemac", 
-        --   "org.mozilla.firefox"}]     = {hyper, "q"},
-        -- ["Hammerspoon"]               = {hyper, "h"},
-        -- [{"O", "o"}]                  = {hyper, "o"},
-    })
+hs
+  .loadSpoon("AppWindowSwitcher")
+  -- :setLogLevel("debug") -- uncomment for console debug log
+  :bindHotkeys({
+    [{
+      "org.mozilla.firefox",
+    }] = { "cmd", "." },
+    -- [{"com.apple.Safari",
+    --   "com.google.Chrome",
+    --   "com.kagi.kagimacOS",
+    --   "com.microsoft.edgemac",
+    --   "org.mozilla.firefox"}]     = {hyper, "q"},
+    -- ["Hammerspoon"]               = {hyper, "h"},
+    -- [{"O", "o"}]                  = {hyper, "o"},
+  })
