@@ -25,6 +25,31 @@ local hintModifierKey = { "cmd", "ctrl" }
 local screenModifierKey = { "cmd", "alt" }
 
 ---------------------------------------------------------
+-- Setup hyper key
+------------------------------------------------------
+
+-- A global variable for the Hyper Mode
+hyper = hs.hotkey.modal.new({}, "F17")
+
+-- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
+function enterHyperMode()
+  hyper.triggered = false
+  hyper:enter()
+end
+
+-- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
+-- send ESCAPE if no other keys are pressed.
+function exitHyperMode()
+  hyper:exit()
+  if not hyper.triggered then
+    hs.eventtap.keyStroke({}, "ESCAPE")
+  end
+end
+
+-- Bind the Hyper key
+f18 = hs.hotkey.bind({}, "F18", enterHyperMode, exitHyperMode)
+
+---------------------------------------------------------
 -- Application definitions
 ---------------------------------------------------------
 
@@ -52,7 +77,7 @@ hs.window.setShadows(false)
 -- Config reload
 ---------------------------------------------------------
 
-function reloadConfig(files)
+local function reloadConfig(files)
   doReload = false
   for _, file in pairs(files) do
     if file:sub(-4) == ".lua" then
@@ -63,6 +88,12 @@ function reloadConfig(files)
     hs.reload()
   end
 end
+
+hyper:bind({}, "r", function()
+  reloadConfig()
+  hyper.triggered = true
+end)
+
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
@@ -172,7 +203,7 @@ spoon.MiroWindowsManager:bindHotkeys({
 ---
 
 --- Increase width
-hotkey.bind(windowResizeKey, "right", function()
+hotkey.bind(windowResizeKey, "l", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.w = f.w + 80
@@ -180,7 +211,7 @@ hotkey.bind(windowResizeKey, "right", function()
 end)
 
 --- Decrease width
-hotkey.bind(windowResizeKey, "left", function()
+hotkey.bind(windowResizeKey, "h", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.w = f.w - 80
@@ -188,7 +219,7 @@ hotkey.bind(windowResizeKey, "left", function()
 end)
 
 --- Increase height
-hotkey.bind(windowResizeKey, "up", function()
+hotkey.bind(windowResizeKey, "j", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.h = f.h + 80
@@ -196,7 +227,7 @@ hotkey.bind(windowResizeKey, "up", function()
 end)
 
 --- Decrease width
-hotkey.bind(windowResizeKey, "down", function()
+hotkey.bind(windowResizeKey, "k", function()
   local win = window.focusedWindow()
   local f = win:frame()
   f.h = f.h - 80
@@ -271,7 +302,7 @@ end)
 ---------------------------------------------------------
 -- Move app to next screen
 --------------------------------------------------------
-function moveToNextScreen()
+local function moveToNextScreen()
   local app = hs.window.focusedWindow()
   app:moveToScreen(app:screen():next())
   app:maximize()
@@ -289,7 +320,7 @@ hs
   :bindHotkeys({
     [{
       "org.mozilla.firefox",
-    }] = { "cmd", "." },
+    }] = { "cmd", "ctrl", "." },
     -- [{"com.apple.Safari",
     --   "com.google.Chrome",
     --   "com.kagi.kagimacOS",
