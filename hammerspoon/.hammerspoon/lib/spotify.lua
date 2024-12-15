@@ -1,70 +1,68 @@
 --- === spotify ===
 ---
---- Controls for Spotify music player
+--- Shows the current playing Spotify song in the menu bar
 
-local spotify = {}
+local obj = {}
+obj.__index = obj
 
-local app = require("hs.application")
-local as = require("hs.applescript")
-local menu = require("hs.menubar")
-local logger = require("hs.logger")
-local timer = require("hs.timer")
+obj.spotify_indicator = nil
+obj.timer = nil
+-- spotify.iconPath = hs.spoons.resourcePath("icons")
+-- spotify.playIcon = nil
+-- spotify.pauseIcon = nil
 
-local menu_bar_app = menu.new()
-
-local function updateState()
+function refreshWidget()
+  local title = ""
   
-  local track_name = spotify.getCurrentTrack()
-  local artist_name = spotify.getCurrentArtist()
+  if (hs.spotify.isPlaying()) then
+      -- obj.spotify_indicator:setIcon(obj.playIcon, false)
 
-  menu_bar_app:setTitle(spotify.getSongInfo(track_name, artist_name))
-end
-
--- Start timer to update song info
-update_timer = timer.doEvery(10, updateState)
-
-spotify.state_playing = "kPSP"
-spotify.state_paused = "kPSp"
-
-local function tell(cmd)
-  local _cmd = 'tell application "Spotify" to ' .. cmd
-  local ok, result = as.applescript(_cmd)
-
-  if ok then
-    return result
+      title = title .. "🎵 ▶︎ "
   else
-    return nil
+      -- obj.spotify_indicator:setIcon(obj.pauseIcon, false)
+      title = title .. "🎵 ⏸︎ "
+  end
+
+  if (hs.spotify.getCurrentArtist() ~= nil and hs.spotify.getCurrentTrack() ~= nil) then
+      title = title .. hs.spotify.getCurrentArtist() .. ' - ' .. hs.spotify.getCurrentTrack()
+      obj.spotify_indicator:setTitle(title)
   end
 end
 
-local function getPlayerState()
-  local state = spotify.getPlaybackState()
-  if state == spotify.state_playing then
-    return "♫ ⏵ "
-  else
-    return "♫ ⏸ "
-  end
+function obj:next()
+  hs.spotify.next()
+  refreshWidget()
 end
 
-function spotify.getCurrentTrack()
-  return tell("name of the current track")
+function obj:prev()
+  hs.spotify.previous() 
+  refreshWidget()
 end
 
-function spotify.getCurrentArtist()
-  return tell("artist of the current track")
+function obj:playpause()
+  hs.spotify.playpause() 
+  refreshWidget()
 end
 
-function spotify.getPlaybackState()
-  return tell("get player state")
+function obj:init()
+  self.spotify_indicator = hs.menubar.new()
+  -- self.playIcon = hs.image.imageFromPath(obj.iconPath .. '/Spotify_Icon_RGB_Green.png'):setSize({w=16,h=16})
+  -- self.pauseIcon = hs.image.imageFromPath(obj.iconPath .. '/Spotify_Icon_RGB_White.png'):setSize({w=16,h=16})
+
+  self.spotify_indicator:setClickCallback(function()
+    hs.spotify.playpause()
+    refreshWidget()
+  end)
+
+  self.timer = hs.timer.new(1, refreshWidget)
 end
 
-function spotify.isRunning()
-  return app.get("Spotify") ~= nil
+function obj:start()
+  self.timer:start()
 end
 
-function spotify.getSongInfo(track_name, artist_name)
-  if not spotify.isRunning() then
-    return "♫ 💤"
-  end
-  return getPlayerState() .. track_name .. " - " .. artist_name
+function obj:stop()
+  self.timer:stop()
 end
+
+return obj

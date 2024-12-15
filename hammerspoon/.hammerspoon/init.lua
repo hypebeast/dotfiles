@@ -1,9 +1,12 @@
 local hotkey = require("hs.hotkey")
 local window = require("hs.window")
 local hints = require("hs.hints")
+local app = require("hs.application")
 
 require("lib/extensions")
-require("lib/spotify")
+local spotify = require("lib/spotify")
+
+local log = hs.logger.new("hammerspoon", "debug")
 
 ---------------------------------------------------------
 -- Load Spoons
@@ -15,7 +18,8 @@ hs.loadSpoon("MiroWindowsManager")
 -- Key definitions
 ---------------------------------------------------------
 
-local hyperKey = { "cmd", "alt", "ctrl", "shift" }
+-- hyper key
+local hyperKey = { "cmd", "alt", "ctrl"}
 -- window location modifier key
 local windowModifierKey = { "cmd", "ctrl" }
 -- window resizing key
@@ -50,18 +54,28 @@ end
 f18 = hs.hotkey.bind({}, "F18", enterHyperMode, exitHyperMode)
 
 ---------------------------------------------------------
--- Application definitions
+-- Application shortcuts
 ---------------------------------------------------------
 
-local keyToApp = {
-  ["1"] = "Google Chrome",
-  ["2"] = "iTerm",
-  ["3"] = "Code",
-  ["4"] = "KeePassX",
-  ["5"] = "Slack",
-  ["6"] = "Skype",
-  ["Z"] = "Finder",
+local function launchOrFocus(appName)
+  log.i("Launching app", appName)
+  app.launchOrFocus(appName)
+end
+
+local appMappings = {
+  {'1', 'Google Chrome'},
+  {'2', 'Firefox'},
+  {'3', 'WezTerm'},
+  {'4', 'Bitwarden'},
+  {'5', 'Visual Studio Code'},
+  {'t', 'Todoist'},
+  {'z', 'Finder'},
+  {'n', 'Obsidian'},
 }
+
+for i, app in ipairs(appMappings) do
+  hyper:bind({}, app[1], function () launchOrFocus(app[2]) end)
+end
 
 ---------------------------------------------------------
 -- Global settings
@@ -115,10 +129,6 @@ hs.alert.show("Config loaded")
 --- Location bindings
 ---
 
--- k:bind({}, "F", fullScreenCurrent)
--- k:bind({}, "D", screenToRight)
--- k:bind({}, "A", screenToLeft)
-
 spoon.MiroWindowsManager:bindHotkeys({
   up = { windowModifierKey, "up" },
   right = { windowModifierKey, "right" },
@@ -127,12 +137,6 @@ spoon.MiroWindowsManager:bindHotkeys({
   fullscreen = { windowModifierKey, "return" },
   nextscreen = { windowModifierKey, "n" },
 })
-
---- Fullsize
--- hotkey.bind(locationModifierKey, "return", function ()
---     local win = window.focusedWindow()
---     win:maximize()
--- end)
 
 --- Lefthalf
 -- hotkey.bind(locationModifierKey, "H", function ()
@@ -329,3 +333,97 @@ hs
     -- ["Hammerspoon"]               = {hyper, "h"},
     -- [{"O", "o"}]                  = {hyper, "o"},
   })
+
+---------------------------------------------------------
+-- Spotify
+---------------------------------------------------------
+
+spotify:init()
+spotify:start()
+
+---------------------------------------------------------
+-- Dev Tools Chooser
+---------------------------------------------------------
+
+devToolsList = {
+  {
+    text = 'GitHub Repositories (@rsefer)',
+    image = hs.image.imageFromAppBundle('com.github.GitHubClient'),
+    url = 'https://github.com/rsefer?tab=repositories'
+  },
+  {
+    text = 'Meeting',
+    image = hs.image.imageFromURL('https://flexibits.com/img/new-fantastical/logo/product/fantastical-mac-glyph@2x.png'),
+    url = 'https://fantastical.app/rsefer/meeting'
+  },
+  {
+    text = 'RegExr',
+    image = hs.image.imageFromURL('https://regexr.com/assets/icons/favicon-32x32.png'),
+    url = 'https://regexr.com'
+  },
+  {
+    text = 'Unix Time Converter',
+    image = hs.image.imageFromURL('https://dpidudyah7i0b.cloudfront.net/favicon.ico'),
+    url = 'https://www.unixtimestamp.com'
+  },
+  {
+    text = 'Character Count',
+    image = hs.image.imageFromURL('https://wordcounter.net/favicon.ico'),
+    action = 'countCharacters'
+  },
+  {
+    text = 'Convert Case',
+    image = hs.image.imageFromURL('https://convertcase.net/favicon.ico'),
+    url = 'https://convertcase.net'
+  },
+  {
+    text = 'Learn X in Y Minutes (JavaScript)',
+    image = hs.image.imageFromURL('https://learnxinyminutes.com/favicon.ico'),
+    url = 'https://learnxinyminutes.com/docs/javascript/'
+  },
+  {
+    text = 'Hammerspoon Documentation',
+    image = hs.image.imageFromAppBundle('org.hammerspoon.Hammerspoon'),
+    url = 'https://www.hammerspoon.org/docs/index.html'
+  },
+  {
+    text = 'Lorem Ipsum',
+    image = hs.image.imageFromURL('https://loremipsum.io/assets/images/favicon.png'),
+    action = 'loremIpsum'
+  },
+  {
+    text = 'PHP Date Format',
+    image = hs.image.imageFromURL('https://www.php.net/favicon.svg'),
+    url = 'https://www.php.net/manual/en/datetime.format.php#refsect1-datetime.format-parameters'
+  },
+  {
+    text = 'GenerateWP',
+    image = hs.image.imageFromURL('https://generatewp.com/wp-content/uploads/cropped-generatewp-logo.png'),
+    url = 'https://generatewp.com/generator/'
+  },
+  {
+    text = 'Excalidraw',
+    image = hs.image.imageFromURL('https://excalidraw.com/favicon.ico'),
+    url = 'https://excalidraw.com/'
+  },
+  {
+    text = 'WooCommerce Templates',
+    image = hs.image.imageFromURL('https://woocommerce.com/wp-content/uploads/2020/06/cropped-Favicon_512.png'),
+    url = 'https://github.com/woocommerce/woocommerce/tree/trunk/plugins/woocommerce/templates'
+  }
+}
+
+hyper:bind({}, 'k', function ()
+  devToolsChooser = hs.chooser.new(function(choice)
+    if not choice then return end
+    if choice.action ~= nil then
+      if choice.action == 'countCharacters' then
+        countCharacters()
+      elseif choice.action == 'loremIpsum' then
+        loremIpsum()
+      end
+    else
+      hs.urlevent.openURL(choice.url)
+    end
+  end):choices(devToolsList):show()
+end)
