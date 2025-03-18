@@ -57,6 +57,16 @@ function obj:init()
   self.timer = hs.timer.new(1, refreshWidget)
 end
 
+function obj:bindHotkeys(mapping)
+  local spec = {
+      next = hs.fnutils.partial(self.next, self),
+      prev = hs.fnutils.partial(self.prev, self),
+      playpause = hs.fnutils.partial(self.playpause, self),
+    }
+    hs.spoons.bindHotkeysToSpec(spec, mapping)
+    return self
+end
+
 function obj:start()
   self.timer:start()
 end
