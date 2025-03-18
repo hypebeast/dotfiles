@@ -25,3 +25,6 @@ direnv hook fish | source
 # bun
 set --export BUN_INSTALL "$HOME/Library/Application Support/reflex/bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# Added by Windsurf
+fish_add_path /Users/seru/.codeium/windsurf/bin
