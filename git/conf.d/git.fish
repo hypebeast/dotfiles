@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-abbr -a g 'git'
+abbr -a g git
 abbr -a gf 'git fetch'
 abbr -a gs 'git status -sb'
 abbr -a gm 'git pull --ff-only'
@@ -30,3 +30,4 @@ abbr -a gm 'git switch (git main-branch)'
 abbr -a gms 'git switch (git main-branch); and git sync'
 abbr -a egms 'e; git switch (git main-branch); and git sync'
 abbr -a gwc 'git switch -c'
+
