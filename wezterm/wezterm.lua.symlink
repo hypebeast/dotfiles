@@ -21,7 +21,8 @@ config.color_scheme = 'Afterglow (Gogh)'
 -- Font settings
 ----
 
-config.font = wezterm.font 'Fira Code'
+--config.font = wezterm.font 'Fira Code'
+config.font = wezterm.font 'MesloLGS Nerd Font Mono'
 
 ----
 -- Key Binding settings
@@ -55,7 +56,7 @@ config.keys = {
     action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' }
   },
   {
-    key = 'b',
+    key = 'h',
     mods = 'CMD|ALT',
     action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' }
   },
